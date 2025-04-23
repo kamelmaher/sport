@@ -5,7 +5,7 @@ import { FooterComponent } from '../../shared/components/footer/footer.component
 
 @Component({
   selector: 'app-channels',
-  imports: [HeaderComponent, FooterComponent],
+  imports: [HeaderComponent, FooterComponent, SearchBarComponent],
   templateUrl: './channels.component.html',
   styleUrl: './channels.component.css'
 })
