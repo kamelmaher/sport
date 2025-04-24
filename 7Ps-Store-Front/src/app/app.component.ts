@@ -4,7 +4,7 @@ import { ChannelsComponent } from "./pages/channels/channels.component";
 
 @Component({
   selector: 'app-root',
-  imports: [ChannelsComponent],
+  imports: [RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
