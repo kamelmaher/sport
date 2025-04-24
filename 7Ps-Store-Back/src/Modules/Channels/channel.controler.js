@@ -178,74 +178,59 @@ const importChannels = async (req, res) => {
 };
 
 
+// Unified channel search endpoint
+const searchChannels = async (req, res) => {
+  try {
+    const { country, search } = req.query;
 
-// Get channels by country
-  const getChannelsByCountry = async (req, res) => {
-    try {
-      const { country } = req.params;
-      const { page = 1, limit = 10, sortBy = 'channel_name', sortOrder = 'asc' } = req.query;
-  
-      const sortOptions = {};
-      sortOptions[sortBy] = sortOrder === 'desc' ? -1 : 1;
-  
-      const channels = await Channel.find({
-        'metadata.country': { 
-          $regex: new RegExp(`^${country}$`, 'i') 
-        }
-      })
-      .sort(sortOptions)
-      .limit(limit * 1)
-      .skip((page - 1) * limit);
-  
-      const count = await Channel.countDocuments({
-        'metadata.country': { 
-          $regex: new RegExp(`^${country}$`, 'i') 
-        }
-      });
-  
-      if (channels.length === 0) {
-        return res.status(404).json({
-          message: 'No channels found for this country',
-          country: country
-        });
+    // بناء كائن الـ query بشكل ديناميكي
+    const query = {};
+
+    // إضافة فلتر الدولة بس لو الـ country موجود ومش فاضي ومش "null"
+    if (country && country !== 'null' && country !== '') {
+      query['metadata.country'] = {
+        $regex: new RegExp(`^${country}$`, 'i')
+      };
+    }
+
+    // إضافة فلتر البحث لو الـ search موجود ومش فاضي ومش "null"
+    if (search && search !== 'null' && search !== '') {
+      query['$or'] = [
+        { channel_name: { $regex: search, $options: 'i' } },
+        { 'technical_info.frequency.text': { $regex: search, $options: 'i' } } // عدلت هنا عشان يطابق السكيما
+      ];
+    }
+
+    // جلب القنوات باستخدام الـ query
+    const channels = await Channel.find(query).sort({ channel_name: 1 }); // ترتيب حسب اسم القناة من الألف للياء
+
+    // لو مفيش قنوات
+    if (channels.length === 0) {
+      let message = 'لا توجد قنوات';
+      if (country && country !== 'null' && country !== '') {
+        message += ` للدولة: ${country}`;
       }
-  
-      res.json({
-        count: channels.length,
-        totalPages: Math.ceil(count / limit),
-        currentPage: page,
-        country: country,
-        channels: channels
-      });
-  
-    } catch (err) {
-      res.status(500).json({ 
-        error: 'Failed to fetch channels by country',
-        details: process.env.NODE_ENV === 'development' ? err.message : undefined
+      if (search && search !== 'null' && search !== '') {
+        message += ` تطابق البحث: ${search}`;
+      }
+
+      return res.status(404).json({
+        message,
+        country: country && country !== 'null' && country !== '' ? country : 'أي دولة',
+        searchTerm: search && search !== 'null' && search !== '' ? search : 'لا يوجد'
       });
     }
-  };
 
-
-// Get all channels with optional pagination
-const getAllChannels = async (req, res) => {
-  try {
-    const { page = 1, limit = 10 } = req.query;
-    const channels = await Channel.find()
-      .limit(limit * 1)
-      .skip((page - 1) * limit)
-      .exec();
-
-    const count = await Channel.countDocuments();
-
+    // إرجاع القنوات لو موجودة
     res.json({
-      channels,
-      totalPages: Math.ceil(count / limit),
-      currentPage: page
+      count: channels.length,
+      country: country && country !== 'null' && country !== '' ? country : 'كل الدول',
+      searchTerm: search && search !== 'null' && search !== '' ? search : 'لا يوجد',
+      channels: channels
     });
   } catch (err) {
-    res.status(500).json({ 
-      error: 'Failed to fetch channels',
+    res.status(500).json({
+      error: 'فشل في جلب القنوات',
       details: process.env.NODE_ENV === 'development' ? err.message : undefined
     });
   }
@@ -316,11 +301,32 @@ const deleteChannel = async (req, res) => {
   }
 };
 
+
+const getArabCountries = async (req, res) => {
+  try {
+    const arabCountries = [
+      'Kuwait', 'Palestine', 'Saudi Arabia', 'Jordan', 'Egypt', 'Oman',
+      'Qatar', 'Syria', 'Tunisia', 'United Arab Emirates', 'Yemen'
+    ];
+    const countries = await Channel.distinct('metadata.country', {
+      'metadata.country': { $in: arabCountries }
+    });
+    res.json(countries);
+  } catch (err) {
+    res.status(500).json({
+      error: 'Failed to fetch Arab countries',
+      details: process.env.NODE_ENV === 'development' ? err.message : undefined
+    });
+  }
+};
+
+
 module.exports = {
   createChannel,
   importChannels,
-  getAllChannels,
+  searchChannels,
   getChannelById,
   updateChannel,
-  deleteChannel
+  deleteChannel,
+  getArabCountries
 };

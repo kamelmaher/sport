@@ -2,23 +2,19 @@ const express = require('express');
 const channelRoutes = require('../7Ps-Store-Back/src/Modules/Channels/channel.routes');
 const connection = require('./DB/connection');
 const app = express();
-
+const cors = require('cors');
 require('dotenv').config();
 // Middleware
 app.use(express.json());
 
-const multer = require('multer');
 
-// Set higher limits for file uploads
-const upload = multer({
-  limits: {
-    fileSize: 50 * 1024 * 1024 // 50MB
-  }
-});
+app.use(cors({
+  origin: 'http://localhost:4200', // Allow only the Angular frontend
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify allowed methods
+  allowedHeaders: ['Content-Type', 'Authorization'] // Specify allowed headers
+}));
 
-app.post('/upload', upload.single('file'), (req, res) => {
-  // Your upload handler
-});
+
 // Database connection
 connection();
 

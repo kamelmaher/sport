@@ -6,13 +6,14 @@ const channelController = require('../Channels/channel.controler');
 router.post('/', channelController.createChannel);
 
 // Get all channels
-router.get('/', channelController.getAllChannels);
+router.get('/', channelController.searchChannels);
+
+// Get Arab countries for filtering
+router.get('/arab-countries', channelController.getArabCountries);
 
 // Import multiple channels
 router.post('/import', channelController.importChannels);
 
-// Get channels by country
-router.get('/country/:country', channelController.getChannelsByCountry);
 // Get a single channel by ID
 router.get('/:id', channelController.getChannelById);
 

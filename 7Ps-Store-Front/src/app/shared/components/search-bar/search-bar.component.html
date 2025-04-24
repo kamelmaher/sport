@@ -1,39 +1,96 @@
-<!-- src/app/shared/components/search-bar/search-bar.component.html -->
-<div class="search-container mx-2 mt-2">
-  <input [formControl]="searchControl" placeholder="ابحث عن قناة..." />
-  <div class="search-icon">
-    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-      stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="11" cy="11" r="8"></circle>
-      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-    </svg>
+<div class="page-container">
+  <!-- Page Header -->
+  <div class="page-header">
+    <h1 class="page-title">قنوات البث الفضائي</h1>
   </div>
 
-  @if (isLoading) {
-  <div class="loading-indicator">جاري البحث...</div>
-  }
+  <!-- Search and Filter Section -->
+  <div class="search-filter-container">
+    <!-- Search Input -->
+    <div class="search-container">
+      <input type="text" [(ngModel)]="searchTerm" (ngModelChange)="searchChannels()"
+        placeholder="ابحث عن قناة أو تردد..." class="search-input">
+    </div>
 
-  @if (searchResults.length) {
-  <ul class="results-list">
-    @for (channel of searchResults; track $index) {
-    <li (click)="selectChannel(channel)" class="channel-item">
-      <div class="channel-logo">
-        <img [src]="channel.logo?.url" [alt]="channel.channel_name"
-          onerror="this.src='assets/images/default-channel-logo.png'">
-      </div>
-      <div class="channel-info">
-        <div class="channel-name">{{ channel.channel_name }}</div>
-        <div class="channel-details">
-          <span class="satellite">{{ channel.satellite_info?.satellite_name }}</span>
-          <span class="position">{{ channel.satellite_info?.position }}</span>
-          <span class="frequency">{{ channel.technical_info?.frequency?.text }}</span>
+    <!-- Filter Buttons -->
+    <div class="filters-container">
+      <button class="filter-btn" [class.active]="!selectedCountry" (click)="filterByCountry(null)">الكل</button>
+      <button *ngFor="let country of arabCountries" class="filter-btn" [class.active]="selectedCountry === country"
+        (click)="filterByCountry(country)">
+        {{ country }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Debug: Show channels as JSON -->
+  <div *ngIf="channels && channels.length > 0" style="margin: 20px; direction: ltr;">
+    <!-- <pre>{{ channels | json }}</pre> -->
+  </div>
+
+  <!-- Channels Display -->
+  <div class="channels-container" *ngIf="!isLoading && channels && channels.length > 0">
+    <div class="channel-card" *ngFor="let channel of channels">
+      <div class="channel-header">
+        <div class="channel-logo">
+          <img [src]="channel.logo?.url" [alt]="channel.channel_name || 'قناة'">
         </div>
-        <div class="channel-country">{{ channel.metadata?.country }}</div>
+        <div class="channel-title">
+          <div class="channel-name">{{ channel.channel_name || 'غير متوفر' }}</div>
+          <div class="channel-country" *ngIf="channel.metadata?.country">
+            {{ channel.metadata?.country }}
+          </div>
+        </div>
       </div>
-    </li>
-    } @empty {
-    <div class="no-results">لا توجد نتائج</div>
-    }
-  </ul>
-  }
+
+      <div class="channel-body">
+        <div class="satellite-info" *ngIf="channel.satellite_info && channel.satellite_info.length > 0">
+          <div class="satellite-name info-group">
+            <div class="info-label">القمر الصناعي</div>
+            <div class="info-value">{{ channel.satellite_info[0].satellite_name || 'غير متوفر' }}</div>
+          </div>
+          <div class="satellite-position info-group">
+            <div class="info-label">الموقع</div>
+            <div class="info-value">{{ channel.satellite_info[0].position || 'غير متوفر' }}</div>
+          </div>
+        </div>
+
+        <div class="technical-info" *ngIf="channel.technical_info && channel.technical_info.length > 0">
+          <div class="tech-detail" *ngIf="channel.technical_info[0].frequency?.text">
+            <span class="tech-label">التردد</span>
+            <span class="tech-value">{{ channel.technical_info[0].frequency?.text }}</span>
+          </div>
+          <div class="tech-detail" *ngIf="channel.technical_info[0]?.eirp?.text">
+            <span class="tech-label">EIRP</span>
+            <span class="tech-value">{{ channel.technical_info[0].eirp?.text }}</span>
+          </div>
+          <div class="tech-detail" *ngIf="channel.technical_info[0]?.beam">
+            <span class="tech-label">الحزمة</span>
+            <span class="tech-value">{{ channel.technical_info[0].beam }}</span>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div class="loading-container" *ngIf="isLoading">
+    <div class="loading-spinner"></div>
+    <div class="loading-text">جاري تحميل القنوات...</div>
+  </div>
+
+  <!-- No Results Message -->
+  <div class="no-results" *ngIf="!isLoading && (!channels || channels.length === 0)">
+    <div class="no-results-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="12" y1="8" x2="12" y2="12"></line>
+        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+      </svg>
+    </div>
+    <div class="no-results-text">لم يتم العثور على قنوات</div>
+    <div class="no-results-hint">جرب تغيير معايير البحث أو التصفية</div>
+  </div>
 </div>

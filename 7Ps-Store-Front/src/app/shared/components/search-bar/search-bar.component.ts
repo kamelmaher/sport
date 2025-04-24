@@ -1,111 +1,77 @@
-// src/app/shared/components/search-bar/search-bar.component.ts
-import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { ChannelService } from '../../../core/services/channel.service';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
-
-interface ChannelLogo {
-  url: string;
-}
-
-interface SatelliteInfo {
-  position: string;
-  position_value: number;
-  position_direction: string;
-  satellite_name: string;
-}
-
-interface FrequencyInfo {
-  text: string;
-  value: number;
-}
-
-interface EirpInfo {
-  text: string;
-  value: number;
-}
-
-interface TechnicalInfo {
-  beam: string;
-  eirp: EirpInfo;
-  frequency: FrequencyInfo;
-}
-
-interface Metadata {
-  source: string;
-  scraped_at: string;
-  country: string;
-}
-
-interface Channel {
-  channel_name: string;
-  logo?: ChannelLogo;
-  satellite_info?: SatelliteInfo;
-  technical_info?: TechnicalInfo;
-  metadata?: Metadata;
-}
+import { ChannelService } from '../../../core/services/channel.service';
+import { Channel, ChannelResponse } from '../../../models/channel.model';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-search-bar',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './search-bar.component.html',
-  styleUrl: './search-bar.component.css'
+  styleUrls: ['./search-bar.component.css']
 })
-export class SearchBarComponent {
-  searchControl = new FormControl('');
-  searchResults: Channel[] = [];
-  isLoading = false;
+export class SearchBarComponent implements OnInit {
+  channels: Channel[] = [];
+  isLoading = true;
+  selectedCountry: string | null = null;
+  searchTerm: string | null = null;
+  arabCountries: string[] = [];
 
-  constructor(private channelService: ChannelService) {
-    this.setupSearch();
+  constructor(private channelService: ChannelService) { }
+
+  ngOnInit(): void {
+    this.loadArabCountries();
+    this.loadChannels();
   }
 
-  private setupSearch(): void {
-    this.searchControl.valueChanges
-      .pipe(
-        debounceTime(300),
-        distinctUntilChanged()
-      )
-      .subscribe(query => {
-        this.handleSearch(query);
-      });
+  loadArabCountries(): void {
+    this.channelService.getArabCountries().subscribe({
+      next: (countries) => {
+        this.arabCountries = countries;
+        console.log('Arab countries loaded:', countries);
+      },
+      error: (error) => {
+        console.error('Error loading Arab countries:', error);
+        this.channels = [];
+      }
+    });
   }
 
-  private handleSearch(query: string | null): void {
-    if (query && query.trim().length > 0) {
-      this.isLoading = true;
-      this.channelService.searchChannels(query).subscribe({
-        next: (results: Channel[]) => {
-          this.searchResults = results;
+  loadChannels(): void {
+    this.isLoading = true;
+    this.channelService.getChannels(this.selectedCountry, this.searchTerm)
+      .subscribe({
+        next: (response: ChannelResponse) => {
+          console.log('Channels response:', response);
+          this.channels = (response.channels || []).map(channel => ({
+            channel_name: channel.channel_name || 'غير متوفر',
+            logo: channel.logo,
+            satellite_info: channel.satellite_info || [],
+            technical_info: channel.technical_info || [],
+            metadata: channel.metadata || { country: null, scraped_at: null, source: null }
+          }));
+          console.log('Channels assigned:', this.channels);
+          console.log('First channel (if exists):', this.channels[0]);
           this.isLoading = false;
         },
-        error: (err) => {
-          console.error('Search failed:', err);
-          this.searchResults = [];
+        error: (error) => {
+          console.error('Error loading channels:', error);
           this.isLoading = false;
+          this.channels = [];
         }
       });
-    } else {
-      this.searchResults = [];
-    }
   }
 
-  selectChannel(channel: Channel): void {
-    // Handle channel selection
-    console.log('Selected channel:', channel);
-    // You can emit an event or use a service to communicate with other components
+  filterByCountry(country: string | null): void {
+    this.selectedCountry = country;
+    if (country === null) {
+      this.searchTerm = null;
+    }
+    this.loadChannels();
+  }
 
-    // Example: Emit an event (you would need to add an EventEmitter to the class)
-    // this.channelSelected.emit(channel);
-
-    // Example: Navigate to a channel detail page
-    // this.router.navigate(['/channel', channelId]);
-
-    // Clear search after selection
-    this.searchControl.setValue('');
-    this.searchResults = [];
+  searchChannels(): void {
+    this.loadChannels();
   }
 }

@@ -1,29 +1,40 @@
-// src/app/core/services/channel.service.ts
-import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
-@Injectable({ providedIn: 'root' })
+import { Channel, ChannelResponse } from '../../models/channel.model';
+import { environment } from '../../../environments/environment';
+@Injectable({
+  providedIn: 'root'
+})
 export class ChannelService {
-  private apiUrl = 'http://your-backend-url/api';
+  private apiUrl = environment.apiUrl;
+  private readonly arabCountriesUrl = `${this.apiUrl}/api/channels/arab-countries`;
+  private readonly channelsUrl = `${this.apiUrl}/api/channels`;
 
   constructor(private http: HttpClient) { }
 
-  getAds(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/ads`);
-  }
+  /**
+   * Fetch channels with optional country and search filters
+   * @param country Optional country filter
+   * @param search Optional search term for channel name or frequency
+   */
+  getChannels(country?: string | null, search?: string | null): Observable<ChannelResponse> {
+    let params = new HttpParams();
 
-  getChannels(page: number, country?: string): Observable<any> {
-    let params = new HttpParams().set('page', page.toString());
-    if (country) {
+    if (country && country !== 'null' && country !== '') {
       params = params.set('country', country);
     }
-    return this.http.get<any>(`${this.apiUrl}/channels`, { params });
+    if (search && search !== 'null' && search !== '') {
+      params = params.set('search', search);
+    }
+
+    return this.http.get<ChannelResponse>(this.channelsUrl, { params });
   }
 
-  // إضافة دالة searchChannels لدعم البحث
-  searchChannels(query: string): Observable<any> {
-    let params = new HttpParams().set('query', query);
-    return this.http.get<any>(`${this.apiUrl}/channels/search`, { params });
+  /**
+   * Fetch list of Arab countries for filtering
+   */
+  getArabCountries(): Observable<string[]> {
+    return this.http.get<string[]>(`${this.arabCountriesUrl}`);
   }
 }
