@@ -2,7 +2,7 @@
   <div class="row align-items-center w-100 h-100 m-0">
     <div class="col-12 col-lg-6 h-100 d-flex align-items-center justify-content-center">
       <div class="login-form-container p-4 p-md-5 mt-4">
-        <div class="m-auto">
+        <div class="m-auto ">
           <h1 class="text-center text-primary mb-4 fs-2">مرحباً بك</h1>
           <p class="text-center text-secondary">من فضلك، أدخل بياناتك</p>
           <form [formGroup]="loginForm" (ngSubmit)="formCheck()" class="row g-3" dir="rtl">
@@ -15,6 +15,11 @@
             @if(loginForm.controls['name'].errors?.['required']) {
             <p class="error text-danger small mb-2">
               <i class="bi bi-exclamation-circle me-1"></i>الرجاء إدخال الاسم
+            </p>
+            } @else if(loginForm.controls['name'].errors?.['minlength'] ||
+            loginForm.controls['name'].errors?.['maxlength']) {
+            <p class="error text-danger small mb-2">
+              <i class="bi bi-exclamation-circle me-1"></i> اسم غير صحيح (يجب أن يكون مكون من 3 - 30 حرف)
             </p>
             }
             }
@@ -30,13 +35,13 @@
             </p>
             } @else if(loginForm.controls['phone'].errors?.['pattern']) {
             <p class="error text-danger small mb-2">
-              <i class="bi bi-exclamation-circle me-1"></i>رقم الهاتف غير صحيح (يجب أن يكون 10-12 رقم)
+              <i class="bi bi-exclamation-circle me-1"></i>رقم الهاتف غير صحيح (يجب أن يكون 10-15 رقم)
             </p>
             }
             }
             <div class="col-12">
-              <button type="submit" [disabled]="isLoading" class="btn w-100 btn-success  text-black">
-                @if (!isLoading) {
+              <button type="submit" [disabled]="isLoading" class="btn w-100 bg-main-color text-black"
+                [attr.aria-busy]="isLoading"> @if (!isLoading) {
                 متابعة
                 } @else {
                 <span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>
@@ -49,7 +54,7 @@
       </div>
     </div>
     <div class="col-lg-6 d-none d-lg-block h-100 p-0">
-      <img src="https://res.cloudinary.com/dojq1nxqw/image/upload/v1743791003/login-image_sw8rwi.jpg" class="img-cover"
+      <img src="https://res.cloudinary.com/dojq1nxqw/image/upload/v1745531996/loginImage3_ojrydu.jpg" class="img-cover"
         alt="صورة تسجيل الدخول" />
     </div>
   </div>
