@@ -1,0 +1,39 @@
+<footer>
+  <div class="footer-container container">
+    <div class="footer-top">
+      <div class="footer-section">
+        <h3>عن الموقع</h3>
+        <p>
+          موقع 7Ps Store هو المنصة الأولى لمتابعة أحدث الترددات والقنوات الناقلة للمباريات
+          والبطولات الرياضية حول العالم.
+        </p>
+      </div>
+
+      <div class="footer-section">
+        <h3>روابط سريعة</h3>
+        <ul>
+          <li *ngFor="let link of footerLinks">
+            <a [routerLink]="link.path">{{ link.title }}</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>وسائل التواصل</h3>
+        <div class="social-links">
+          <a *ngFor="let social of socialLinks" [href]="social.url" target="_blank" rel="noopener">
+            <i [class]="social.icon"></i>
+          </a>
+        </div>
+        <div class="contact-info">
+          <p><i class="fas fa-phone"></i> +123456789</p>
+          <p><i class="fas fa-envelope"></i> info&#64;sports.com</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>جميع الحقوق محفوظة &copy; {{ currentYear }} 7Ps Store</p>
+    </div>
+  </div>
+</footer>
