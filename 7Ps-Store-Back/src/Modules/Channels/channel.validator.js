@@ -16,6 +16,7 @@ const eirpSchema = Joi.object({
   value: Joi.number().allow(null) // Keep existing value validation
 });
 
+
 const frequencySchema = Joi.object({
   text: Joi.string().required(),
   value: Joi.number().required()
