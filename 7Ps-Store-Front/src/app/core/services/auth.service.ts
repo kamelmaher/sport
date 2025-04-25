@@ -17,8 +17,7 @@ export class AuthService {
 
   }
 
-  //   // Login with username and phone
-  // في auth.service.ts
+  // Login with username and phone
   login(userName: string, phone: string): Observable<any> {
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json; charset=utf-8')
@@ -38,6 +37,14 @@ export class AuthService {
     return !!token;
   }
 
+  isAdmin(): boolean {
+    const role: any = localStorage.getItem('role');
+    console.log('Role:', role);
+    console.log('Role parsed:', JSON.parse(role));
+    return role == '"admin"';
+  }
+
+
   getToken(): string | null {
     return localStorage.getItem('token');
   }
@@ -46,6 +53,10 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem('token');
     // this.router.navigate(['/login']);
+  }
+
+  getRole(): string | null {
+    return localStorage.getItem('role');
   }
 }
 //   // Check if user is logged in

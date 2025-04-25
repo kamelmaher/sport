@@ -15,9 +15,6 @@ export class FooterComponent implements OnInit {
     { title: 'الرئيسية', path: '/' },
     { title: 'القنوات', path: '/channels' },
     { title: 'المباريات', path: '/matches' },
-    { title: 'سياسة الخصوصية', path: '/privacy' },
-    { title: 'شروط الاستخدام', path: '/terms' },
-    { title: 'اتصل بنا', path: '/contact' }
   ];
 
   socialLinks = [
@@ -27,7 +24,7 @@ export class FooterComponent implements OnInit {
     { icon: 'fa-brands fa-tiktok', url: 'https://www.tiktok.com/@7ps_store' },
     { icon: 'fa-brands fa-phoenix-framework', url: 'https://7ps-oman.com' },
     { icon: 'fa-brands fa-snapchat', url: 'https://www.snapchat.com/add/store_7ps' },
-    { icon: 'fab fa-whatsapp', url: 'https://api.whatsapp.com/resolve/?deeplink=%2F%2B968%252092415103&not_found=1' }
+    { icon: 'fab fa-whatsapp', url: 'https://api.whatsapp.com/send/?phone=96892415103&text&type=phone_number&app_absent=0' }
   ];
 
   constructor() { }
