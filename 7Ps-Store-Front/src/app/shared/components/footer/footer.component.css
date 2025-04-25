@@ -91,9 +91,16 @@ footer {
   transform: translateY(-3px);
 }
 
-.contact-info p {
+.contact-info{
   display: flex;
-  align-items: center;
+  flex-direction: row;
+  gap: 15px;
+  align-items: end;
+}
+
+.contact-info p {
+
+  /* align-items: center; */
   margin-bottom: 10px;
 }
 
@@ -121,4 +128,4 @@ footer {
 }
 
 /* Font Awesome icons */
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
+/* @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css'); */

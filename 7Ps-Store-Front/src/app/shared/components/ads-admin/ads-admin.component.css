@@ -1,0 +1,185 @@
+.ads-table-container {
+  width: 100%;
+}
+
+.ads-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.ad-card {
+  border: 1px solid #dee2e6;
+  border-radius: 0.25rem;
+  padding: 1rem;
+  background-color: #fff;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.ad-image {
+  text-align: center;
+}
+
+.ad-thumbnail {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.ad-details {
+  flex: 1;
+}
+
+.ad-title {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+}
+
+.ad-link {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #0d6efd;
+  text-decoration: none;
+  margin-bottom: 0.5rem;
+}
+
+.ad-link:hover {
+  text-decoration: underline;
+}
+
+.ad-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.ads-btn {
+  min-width: 82px;
+}
+
+@media (max-width: 576px) {
+  .ads-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ads-admin-container {
+  padding: 1.5rem;
+  direction: rtl;
+  text-align: right;
+}
+
+.section-title {
+  margin-bottom: 1.5rem;
+}
+
+.card {
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  margin-bottom: 1.5rem;
+}
+
+.card-header {
+  background-color: #f8f9fa;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 1.5rem;
+}
+
+/* Table view styles (desktop) */
+.table-view {
+  display: block;
+}
+
+.ad-thumbnail {
+  width: 100px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.link-truncate {
+  display: block;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.spinner-border {
+  width: 1rem;
+  height: 1rem;
+}
+
+.table th,
+.table td {
+  vertical-align: middle;
+}
+
+.ads-btn {
+  min-width: 82px;
+}
+
+/* Card view styles (mobile) */
+.cards-view {
+  display: none;
+}
+
+.ad-card {
+  border: 1px solid #dee2e6;
+  border-radius: 0.25rem;
+  padding: 1rem;
+  background-color: #fff;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  margin-bottom: 1rem;
+}
+
+.ad-image {
+  text-align: center;
+  margin-bottom: 0.75rem;
+}
+
+.ad-card .ad-thumbnail {
+  width: 100%;
+  max-width: 180px;
+  height: auto;
+}
+
+.ad-title {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+}
+
+.ad-link {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-bottom: 0.75rem;
+}
+
+.ad-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* Responsive breakpoints */
+@media (max-width: 767px) {
+  .table-view {
+    display: none; /* Hide table on mobile */
+  }
+
+  .cards-view {
+    display: block; /* Show cards on mobile */
+  }
+}
