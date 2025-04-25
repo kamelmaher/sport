@@ -38,10 +38,12 @@ export class AuthService {
     return !!token;
   }
 
+  getToken(): string | null {
+    return localStorage.getItem('token');
+  }
 
   // Logout the user
   logout(): void {
-    // Remove user from local storage and set current user to null
     localStorage.removeItem('token');
     // this.router.navigate(['/login']);
   }

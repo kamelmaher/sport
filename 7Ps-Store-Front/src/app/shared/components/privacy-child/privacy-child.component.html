@@ -1,0 +1,44 @@
+<div class="privacy-container">
+  <div class="page-header">
+    <div class="container">
+      <h1>سياسة الخصوصية</h1>
+      <p class="updated-date">آخر تحديث: {{ lastUpdated }}</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="intro-section">
+      <p>تصف سياسة الخصوصية هذه كيفية جمع واستخدام وحماية المعلومات الشخصية التي تقدمها عند استخدام موقعنا. نحن ملتزمون
+        بضمان حماية خصوصيتك. عندما نطلب منك تقديم معلومات معينة يمكن من خلالها التعرف عليك عند استخدام هذا الموقع، يمكنك
+        التأكد من أنه سيتم استخدامها فقط وفقًا لبيان الخصوصية هذا.</p>
+    </div>
+
+    <div class="privacy-sections">
+      <div class="privacy-section" *ngFor="let section of sections">
+        <h2>{{ section.title }}</h2>
+        <p>{{ section.content }}</p>
+      </div>
+    </div>
+
+    <div class="faq-section">
+      <h2>الأسئلة الشائعة حول الخصوصية</h2>
+      <div class="faq-accordion">
+        <div class="faq-item" *ngFor="let faq of faqs; let i = index" [id]="'faq-' + i">
+          <div class="faq-question" (click)="toggleFaq(i)">
+            <h3>{{ faq.question }}</h3>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>{{ faq.answer }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-section">
+      <h2>أسئلة عن سياسة الخصوصية؟</h2>
+      <p>إذا كان لديك أي استفسارات حول سياسة الخصوصية الخاصة بنا، فلا تتردد في الاتصال بنا من خلال <a
+          routerLink="/contact">صفحة الاتصال</a>.</p>
+    </div>
+  </div>
+</div>

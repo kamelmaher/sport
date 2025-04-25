@@ -1,0 +1,48 @@
+<!-- terms.component.html -->
+<div class="terms-container">
+  <div class="terms-header">
+    <div class="container">
+      <h1>شروط الاستخدام</h1>
+      <p class="last-updated">آخر تحديث: {{ lastUpdated }}</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="terms-nav">
+      <div class="terms-nav-inner">
+        <h3>المحتويات</h3>
+        <ul>
+          <li *ngFor="let term of terms; let i = index">
+            <a (click)="scrollToSection('section-' + i)">{{ term.title }}</a>
+          </li>
+        </ul>
+        <button class="print-btn" (click)="printTerms()">
+          <i class="fas fa-print"></i> طباعة الشروط
+        </button>
+      </div>
+    </div>
+
+    <div class="terms-content">
+      <div class="terms-intro">
+        <p>يرجى قراءة شروط الاستخدام هذه بعناية قبل استخدام موقعنا. يمثل وصولك إلى الموقع واستخدامه موافقتك على الالتزام
+          بهذه الشروط والأحكام. إذا كنت لا توافق على هذه الشروط، فيرجى عدم استخدام موقعنا.</p>
+      </div>
+
+      <div class="terms-sections">
+        <div class="term-section" *ngFor="let term of terms; let i = index" [id]="'section-' + i">
+          <h2>{{ term.title }}</h2>
+          <p>{{ term.content }}</p>
+        </div>
+      </div>
+
+      <div class="terms-agreement">
+        <h2>قبول الشروط</h2>
+        <p>باستخدام هذا الموقع، فإنك تقر بأنك قد قرأت وفهمت وتوافق على الالتزام بشروط وأحكام الاستخدام الموضحة أعلاه.
+          إذا كان لديك أي أسئلة أو استفسارات بخصوص هذه الشروط، يرجى <a routerLink="/contact">الاتصال بنا</a>.</p>
+        <div class="date-signature">
+          <p>تاريخ سريان المفعول: {{ lastUpdated }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

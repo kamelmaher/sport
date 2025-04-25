@@ -7,6 +7,15 @@ import { AuthService } from '../services/auth.service';
 })
 export class AuthGuard {
   constructor(private authService: AuthService, private router: Router) { }
+  canActivate(): boolean {
+    // const token = localStorage.getItem('authToken');
 
+    if (this.authService.getToken()) {
+      return true;
+    } else {
+      this.router.navigate(['/login']);
+      return false;
+    }
+  }
 
 }
