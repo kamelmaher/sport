@@ -20,6 +20,14 @@ body {
   line-height: 1.6;
 }
 
+/* general styles */
+.main-color {
+  color: #0072ff!important;
+}
+
+.bg-main-color {
+  background-color: #0072ff!important;
+}
 /* Container */
 .container {
   width: 90%;

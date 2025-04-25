@@ -1,120 +1,78 @@
 const Joi = require('joi');
 
-// Password complexity requirements
-const passwordComplexity = Joi.string()
-  .min(8)
-  .max(20)
-  .pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/)
-  .required()
-  .messages({
-    'string.min': 'Password must be at least 8 characters',
-    'string.max': 'Password cannot exceed 20 characters',
-    'string.pattern.base': 'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character',
-    'any.required': 'Password is required'
-  });
 
-// Registration schema
-const registerSchema = Joi.object({
-  firstName: Joi.string()
+// Login schema
+const loginSchema = Joi.object({
+  userName: Joi.string()
     .trim()
     .min(3)
-    .max(12)
+    .max(30)
     .required()
     .messages({
-      'string.empty': 'First name cannot be empty',
-      'string.min': 'First name must be at least 3 characters',
-      'string.max': 'First name cannot exceed 12 characters',
-      'any.required': 'First name is required'
+      'string.empty': 'User name cannot be empty',
+      'string.min': 'User name must be at least 3 characters',
+      'string.max': 'User name cannot exceed 30 characters',
+      'any.required': 'User name is required'
     }),
 
-  lastName: Joi.string()
-    .trim()
-    .min(3)
-    .max(12)
-    .required()
-    .messages({
-      'string.empty': 'Last name cannot be empty',
-      'string.min': 'Last name must be at least 3 characters',
-      'string.max': 'Last name cannot exceed 12 characters',
-      'any.required': 'Last name is required'
-    }),
-
-  email: Joi.string()
-    .trim()
-    .lowercase()
-    .email({ 
-      minDomainSegments: 2,
-      tlds: { allow: ['com', 'net', 'org', 'edu', 'eg'] }
-    })
-    .required()
-    .messages({
-      'string.email': 'Please enter a valid email address',
-      'any.required': 'Email is required'
-    }),
-
-  password: passwordComplexity,
-
-  // Prevent role assignment during registration
+  // Prevent role assignment during login
   role: Joi.forbidden().messages({
-    'any.unknown': 'Role cannot be set during registration'
+    'any.unknown': 'Role cannot be set during login'
   }),
-
+  // Prevent status assignment during login
+  status: Joi.forbidden().messages({
+    'any.unknown': 'Status cannot be set during login'
+  }),
   // phone number validation
-  phoneNumber: Joi.string()
+  phone: Joi.string()
     .trim()
     .pattern(/^01[0-2,5]{1}[0-9]{8}$/)
     .messages({
       'string.pattern.base': 'Please enter a valid Egyptian phone number (e.g., 01123456789)',
       'any.required': 'Phone number is required'
     })
-}).options({ 
+}).options({
   abortEarly: false, // Show all errors not just the first one
   stripUnknown: true // Remove unknown fields
 });
 
-// Login schema
-const loginSchema = Joi.object({
-  email: registerSchema.extract('email'),
-  password: Joi.string().required().messages({
-    'any.required': 'Password is required'
-  })
-}).options({ abortEarly: false });
 
-// Update profile schema
-const updateSchema = Joi.object({
-  firstName: Joi.string().trim().min(3).max(12),
-  lastName: Joi.string().trim().min(3).max(12),
-  
-  phoneNumber: Joi.string()
+const registerSchema = Joi.object({
+  userName: Joi.string()
     .trim()
+    .min(3)
+    .max(30)
+    .required()
+    .messages({
+      'string.empty': 'User name cannot be empty',
+      'string.min': 'User name must be at least 3 characters',
+      'string.max': 'User name cannot exceed 30 characters',
+      'any.required': 'User name is required'
+    }),
+  // phone number validation
+  phone: Joi.string()
+    .trim()
+    .required()
     .pattern(/^01[0-2,5]{1}[0-9]{8}$/)
     .messages({
-      'string.pattern.base': 'Please enter a valid Egyptian phone number'
+      'string.pattern.base': 'Please enter a valid Egyptian phone number (e.g., 01123456789)',
+      'any.required': 'Phone number is required'
     }),
-
-  image: Joi.string()
-    .uri()
+  status: Joi.string()
+    .valid('approved', 'pending', 'rejected') // Only allow "approved", "pending", or "rejected"
+    .required()
     .messages({
-      'string.uri': 'Image must be a valid URL'
-    }),
+      'any.only': 'Status must be "approved", "pending", or "rejected"',
+      'any.required': 'Status is required'
+    })
 
-  address: Joi.object({
-    street: Joi.string().trim().max(100),
-    city: Joi.string().trim().max(50),
-    state: Joi.string().trim().max(50),
-    zipCode: Joi.string().pattern(/^\d{5}$/).messages({
-      'string.pattern.base': 'Zip code must be 5 digits'
-    }),
-    country: Joi.string().trim().default('Egypt')
-  })
-}).options({ 
-  abortEarly: false,
-  stripUnknown: true 
+}).options({
+  abortEarly: false, // Show all errors not just the first one
+  stripUnknown: true // Remove unknown fields
 });
 
 // Export schemas
 module.exports = {
-  registerSchema,
   loginSchema,
-  updateSchema
+  registerSchema
 };
