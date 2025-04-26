@@ -1,0 +1,46 @@
+<div class="ads-container">
+  <!-- Loading State -->
+  @if (isLoading) {
+  <div class="loading-state">
+    <div class="spinner"></div>
+    <p>جارى التحميل الإعلانات </p>
+  </div>
+  }
+
+  <!-- Error State -->
+  @if (error) {
+  <div class="error-state">
+    <div class="error-icon">!</div>
+    <p>{{ error }}</p>
+    <button class="retry-btn" (click)="loadAds()">اعاده المحاولة</button>
+  </div>
+  }
+
+  <!-- Empty State -->
+  @if (!isLoading && !error && ads.length === 0) {
+  <div class="empty-state fs-5 text-center btn-danger p-3">
+    <i class="fa-solid fa-circle-info"></i>
+    <p class="d-inline me-2">لا توجد إعلانات حالياً</p>
+  </div>
+  }
+
+  <!-- Ads Grid -->
+  @if (!isLoading && !error && ads.length > 0) {
+  <div class="ads-grid">
+    @for (ad of ads; track trackByAdId($index, ad)) {
+    <div class="ad-card">
+      <a [href]="ad.link" target="_blank" rel="noopener noreferrer">
+        <div class="ad-content">
+          <a href="{{ad.link}}" target="_blank">
+            <h3 class="text-center">{{ ad.title }}</h3>
+          </a>
+        </div>
+        <div class="image-container">
+          <img [src]="ad.image.url" [alt]="ad.title" loading="lazy">
+        </div>
+      </a>
+    </div>
+    }
+  </div>
+  }
+</div>

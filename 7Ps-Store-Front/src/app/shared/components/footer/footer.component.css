@@ -10,6 +10,7 @@ footer {
 .footer-container {
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0 15px;
 }
 
 .footer-top {
@@ -20,8 +21,7 @@ footer {
 }
 
 .footer-section {
-  flex: 1;
-  min-width: 250px;
+  flex: 1 1 250px; /* Changed to flex-grow, flex-shrink, flex-basis */
   margin-bottom: 30px;
   padding: 0 15px;
 }
@@ -51,6 +51,7 @@ footer {
 .footer-section ul {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 .footer-section ul li {
@@ -59,7 +60,8 @@ footer {
 
 .footer-section ul li a {
   color: #ddd;
-  transition: color 0.3s;
+  transition: color 0.3s, padding 0.3s;
+  display: inline-block;
 }
 
 .footer-section ul li a:hover {
@@ -69,6 +71,7 @@ footer {
 
 .social-links {
   display: flex;
+  flex-wrap: wrap;
   gap: 15px;
   margin-bottom: 20px;
 }
@@ -91,17 +94,25 @@ footer {
   transform: translateY(-3px);
 }
 
-.contact-info{
+.contact-info {
   display: flex;
-  flex-direction: row;
-  gap: 15px;
-  align-items: end;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.contact-info a {
+  color: #ddd;
+  text-decoration: none;
+}
+
+.contact-info a:hover {
+  color: #e74c3c;
 }
 
 .contact-info p {
-
-  /* align-items: center; */
   margin-bottom: 10px;
+  display: flex;
+  align-items: center;
 }
 
 .contact-info i {
@@ -117,15 +128,37 @@ footer {
 }
 
 /* Responsive styles */
-@media (max-width: 768px) {
+@media (max-width: 992px) {
   .footer-top {
-    flex-direction: column;
+    gap: 20px;
   }
 
   .footer-section {
-    margin-bottom: 30px;
+    flex: 1 1 300px;
   }
 }
 
-/* Font Awesome icons */
-/* @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css'); */
+@media (max-width: 768px) {
+  .footer-section {
+    flex: 1 1 100%;
+    margin-bottom: 25px;
+  }
+
+  .social-links {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  footer {
+    padding: 30px 0 15px;
+  }
+
+  .footer-section h3 {
+    font-size: 18px;
+  }
+
+  .contact-info {
+    gap: 0;
+  }
+}

@@ -6,9 +6,15 @@ const adSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-    imageUrl: {
-        type: String,
-        required: true
+    image: {
+        public_id: {
+            type: String,
+            required: true
+        },
+        url: {
+            type: String,
+            required: true
+        }
     },
     link: {
         type: String,

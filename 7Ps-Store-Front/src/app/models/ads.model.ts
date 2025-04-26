@@ -2,7 +2,10 @@
 export interface Ad {
   _id?: string;
   title: string;
-  imageUrl: string;
+  image: {
+    public_id: string;
+    url: string;
+  };
   link: string;
   createdAt?: Date;
   updatedAt?: Date;

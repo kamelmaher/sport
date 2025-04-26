@@ -163,7 +163,7 @@ const login = async (req, res) => {
       });
 
       await newUser.save();
-      return res.status(200).json({ message: 'User registered successfully' });
+      return res.status(200).json({ message: 'User registered successfully', status: 'pending', role: 'user' });
     }
 
     if (userName.localeCompare(user.userName, undefined, { sensitivity: 'base' }) !== 0) {
@@ -171,7 +171,7 @@ const login = async (req, res) => {
     }
 
     if (user.status === 'pending') {
-      return res.status(401).json({ error: 'User is pending', status: user.status });
+      return res.status(200).json({ error: 'User is pending', status: user.status });
     }
 
     const token = jwt.sign(

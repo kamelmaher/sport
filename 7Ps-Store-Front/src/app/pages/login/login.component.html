@@ -49,6 +49,16 @@
                 }
               </button>
             </div>
+            <div>
+              <p *ngIf="isPending" class="text-center text-success-emphasis fw-bold"> <i
+                  class="fa-solid fa-circle-info mx-1 "></i>بانتظار
+                موافقة المسؤول</p>
+            </div>
+            <div>
+              <p *ngIf="isRejected" class="text-center text-danger fw-bold">
+                <i class="fa-solid fa-triangle-exclamation mx-1"></i>تم رفض طلبك ، يرجى المحاولة لاحقاً
+              </p>
+            </div>
           </form>
         </div>
       </div>

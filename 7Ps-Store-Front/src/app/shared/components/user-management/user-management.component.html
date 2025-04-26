@@ -1,0 +1,162 @@
+<!-- user-management.component.html -->
+<div class="user-container">
+  <h1>إدارة المستخدمين</h1>
+
+  <!-- Toggle between pending and all users -->
+  <div class="toggle-buttons">
+    <button (click)="toggleSearch()" [ngClass]="showSearch ? 'secondary' : 'primary'">
+      {{ showSearch ? 'عرض المستخدمين المعلقين' : 'البحث في جميع المستخدمين' }}
+    </button>
+
+    <button (click)="addNewUser()" class="success">
+      إضافة مستخدم جديد
+    </button>
+  </div>
+
+  <!-- Search bar -->
+  <div class="search-container mt-2" *ngIf="showSearch">
+    <input type="text" class="search-input" [(ngModel)]="searchTerm"
+      placeholder="البحث باسم المستخدم أو رقم الهاتف..." />
+    <button (click)="handleSearch()" class="search-button">
+      بحث
+    </button>
+  </div>
+
+  <!-- User form for editing/creating -->
+  <div *ngIf="editingUser" class="form-container">
+    <h2 class="form-title">
+      {{ editingUser._id ? 'تعديل مستخدم' : 'إضافة مستخدم جديد' }}
+    </h2>
+
+    <form [formGroup]="userForm" (ngSubmit)="saveUser()">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>اسم المستخدم</label>
+          <input type="text" formControlName="userName" />
+          <div *ngIf="userForm.get('userName')?.invalid && userForm.get('userName')?.touched" class="error-message">
+            <div *ngIf="userForm.get('userName')?.errors?.['required']">اسم المستخدم مطلوب</div>
+            <div *ngIf="userForm.get('userName')?.errors?.['minlength']">اسم المستخدم يجب أن يكون 3 أحرف على الأقل</div>
+            <div *ngIf="userForm.get('userName')?.errors?.['maxlength']">اسم المستخدم لا يمكن أن يتجاوز 30 حرفًا</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>رقم الهاتف</label>
+          <input type="text" formControlName="phone" />
+          <div *ngIf="userForm.get('phone')?.invalid && userForm.get('phone')?.touched" class="error-message">
+            <div *ngIf="userForm.get('phone')?.errors?.['required']">رقم الهاتف مطلوب</div>
+            <div *ngIf="userForm.get('phone')?.errors?.['pattern']">الرجاء إدخال رقم هاتف صالح</div>
+          </div>
+        </div>
+
+        <!-- <div class="form-group">
+          <label>الحالة</label>
+          <select formControlName="status">
+            <option value="pending">معلق</option>
+            <option value="approved">مقبول</option>
+            <option value="rejected">مرفوض</option>
+          </select>
+        </div> -->
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="primary" [disabled]="userForm.invalid || loading">
+          {{ loading ? 'جارٍ الحفظ...' : 'حفظ' }}
+        </button>
+        <button type="button" (click)="cancelEdit()" class="secondary">
+          إلغاء
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Loading indicator -->
+  <div *ngIf="loading" class="loading-container">
+    <div class="loading-spinner"></div>
+  </div>
+
+  <!-- Users table -->
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>اسم المستخدم</th>
+          <th>رقم الهاتف</th>
+          <th>الحالة</th>
+          <th>الإجراءات</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Show pending users by default -->
+        <ng-container *ngIf="!showSearch">
+          <tr *ngFor="let user of pendingUsers">
+            <td>{{ user.userName }}</td>
+            <td>{{ user.phone }}</td>
+            <td>
+              <span class="status-badge status-pending">
+                معلق
+              </span>
+            </td>
+            <td>
+              <div class="actions-container">
+                <button (click)="editUser(user)" class="btn-edit">
+                  تعديل
+                </button>
+                <button (click)="approveUser(user)" class="btn-approve">
+                  قبول
+                </button>
+                <button (click)="rejectUser(user)" class="btn-reject">
+                  رفض
+                </button>
+                <button (click)="deleteUser(user)" class="btn-delete">
+                  حذف
+                </button>
+              </div>
+            </td>
+          </tr>
+          <tr *ngIf="pendingUsers.length === 0">
+            <td colspan="4" class="empty-state">لا يوجد مستخدمين معلقين</td>
+          </tr>
+        </ng-container>
+
+        <!-- Show search results when searching -->
+        <ng-container *ngIf="showSearch">
+          <tr *ngFor="let user of searchResults">
+            <td>{{ user.userName }}</td>
+            <td>{{ user.phone }}</td>
+            <td>
+              <span class="status-badge" [ngClass]="{
+                  'status-approved': user.status === 'approved',
+                  'status-rejected': user.status === 'rejected',
+                  'status-pending': user.status === 'pending'
+                }">
+                {{ user.status === 'approved' ? 'مقبول' : user.status === 'rejected' ? 'مرفوض' : 'معلق' }}
+              </span>
+            </td>
+            <td>
+              <div class="actions-container">
+                <button (click)="editUser(user)" class="btn-edit">
+                  تعديل
+                </button>
+                <ng-container *ngIf="user.status === 'pending'">
+                  <button (click)="approveUser(user)" class="btn-approve">
+                    قبول
+                  </button>
+                  <button (click)="rejectUser(user)" class="btn-reject">
+                    رفض
+                  </button>
+                </ng-container>
+                <button (click)="deleteUser(user)" class="btn-delete">
+                  حذف
+                </button>
+              </div>
+            </td>
+          </tr>
+          <tr *ngIf="searchResults.length === 0 && searchTerm">
+            <td colspan="4" class="empty-state">لا توجد نتائج للبحث</td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+</div>
