@@ -44,7 +44,10 @@ export class LoginComponent {
       next: (response) => {
         console.log(name, phone);
         console.log('Login response:', response);
+        console.log('Token:', response?.token);
+        console.log('Role:', response?.role);
         localStorage.setItem('token', JSON.stringify(response?.token));
+        localStorage.setItem('role', JSON.stringify(response?.role));
         this.router.navigate(['/channels']);
       },
       error: (error) => {
