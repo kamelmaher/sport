@@ -1,0 +1,65 @@
+<div class="matches-container mt-5">
+  <div *ngIf="loading" class="text-center">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <div *ngIf="error" class="alert alert-danger" role="alert">
+    {{ error }}
+  </div>
+
+  <div *ngIf="matches && !loading" class="matches-content">
+    <div *ngFor="let competition of matches.competitions" class="competition-card">
+      <div class="competition-header">
+        <div class="league-info">
+          <i class="fas fa-futbol m-2"></i>
+          <span>{{ competition.name }}</span>
+        </div>
+      </div>
+      
+      <div class="matches-list">
+        <div *ngFor="let matchGroup of competition.matches">
+          <div class="match-group">
+            
+            <div *ngFor="let match of matchGroup.matches" class="match-card">
+              <div class="match-title text-white text-center mb-2">{{ match.competition }}</div>
+              <div class="match-details">
+                <div class="teams-container">
+                  <div class="team team-home">{{ match.teams.split(' vs ')[0] }}</div>
+                  <div class="match-time">{{ match.time }}</div>
+                  <div class="team team-away">{{ match.teams.split(' vs ')[1] }}</div>
+                </div>
+              </div>
+              
+              <div class="channels-toggle" (click)="toggleChannels(match)">
+                <i class="fas" [class.fa-chevron-down]="!match.showChannels" [class.fa-chevron-up]="match.showChannels"> القنوات </i>
+              </div>
+              
+              <div class="channels-section" [class.collapsed]="!match.showChannels">
+                <div class="channels-row">
+                  <!-- Free Channels -->
+                  <div *ngFor="let channel of match.freeChannels" class="channel-item">
+                    <span class="channel-badge free" [title]="getFrequencyTooltip(channel)">
+                      <i class="fas fa-tv me-1"></i>
+                      {{ channel.name }}
+                      <i *ngIf="channel.frequency" class="fas fa-satellite-dish ms-1"></i>
+                    </span>
+                  </div>
+                  <!-- Paid Channels -->
+                  <div *ngFor="let channel of match.paidChannels" class="channel-item">
+                    <span class="channel-badge paid" [title]="getFrequencyTooltip(channel)">
+                      <i class="fas fa-tv me-1"></i>
+                      {{ channel.name }}
+                      <i *ngIf="channel.frequency" class="fas fa-satellite-dish ms-1"></i>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
