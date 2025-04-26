@@ -23,7 +23,7 @@ export class HeaderComponent {
   ngOnInit(): void {
     this.isLoggedIn = this.authService.isLoggedIn();
     this.isAdmin = this.authService.isAdmin();
-    console.log('Is Admin:', this.isAdmin);
+    // console.log('Is Admin:', this.isAdmin);
   };
 
 

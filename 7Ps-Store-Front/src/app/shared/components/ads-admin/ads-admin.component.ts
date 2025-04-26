@@ -41,10 +41,11 @@ export class AdsAdminComponent implements OnInit {
     this.adsService.getAds().subscribe({
       next: (data) => {
         this.ads = data;
+        // console.log('Ads:', this.ads);
         this.isLoading = false;
       },
       error: (error) => {
-        this.errorMessage = 'Failed to load advertisements';
+        this.errorMessage = 'فشل تحميل الإعلانات';
         this.isLoading = false;
         console.error('Error loading ads:', error);
       }
@@ -87,10 +88,11 @@ export class AdsAdminComponent implements OnInit {
 
     this.isLoading = true;
     this.adsService.createAd(formData).subscribe({
+
       next: (newAd) => {
         this.ads.push(newAd);
         this.resetForm();
-        this.successMessage = 'Advertisement created successfully';
+        this.successMessage = 'تم انشاء الإعلان بنجاح';
         this.isLoading = false;
 
         setTimeout(() => {
@@ -98,7 +100,7 @@ export class AdsAdminComponent implements OnInit {
         }, 3000);
       },
       error: (error) => {
-        this.errorMessage = 'Failed to create advertisement';
+        this.errorMessage = 'فشل انشاء الإعلان';
         this.isLoading = false;
         console.error('Error creating ad:', error);
 
@@ -125,7 +127,7 @@ export class AdsAdminComponent implements OnInit {
           this.ads[index] = updatedAd;
         }
         this.resetForm();
-        this.successMessage = 'Advertisement updated successfully';
+        this.successMessage = 'تم تحديث الإعلان بنجاح';
         this.isLoading = false;
 
         setTimeout(() => {
@@ -133,7 +135,7 @@ export class AdsAdminComponent implements OnInit {
         }, 3000);
       },
       error: (error) => {
-        this.errorMessage = 'Failed to update advertisement';
+        this.errorMessage = 'فشل تحديث الإعلان';
         this.isLoading = false;
         console.error('Error updating ad:', error);
 
@@ -159,12 +161,12 @@ export class AdsAdminComponent implements OnInit {
   deleteAd(ad: Ad): void {
     if (!ad._id) return;
 
-    if (confirm('Are you sure you want to delete this advertisement?')) {
+    if (confirm('هل انت متاكد من حذف هذا الإعلان؟')) {
       this.isLoading = true;
       this.adsService.deleteAd(ad._id).subscribe({
         next: () => {
           this.ads = this.ads.filter(a => a._id !== ad._id);
-          this.successMessage = 'Advertisement deleted successfully';
+          this.successMessage = 'تم حذف الإعلان بنجاح';
           this.isLoading = false;
 
           setTimeout(() => {
@@ -172,7 +174,7 @@ export class AdsAdminComponent implements OnInit {
           }, 3000);
         },
         error: (error) => {
-          this.errorMessage = 'Failed to delete advertisement';
+          this.errorMessage = 'فشل حذف الإعلان';
           this.isLoading = false;
           console.error('Error deleting ad:', error);
 

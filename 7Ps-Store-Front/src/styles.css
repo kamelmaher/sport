@@ -30,8 +30,8 @@ body {
 }
 /* Container */
 .container {
-  width: 90%;
-  max-width: 1200px;
+  width: 100%;
+  /* max-width: 1200px; */
   margin: 0 auto;
   padding: 20px 0;
 }
@@ -130,3 +130,6 @@ a:hover {
   max-width: 100%;
   height: auto;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

@@ -5,7 +5,7 @@ import { HeaderComponent } from "../../shared/components/header/header.component
 
 @Component({
   selector: 'app-ads',
-  imports: [FooterComponent, AdsAdminComponent, HeaderComponent],
+  imports: [],
   templateUrl: './ads.component.html',
   styleUrl: './ads.component.css'
 })

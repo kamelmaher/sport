@@ -1,6 +1,9 @@
 export interface AuthResponse {
-  token: string;
-  user: string;
-  status: boolean;
-  massege: string; // لو عايز تكتبها صح خالص: message 😅
+  _id?: string;
+  userName: string;
+  phone: string;
+  role?: string;
+  status: 'pending' | 'approved' | 'rejected';
+  createdAt?: Date;
+  updatedAt?: Date;
 }

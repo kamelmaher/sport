@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
@@ -6,14 +6,17 @@ import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { env } from 'process';
 import { AuthResponse } from '../../models/user.model';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private readonly apiUrl = `${environment.apiUrl}/api/users/login`;
-
-  constructor(private http: HttpClient, private router: Router) {
+  private readonly usersUrl = `${environment.apiUrl}/api/users`;
+  constructor(private http: HttpClient, private router: Router,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {
 
   }
 
@@ -33,14 +36,16 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    const token = localStorage.getItem('token');
-    return !!token;
+    if (isPlatformBrowser(this.platformId)) {
+      return !!localStorage.getItem('token');
+    }
+    return false;
   }
 
   isAdmin(): boolean {
     const role: any = localStorage.getItem('role');
-    console.log('Role:', role);
-    console.log('Role parsed:', JSON.parse(role));
+    // console.log('Role:', role);
+    // console.log('Role parsed:', JSON.parse(role));
     return role == '"admin"';
   }
 
@@ -52,62 +57,48 @@ export class AuthService {
   // Logout the user
   logout(): void {
     localStorage.removeItem('token');
+    localStorage.removeItem('role');
     // this.router.navigate(['/login']);
   }
 
   getRole(): string | null {
     return localStorage.getItem('role');
   }
+
+  getAuthHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token');
+    const cleanToken = token ? token.replace(/^"(.*)"$/, '$1') : '';
+    // console.log('Cleaned Authorization Token:', cleanToken);
+
+    return new HttpHeaders({
+      'Authorization': `Bearer ${cleanToken}`,
+      'Content-Type': 'application/json'
+    });
+  }
+
+  getAllUsers(): Observable<any> {
+    return this.http.get<any>(this.usersUrl, { headers: this.getAuthHeaders() });
+  }
+
+  getPendingUsers(): Observable<any> {
+    return this.http.get<any>(`${this.usersUrl}/pending`, { headers: this.getAuthHeaders() });
+  }
+
+  getUserById(id: string): Observable<AuthResponse> {
+    return this.http.get<AuthResponse>(`${this.usersUrl}/${id}`, { headers: this.getAuthHeaders() });
+  }
+
+  createUser(user: AuthResponse): Observable<any> {
+    return this.http.post<any>(this.usersUrl, user, { headers: this.getAuthHeaders() });
+  }
+
+  updateUser(id: string, user: Partial<AuthResponse>): Observable<any> {
+    return this.http.put<any>(`${this.usersUrl}/${id}`, user, { headers: this.getAuthHeaders() });
+  }
+
+  deleteUser(id: string): Observable<any> {
+    return this.http.delete<any>(`${this.usersUrl}/${id}`, { headers: this.getAuthHeaders() });
+  }
 }
-//   // Check if user is logged in
-//   isLoggedIn(): boolean {
-//     return this.currentUserSubject.value !== null;
-//   }
 
-//   // Check if user is admin
-//   isAdmin(): boolean {
-//     const user = this.currentUserSubject.value;
-//     return user ? user.isAdmin : false;
-//   }
-
-//   // Get current user
-//   getCurrentUser(): any | null {
-//     return this.currentUserSubject.value;
-//   }
-
-//   // Check authentication status (for route guards)
-//   checkAuthStatus(): Observable<boolean> {
-//     const user = this.currentUserSubject.value;
-//     if (user) {
-//       return of(true);
-//     } else {
-//       // Optionally: verify token with backend
-//       return of(false);
-//     }
-//   }
-
-//   // Register new user
-//   register(userData: { username: string; phone: string }): Observable<any> {
-//     return this.http.post<any>(`${this.apiUrl}/register`, userData).pipe(
-//       tap(user => {
-//         // Auto-login after registration if desired
-//         // this.login(user.username, user.phone).subscribe();
-//       })
-//     );
-//   }
-
-//   // Update user profile
-//   updateProfile(userId: string, updateData: any): Observable<any> {
-//     return this.http.put<any>(`${this.apiUrl}/users/${userId}`, updateData).pipe(
-//       tap(updatedUser => {
-//         if (this.currentUserSubject.value?._id === updatedUser._id) {
-//           localStorage.setItem('currentUser', JSON.stringify(updatedUser));
-//           this.currentUserSubject.next(updatedUser);
-//         }
-//       })
-//     );
-//   }
-// }
-
-// }
 

@@ -71,8 +71,8 @@
         <tbody>
           <tr *ngFor="let ad of ads">
             <td>
-              <a [href]="ad.imageUrl" target="_blank">
-                <img [src]="ad.imageUrl" alt="{{ad.title}}" class="ad-thumbnail">
+              <a [href]="ad.image.url" target="_blank">
+                <img [src]="ad.image.url" alt="{{ad.title}}" class="ad-thumbnail">
               </a>
             </td>
             <td>{{ad.title}}</td>
@@ -92,8 +92,8 @@
     <div class="cards-view">
       <div *ngFor="let ad of ads" class="ad-card">
         <div class="ad-image">
-          <a [href]="ad.imageUrl" target="_blank">
-            <img [src]="ad.imageUrl" alt="{{ad.title}}" class="ad-thumbnail">
+          <a [href]="ad.image.url" target="_blank">
+            <img [src]="ad.image.url" alt="{{ad.title}}" class="ad-thumbnail">
           </a>
         </div>
         <div class="ad-details">
@@ -109,13 +109,16 @@
 
     <!-- Empty state message -->
     <div *ngIf="!isLoading && !ads.length" class="text-center p-5">
-      <p>لا توجد إعلانات حالياً</p>
+      <div class="empty-state fs-5 text-center btn-danger p-3">
+        <i class="fa-solid fa-circle-info"></i>
+        <p class="d-inline me-2">لا توجد إعلانات حالياً</p>
+      </div>
     </div>
 
     <!-- Loading indicator -->
     <div *ngIf="isLoading && !ads.length" class="text-center p-5">
       <div class="spinner-border" role="status">
-        <span class="visually-hidden">Loading...</span>
+        <span class="visually-hidden">...يرجى الانتظار</span>
       </div>
     </div>
   </div>
