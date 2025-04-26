@@ -1,3 +1,6 @@
+const { parseFrequencyInfo } = require('../helpers/channelFrequency');
+const { convertToMeccaTime } = require('../helpers/timeConverter');
+
 module.exports.competitionEvaluator = (CompetitionNodes) => {
     return CompetitionNodes.map(getCompetitionMatches);
   
@@ -41,7 +44,7 @@ module.exports.competitionEvaluator = (CompetitionNodes) => {
     function getMatchStatus(matchNode) {
       const timeElement = matchNode.querySelector('.fLeft_time_live').innerText;
   
-      // Check if the content looks like a score (e.g., "2 - 1")
+      // Check if it's a score
       const scorePattern = /^\d+\s*-\s*\d+$/;
       if (scorePattern.test(timeElement.trim())) {
         return {
@@ -51,16 +54,12 @@ module.exports.competitionEvaluator = (CompetitionNodes) => {
         };
       }
   
-      // Otherwise, treat it as an upcoming match with a time
-      const fullTime = timeElement.split(' ')[1];
-      const originalHours = Number(fullTime.split(':')[0]) + 1; // تعديل لدعم التوقيت الصيفي
-      const formattedHours = originalHours > 12 ? (originalHours - 12).toString().padStart(2, '0') : originalHours;
-      const minutes = fullTime.split(':')[1].padStart(2, '0');
-      const rawTime = `${formattedHours}:${minutes}`;
+      // Just return the raw time data
+      const timeData = timeElement.split(' ');
       return {
-        time: rawTime,
+        time: `${timeData[1]} ${timeData[2] || ''}`.trim(), // Include AM/PM if exists
         result: null,
-        status: 'upcoming',
+        // status: 'upcoming',
       };
     }
   
@@ -77,13 +76,47 @@ module.exports.competitionEvaluator = (CompetitionNodes) => {
         if (isOnlineChannel(name)) return;
   
         const isFree = isFreeChannel(item);
+        const frequencyData = item.getAttribute('onmouseover');
+        let frequency = null;
+  
+        if (frequencyData) {
+          // Extract HTML content from onmouseover attribute
+          const frequencyHtml = frequencyData
+            .replace('return overlib(\'', '')
+            .replace('\', STICKY, MOUSEOFF);', '');
+  
+          // Parse the frequency table data
+          const tableMatch = frequencyHtml.match(/<tr.*?>(.*?)<\/tr>/gs);
+          if (tableMatch && tableMatch.length > 1) {
+            const cells = tableMatch[1].match(/<td.*?>(.*?)<\/td>/g);
+            if (cells && cells.length >= 5) {
+              frequency = {
+                position: cells[0].replace(/<[^>]*>/g, '').trim(),
+                satellite: cells[1].replace(/<[^>]*>/g, '').trim(),
+                frequency: cells[2].replace(/<[^>]*>/g, '').trim(),
+                symbolRate: cells[3].replace(/<[^>]*>/g, '').trim(),
+                encryption: cells[4].replace(/<[^>]*>/g, '').trim()
+              };
+            }
+          }
+        }
+  
+        const channelInfo = {
+          name,
+          frequency
+        };
+  
         const channelList = isFree ? freeChannels : paidChannels;
-        channelList.push(name);
+        channelList.push(channelInfo);
       });
   
       sortChannelsNames(freeChannels);
       sortChannelsNames(paidChannels);
       return { freeChannels, paidChannels };
+    }
+  
+    function sortChannelsNames(channels) {
+      channels.sort((a, b) => a.name.localeCompare(b.name));
     }
   
     function isOnlineChannel(channelName) {
@@ -92,9 +125,5 @@ module.exports.competitionEvaluator = (CompetitionNodes) => {
   
     function isFreeChannel(channel) {
       return channel.classList.contains('chan_live_free');
-    }
-  
-    function sortChannelsNames(channels) {
-      channels.sort((a, b) => a.localeCompare(b));
     }
   };

@@ -1,4 +1,5 @@
 const { competitionEvaluator } = require('./competitionEvaluator');
+const { convertToMeccaTime } = require('../helpers/timeConverter');
 
 module.exports.scrapeCompetitions = async (page, competitionsNames) => {
   // Wait for the content to be loaded
@@ -25,5 +26,28 @@ module.exports.scrapeCompetitions = async (page, competitionsNames) => {
     })
   );
 
-  return allCompetitions.filter((competition) => competition !== null);
+  return allCompetitions.map(competition => {
+    if (competition) {
+      competition.matches = competition.matches.map(matchGroup => {
+        matchGroup.matches = matchGroup.matches.map(match => {
+          if (match && match.time) {
+            match.time =  `${convertToMeccaTime(match.time)}`;
+          }
+          return match;
+        });
+        return matchGroup;
+      });
+    }
+    return competition;
+  }).filter(competition => competition !== null);
+
+  const matches = await page.evaluate(competitionEvaluator);
+
+  // Convert times to Mecca time after scraping
+  return matches.map(match => {
+    if (match && match.time) {
+      match.time = ` ${convertToMeccaTime(match.time)}`;
+    }
+    return match;
+  });
 };

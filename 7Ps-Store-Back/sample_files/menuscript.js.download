@@ -1,0 +1,522 @@
+<!--
+var isDOM = (document.getElementById ? true : false);
+var isIE4 = ((document.all && !isDOM) ? true : false);
+var isNS4 = (document.layers ? true : false);
+function getRef(id) {
+if (isDOM) return document.getElementById(id);
+if (isIE4) return document.all[id];
+if (isNS4) return document.layers[id];
+}
+function getWidth() {
+  return Math.max(
+    document.documentElement.scrollWidth,
+    document.body.offsetWidth,
+    document.documentElement.offsetWidth,
+    document.documentElement.clientWidth
+  );
+}
+
+function getSty(id) {
+return (isNS4 ? getRef(id) : getRef(id).style);
+}
+var popTimer = 0;
+var litNow = new Array();
+function popOver(menuNum, itemNum) {
+clearTimeout(popTimer);
+hideAllBut(menuNum);
+litNow = getTree(menuNum, itemNum);
+changeCol(litNow, true);
+targetNum = menu[menuNum][itemNum].target;
+if (targetNum > 0) {
+thisX = parseInt(menu[menuNum][0].ref.left) + parseInt(menu[menuNum][itemNum].ref.left);
+thisY = parseInt(menu[menuNum][0].ref.top) + parseInt(menu[menuNum][itemNum].ref.top);
+with (menu[targetNum][0].ref) {
+left = parseInt(thisX + menu[targetNum][0].x);
+top = parseInt(thisY + menu[targetNum][0].y);
+visibility = 'visible';
+      }
+   }
+}
+function popOut(menuNum, itemNum) {
+if ((menuNum == 0) && !menu[menuNum][itemNum].target)
+hideAllBut(0)
+else
+popTimer = setTimeout('hideAllBut(0)', 500);
+}
+function getTree(menuNum, itemNum) {
+
+itemArray = new Array(menu.length);
+
+while(1) {
+itemArray[menuNum] = itemNum;
+if (menuNum == 0) return itemArray;
+itemNum = menu[menuNum][0].parentItem;
+menuNum = menu[menuNum][0].parentMenu;
+   }
+}
+
+function changeCol(changeArray, isOver) {
+for (menuCount = 0; menuCount < changeArray.length; menuCount++) {
+if (changeArray[menuCount]) {
+newCol = isOver ? menu[menuCount][0].overCol : menu[menuCount][0].backCol;
+with (menu[menuCount][changeArray[menuCount]].ref) {
+if (isNS4) bgColor = newCol;
+else backgroundColor = newCol;
+         }
+      }
+   }
+}
+function hideAllBut(menuNum) {
+var keepMenus = getTree(menuNum, 1);
+for (count = 0; count < menu.length; count++)
+if (!keepMenus[count])
+menu[count][0].ref.visibility = 'hidden';
+changeCol(litNow, false);
+}
+
+function Menu(isVert, popInd, x, y, width, overCol, backCol, borderClass, textClass) {
+this.isVert = isVert;
+this.popInd = popInd
+this.x = x;
+this.y = y;
+this.width = width;
+this.overCol = overCol;
+this.backCol = backCol;
+this.borderClass = borderClass;
+this.textClass = textClass;
+this.parentMenu = null;
+this.parentItem = null;
+this.ref = null;
+}
+
+function Item(text, href, frame, length, spacing, target) {
+this.text = text;
+this.href = href;
+this.frame = frame;
+this.length = length;
+this.spacing = spacing;
+this.target = target;
+this.ref = null;
+
+
+}
+function fixmenu() {
+   var element = document.getElementById('fullmenu');
+
+
+ 
+  firstleft = (getWidth()/2)-(1060/2);
+    element.style.left = firstleft;
+     //console.log(firstleft);
+
+}
+
+function writeMenus() {
+
+if (!isDOM && !isIE4 && !isNS4) return;
+
+for (currMenu = 0; currMenu < menu.length; currMenu++) with (menu[currMenu][0]) {
+var str = '', itemX = 0, itemY = 0;
+
+for (currItem = 1; currItem < menu[currMenu].length; currItem++) with (menu[currMenu][currItem]) {
+var itemID = 'menu' + currMenu + 'item' + currItem;
+
+var w = (isVert ? width : length);
+var h = (isVert ? length : width);
+
+if (isDOM || isIE4) {
+str += '<div id="' + itemID + '" style="position: absolute; left: ' + itemX + '; top: ' + itemY + '; width: ' + w + '; height: ' + h + '; visibility: inherit; ';
+if (backCol) str += 'background: ' + backCol + '; ';
+str += '" ';
+}
+if (isNS4) {
+str += '<layer id="' + itemID + '" left="' + itemX + '" top="' + itemY + '" width="' +  w + '" height="' + h + '" visibility="inherit" ';
+if (backCol) str += 'bgcolor="' + backCol + '" ';
+}
+if (borderClass) str += 'class="' + borderClass + '" ';
+
+str += 'onMouseOver="popOver(' + currMenu + ',' + currItem + ')" onMouseOut="popOut(' + currMenu + ',' + currItem + ')">';
+
+str += '<table width="' + (w - 8) + '" border="0" cellspacing="0" cellpadding="' + (!isNS4 && borderClass ? 3 : 0) + '"><tr><td align="left" height="' + (h - 7) + '">' + '<a class="' + textClass + '" href="' + href + '"' + (frame ? ' target="' + frame + '">' : '>') + text + '</a></td>';
+if (target > 0) {
+
+menu[target][0].parentMenu = currMenu;
+menu[target][0].parentItem = currItem;
+
+if (popInd) str += '<td class="' + textClass + '" align="right">' + popInd + '</td>';
+}
+str += '</tr></table>' + (isNS4 ? '</layer>' : '</div>');
+if (isVert) itemY += length + spacing;
+else itemX += length + spacing;
+}
+if (isDOM) {
+var newDiv = document.createElement('div');
+document.getElementsByTagName('body').item(0).appendChild(newDiv);
+newDiv.setAttribute("id", "fullmenu");
+newDiv.innerHTML = str;
+ref = newDiv.style;
+ref.position = 'absolute';
+ref.visibility = 'hidden';
+}
+
+if (isIE4) {
+document.body.insertAdjacentHTML('beforeEnd', '<div id="menu' + currMenu + 'div" ' + 'style="position: absolute; visibility: hidden">' + str + '</div>');
+ref = getSty('menu' + currMenu + 'div');
+}
+
+if (isNS4) {
+ref = new Layer(0);
+ref.document.write(str);
+ref.document.close();
+}
+
+for (currItem = 1; currItem < menu[currMenu].length; currItem++) {
+itemName = 'menu' + currMenu + 'item' + currItem;
+if (isDOM || isIE4) menu[currMenu][currItem].ref = getSty(itemName);
+if (isNS4) menu[currMenu][currItem].ref = ref.document[itemName];
+   }
+}
+
+firstleft = (getWidth()/2)-(1060/2);
+
+
+with(menu[0][0]) {
+ref.left = firstleft;
+ref.top = y;
+ref.visibility = 'visible';
+   }
+}
+
+var menu = new Array();
+var theTime = new Date();
+var theDay = theTime.formatDate("d");
+var theMonth = theTime.formatDate("m");
+var theYear = theTime.formatDate("Y");
+
+var look60Time = new Date();
+look60Time.setDate(look60Time.getDate()+59);
+var look60day = look60Time.formatDate("d");
+var look60month = look60Time.formatDate("m");
+var look60year = look60Time.formatDate("Y");
+
+var look90Time = new Date();
+look90Time.setDate(look90Time.getDate()+89);
+var look90day = look90Time.formatDate("d");
+var look90month = look90Time.formatDate("m");
+var look90year = look90Time.formatDate("Y");
+
+var defOver = '#C0C0C0', defBack = '#CACACA';
+
+var defLength = 19;
+
+
+menu[0] = new Array();
+menu[0][0] = new Menu(false, '', 0, 32, 14, '#EEEAEA', '#EEEAEA', '', 'itemText');
+menu[0][1] = new Item('Daily TV', '#', '', 74, 0, 1);
+menu[0][2] = new Item('UK / Ireland', '#', '', 100, 0, 2);
+menu[0][3] = new Item('Continental Europe', '#', '', 143, 0, 3);
+menu[0][4] = new Item('UEFA', '#', '', 62, 0, 4);
+menu[0][5] = new Item('Americas', '#', '', 83, 0, 5);
+menu[0][6] = new Item('Asia / Africa', '#', '', 98, 0, 6);
+menu[0][7] = new Item('International', '#', '', 108, 0, 7);
+menu[0][8] = new Item('Friendly', '#', '', 76, 0, 13);
+menu[0][9] = new Item('Other Sports', '#', '', 107, 0, 8);
+menu[0][10] = new Item('Freqs / Feeds', '#', '', 110, 0, 9);
+menu[0][11] = new Item('Links', '#', '', 56, 0, 10);
+
+menu[1] = new Array();
+menu[1][0] = new Menu(true, '>', 0, 21, 120, defOver, defBack, 'itemBorder', 'itemText');
+
+for(var i = 0; i<=9; i++)// web reference: http://www.svendtofte.com/code/date_format/
+{
+	var currentTime = new Date();
+	currentTime.setDate(currentTime.getDate()+i);
+	var day = currentTime.formatDate("d");
+	var month = currentTime.formatDate("m");
+	var year = currentTime.formatDate("Y");
+
+	menu[1][i+1] = new Item(currentTime.formatDate("M d - (D)"), 'https://liveonsat.com/2day.php?start_dd='+day+'&start_mm='+month+'&start_yyyy='+year+'&end_dd='+day+'&end_mm='+month+'&end_yyyy='+year, '_top', 22, 0, 0);
+}
+
+menu[2] = new Array();
+menu[2][0] = new Menu(true, '>', 0, 21, 220, defOver, defBack, 'itemBorder', 'itemText');
+menu[2][1] = new Item('&nbsp;All UK & Ireland', 'uk-britain-ireland-all-football.php', '', 22, 0, 0);
+menu[2][2] = new Item('&nbsp;English Premiership only', 'uk-england-premier-league.php', '', 22, 0, 0);
+menu[2][3] = new Item('&nbsp;English Championship only', 'uk-england-championship.php', '', 22, 0, 0);
+menu[2][4] = new Item('&nbsp;&bull; England excluding EPL', 'uk-england-ex-premiership.php', '', 22, 0, 0);
+menu[2][5] = new Item('&nbsp;&bull; England including EPL', 'uk-england-all-football.php', '', 22, 0, 0);
+menu[2][6] = new Item('&nbsp;&bull; Scotland / Wales only', 'uk-scotland-wales-premiership.php', '', 22, 0, 0);
+menu[2][7] = new Item('&nbsp;&bull; Ireland / Northern Ireland', 'uk-ireland-northern-ireland-all-football.php', '', 22, 0, 0);
+menu[2][8] = new Item('&nbsp;All CUP Competitions only', 'uk-cup-competitions-all.php', '', 22, 0, 0);
+
+menu[3] = new Array();
+menu[3][0] = new Menu(true, '>', 0, 21, 165, defOver, defBack, 'itemBorder', 'itemText');
+menu[3][1] = new Item('&nbsp;&bull; Austria only', '#', '', 22, 0, 22);
+menu[3][2] = new Item('&nbsp;&bull; Belgium only', 'europe-belgium-all-football.php', '', 22, 0, 0);
+menu[3][3] = new Item('&nbsp;&bull; France only', '#', '', 22, 0, 23);
+menu[3][4] = new Item('&nbsp;&bull; Germany only', '#', '', 22, 0, 20);
+menu[3][5] = new Item('&nbsp;&bull; Italy only', '#', '', 22, 0, 21);
+menu[3][6] = new Item('&nbsp;&bull; Netherlands only', 'europe-netherlands-all-football.php', '', 22, 0, 0);
+menu[3][7] = new Item('&nbsp;&bull; Portugal only', '#', '', 22, 0, 24);
+menu[3][8] = new Item('&nbsp;&bull; Spain only', '#', '', 22, 0, 14);
+menu[3][9] = new Item('&nbsp;&bull; Switzerland only', 'europe-switzerland-all-football.php', '', 22, 0, 0);
+menu[3][10] = new Item('&nbsp;Eastern European', '#', '', 22, 0, 11);
+menu[3][11] = new Item('&nbsp;Mediterranean', '#', '', 22, 0, 19);
+menu[3][12] = new Item('&nbsp;Nordic (inc Iceland)', '#', '', 22, 0, 18);
+
+menu[4] = new Array();
+menu[4][0] = new Menu(true, '>', 0, 21, 260, defOver, defBack, 'itemBorder', 'itemText');
+menu[4][1] = new Item('&nbsp;&bull; UEFA Champions League', 'club-uefa-champions-league.php', '', 22, 0, 0);
+menu[4][2] = new Item('&nbsp;&bull; UEFA Europa League', 'club-uefa-europa-league.php', '', 22, 0, 0);
+menu[4][3] = new Item('&nbsp;&bull; UEFA Conference League', 'club-uefa-europa-conference-league.php', '', 22, 0, 0);
+menu[4][4] = new Item('&nbsp;&bull; UEFA Club Youth Competitions', 'club-uefa-youth-competitions.php', '', 22, 0, 0);
+menu[4][5] = new Item('&nbsp;&bull; UEFA Womens Champions League', 'club-uefa-womens-champions-league.php', '', 22, 0, 0);
+menu[4][6] = new Item('&nbsp;UEFA Official Web Site', 'https://www.uefa.com/index.html', '_blank', 22, 0, 0);
+
+menu[5] = new Array();
+menu[5][0] = new Menu(true, '>', 0, 21, 220, defOver, defBack, 'itemBorder', 'itemText');
+menu[5][1] = new Item('&nbsp;CONCACAF Club Competitions', 'club-concacaf-all-football.php', '', 22, 0, 0);
+menu[5][2] = new Item('&nbsp;CONMEBOL Club Competitions', 'club-conmebol-all-football.php', '', 22, 0, 0);
+menu[5][3] = new Item('&nbsp;All National League & Cup', 'americas-all-football.php', '', 22, 0, 0);
+menu[5][4] = new Item('&nbsp;&bull; NORTH AMERICA', '#', '', 22, 0, 25);
+menu[5][5] = new Item('&nbsp;&bull; ARGENTINA', 'americas-argentina-superliga.php', '', 22, 0, 0);
+menu[5][6] = new Item('&nbsp;&bull; BRAZIL', 'americas-brazil-all-football.php', '', 22, 0, 0);
+menu[5][7] = new Item('&nbsp;&bull; CHILE', 'americas-chile-primera-division.php', '', 22, 0, 0);
+menu[5][8] = new Item('&nbsp;&bull; COLOMBIA', 'americas-colombia-primera-a.php', '', 22, 0, 0);
+menu[5][9] = new Item('&nbsp;&bull; ECUADOR', 'americas-ecuador-primera-a.php', '', 22, 0, 0);
+menu[5][10] = new Item('&nbsp;&bull; MEXICO', 'americas-mexico-liga-mx.php', '', 22, 0, 0);
+menu[5][11] = new Item('&nbsp;&bull; PERU', 'americas-peru-primera-division.php', '', 22, 0, 0);
+menu[5][12] = new Item('&nbsp;&bull; URUGUAY', 'americas-uruguay-primera-division.php', '', 22, 0, 0);
+
+menu[6] = new Array();
+menu[6][0] = new Menu(true, '<', 0, 21, 220, defOver, defBack, 'itemBorder', 'itemText');
+menu[6][1] = new Item('&nbsp;AFC Club Competition', 'club-afc-all-football.php', '', 22, 0, 0);
+menu[6][2] = new Item('&nbsp;CAF Club Competition', 'club-caf-all-football.php', '', 22, 0, 0);
+menu[6][3] = new Item('&nbsp;All National League & Cup', 'club-asia-africa-all-football.php', '', 22, 0, 0);
+menu[6][4] = new Item('&nbsp;&bull; AUSTRALIA', 'asia-australia-a-league.php', '', 22, 0, 0);
+menu[6][5] = new Item('&nbsp;&bull; CHINA', 'asia-china-csl.php', '', 22, 0, 0);
+menu[6][6] = new Item('&nbsp;&bull; EGYPT', 'africa-egypt.php', '', 22, 0, 0);
+menu[6][7] = new Item('&nbsp;&bull; INDIA', 'asia-india-super-league.php', '', 22, 0, 0);
+menu[6][8] = new Item('&nbsp;&bull; JAPAN', 'asia-japan-all-football.php', '', 22, 0, 0);
+menu[6][9] = new Item('&nbsp;&bull; MOROCCO', 'africa-morocco.php', '', 22, 0, 0);
+menu[6][10] = new Item('&nbsp;&bull; SAUDI ARABIA', 'asia_saudi-arabia.php', '', 22, 0, 0);
+menu[6][11] = new Item('&nbsp;&bull; SOUTH AFRICA', 'africa-south-africa.php', '', 22, 0, 0);
+
+menu[7] = new Array();
+menu[7][0] = new Menu(true, '<', 0, 21, 320, defOver, defBack, 'itemBorder', 'itemText');
+menu[7][1] = new Item('&nbsp;Friendlies Only', 'international-friendly-matches.php', '', 22, 0, 0);
+menu[7][2] = new Item('&nbsp;All Internationals (m)', 'international-all-football.php', '', 22, 0, 0);
+menu[7][3] = new Item('&nbsp;All Womens Televised Football (f)', 'womens-televised-football.php', '', 22, 0, 0);
+menu[7][4] = new Item('&nbsp;All Under-Age Football', 'international-underage-all-football.php', '', 22, 0, 0);
+menu[7][5] = new Item('&nbsp;&bull; CAF Africa Cup of Nations 2026 Qualifiers', 'international-caf-african-cup-of-nations.php', '', 22, 0, 0);
+menu[7][6] = new Item('&nbsp;&bull; CONCACAF Nations League 2025', 'international-concacaf-nations-league.php', '', 22, 0, 0);
+menu[7][7] = new Item('&nbsp;&bull; FIFA Club World Cup 2025', 'international-fifa-world-club-championship.php', '', 22, 0, 0);
+menu[7][8] = new Item('&nbsp;&bull; FIFA World Cup 2026 Qualifiers', 'international-fifa-world-cup-2026.php', '', 22, 0, 0);
+menu[7][9] = new Item('&nbsp;&bull; UEFA Nations League 2025', 'international-uefa-nations-league.php', '', 22, 0, 0);
+menu[7][10] = new Item('&nbsp;&bull; UEFA Womens Nations League 2025 (f)', 'international-uefa-womens-nations-league.php', '', 22, 0, 0);
+menu[7][11] = new Item('&nbsp;&bull; UEFA U-21 Championship Qualifiers 2027', 'international-uefa-under-21-championships.php', '', 22, 0, 0);
+
+menu[8]= new Array();
+menu[8][0] = new Menu(true, '<', 0, 21, 170, defOver, defBack, 'itemBorder', 'itemText');
+menu[8][1] = new Item('&nbsp;AMERICAN Sports', '#', '', 22, 0, 12);
+menu[8][2] = new Item('&nbsp;Aussie Rules', 'x-aussie-rules.php', '', 22, 0, 0);
+menu[8][3] = new Item('&nbsp;Basketball (ex NBA)', 'x-international-basketball.php', '', 22, 0, 0);
+menu[8][4] = new Item('&nbsp;Boxing / Fighting', 'x-boxing-mma.php', '', 22, 0, 0);
+menu[8][5] = new Item('&nbsp;Field Hockey', 'x-field-hockey.php', '', 22, 0, 0);
+menu[8][6] = new Item('&nbsp;Gaelic Sport', 'x-gaa.php', '', 22, 0, 0);
+menu[8][7] = new Item('&nbsp;Handball', 'x-olympic-handball.php', '', 22, 0, 0);
+menu[8][8] = new Item('&nbsp;Ice Hockey', 'x-international-icehockey.php', '', 22, 0, 0);
+menu[8][9] = new Item('&nbsp;Motor Sport', 'x-formula1.php', '', 22, 0, 0);
+menu[8][10] = new Item('&nbsp;Rugby League', 'x-rugby-league.php', '', 22, 0, 0);
+menu[8][11] = new Item('&nbsp;Rugby Union', 'x-rugby-union.php', '', 22, 0, 0);
+menu[8][12] = new Item('&nbsp;Volleyball', 'x-volleyball.php', '', 22, 0, 0);
+
+menu[9] = new Array();
+menu[9][0] = new Menu(true, '<', 0, 21, 90, defOver, defBack, 'itemBorder', 'itemText');
+menu[9][1] = new Item('&nbsp;King of Sat', 'http://en.kingofsat.net/', '_blank', 22, 0, 0);
+menu[9][2] = new Item('&nbsp;Lyngsat', 'http://www.lyngsat.com/dig/europe.shtml', '_blank', 22, 0, 0);
+menu[9][3] = new Item('&nbsp;SatelliWeb', 'http://www.satelliweb.com/index.php?section=livef&langue=en', '_blank', 22, 0, 0);
+
+menu[10] = new Array();
+menu[10][0] = new Menu(true, '<', -160, 21, 220, defOver, defBack, 'itemBorder', 'itemText');
+menu[10][1] = new Item('&nbsp;Premiership Clubs 2024/25', '#', '', 22, 0, 15);
+menu[10][2] = new Item('&nbsp;Satellite TV Channels', '#', '', 22, 0, 16);
+menu[10][3] = new Item('&nbsp;Terrestrial TV Channels', '#', '', 22, 0, 17);
+
+menu[11] = new Array();
+menu[11][0] = new Menu(true, '>', 158, 0, 148, '#F3B803', '#FFD143', 'crazyBorder', 'crazyText');
+menu[11][1] = new Item('&nbsp;&bull; Albania / Kosovo', 'europe-albania-superliga.php', '', 21, 0, 0);
+menu[11][2] = new Item('&nbsp;&bull; Belarus', 'europe-belarus-premier-league.php', '', 21, 0, 0);
+menu[11][3] = new Item('&nbsp;&bull; Bosnia H', 'europe-bosnia-premijer-liga.php', '', 21, 0, 0);
+menu[11][4] = new Item('&nbsp;&bull; Bulgaria', 'europe-bulgaria-first-league.php', '', 21, 0, 0);
+menu[11][5] = new Item('&nbsp;&bull; Croatia', 'europe-croatia-1-hnl.php', '', 21, 0, 0);
+menu[11][6] = new Item('&nbsp;&bull; Czechia', 'europe-czech-first-league.php', '', 21, 0, 0);
+menu[11][7] = new Item('&nbsp;&bull; Hungary', 'europe-hungary-NB1.php', '', 21, 0, 0);
+menu[11][8] = new Item('&nbsp;&bull; Poland', 'europe-poland-elstraklasa.php', '', 21, 0, 0);
+menu[11][9] = new Item('&nbsp;&bull; Romania', 'europe-romania-liga-1.php', '', 21, 0, 0);
+menu[11][10] = new Item('&nbsp;&bull; Russia', 'europe-russia-premier-league.php', '', 21, 0, 0);
+menu[11][11] = new Item('&nbsp;&bull; Serbia', 'europe-serbia-superliga.php', '', 21, 0, 0);
+menu[11][12] = new Item('&nbsp;&bull; Slovakia', 'europe-slovakia-superliga.php', '', 21, 0, 0);
+menu[11][13] = new Item('&nbsp;&bull; Slovenia', 'europe-slovania-1snl.php', '', 21, 0, 0);
+menu[11][14] = new Item('&nbsp;&bull; Ukraine', 'europe-ukraine-premier-league.php', '', 21, 0, 0);
+menu[11][15] = new Item('&nbsp;OTHERS', 'europe-european-football.php', '', 21, 0, 0);
+
+menu[12] = new Array();
+menu[12][0] = new Menu(true, '>', -124, 0, 123, '#FF4040', '#4040FF', 'crazyBorder', 'usaText');
+menu[12][1] = new Item('&nbsp;Any TV Coverage', 'usa-all-televised-sports.php', '', 22, 0, 0);
+menu[12][2] = new Item('&nbsp;&bull; Baseball', 'usa-mlb-baseball.php', '', 22, 0, 0);
+menu[12][3] = new Item('&nbsp;&bull; Basketball', 'usa-nba-basketball.php', '', 22, 0, 0);
+menu[12][4] = new Item('&nbsp;&bull; Football', 'usa-nfl-football.php', '', 22, 0, 0);
+menu[12][5] = new Item('&nbsp;&bull; Hockey', 'usa-nhl-hockey.php', '', 22, 0, 0);
+menu[12][6] = new Item('&nbsp;&bull; Soccer', 'usa-mls-soccer.php', '', 22, 0, 0);
+
+menu[13] = new Array();
+menu[13][0] = new Menu(true, '>', 0, 21, 260, defOver, defBack, 'itemBorder', 'itemText');
+menu[13][1] = new Item('&nbsp;Club Teams', 'club-friendly-matches.php', '', 22, 0, 0);
+menu[13][2] = new Item('&nbsp;International (Men & Women)', 'international-friendly-matches.php', '', 22, 0, 0);
+
+menu[14] = new Array();
+menu[14][0] = new Menu(true, '>', 157, 0, 150, '#F3B803', '#FFD143', 'crazyBorder', 'crazyText');
+menu[14][1] = new Item('&nbsp;All Spanish', 'europe-spain-all-football.php', '', 21, 0, 0);
+menu[14][2] = new Item('&nbsp;&bull; La Liga', 'europe-spain-laliga.php', '', 21, 0, 0);
+menu[14][3] = new Item('&nbsp;&bull; La Liga 2', 'europe-spain-laliga2.php', '', 21, 0, 0);
+menu[14][4] = new Item('&nbsp;&bull; Cup Competitions', 'europe-spain-copa-del-rey.php', '', 21, 0, 0);
+
+menu[15] = new Array();
+menu[15][0] = new Menu(true, '>', -183, 0, 182, '#F3B803', '#FFD143', 'crazyBorder', 'crazyText');
+menu[15][1] = new Item('AFC Bournemouth', 'https://www.afcb.co.uk/', '_blank', 21, 1, 0);
+menu[15][2] = new Item('Arsenal', 'https://www.arsenal.com', '_blank', 21, 1, 0);
+menu[15][3] = new Item('Aston Villa', 'https://www.avfc.co.uk/', '_blank', 21, 1, 0);
+menu[15][4] = new Item('Brentford', 'https://www.brentfordfc.com', '_blank', 21, 1, 0);
+menu[15][5] = new Item('Brighton & Hove Albion', 'https://www.brightonandhovealbion.com', '_blank', 21, 1, 0);
+menu[15][6] = new Item('Chelsea', 'https://www.chelseafc.com', '_blank', 21, 1, 0);
+menu[15][7] = new Item('Crystal Palace', 'https://www.cpfc.co.uk', '_blank', 21, 1, 0);
+menu[15][8] = new Item('Everton', 'http://www.evertonfc.com/home', '_blank', 21, 1, 0);
+menu[15][9] = new Item('Fulham', 'https://www.fulhamfc.com/', '_blank', 21, 1, 0);
+menu[15][10] = new Item('Ipswich Town *', 'https://www.itfc.co.uk/', '_blank', 21, 1, 0);
+menu[15][11] = new Item('Leicester City *', 'https://www.lcfc.com/', '_blank', 21, 1, 0);
+menu[15][12] = new Item('Liverpool', 'https://www.liverpoolfc.com', '_blank', 21, 1, 0);
+menu[15][13] = new Item('Manchester City', 'https://www.mancity.com', '_blank', 21, 1, 0);
+menu[15][14] = new Item('Manchester United', 'https://www.manutd.com', '_blank', 21, 1, 0);
+menu[15][15] = new Item('Newcastle United', 'https://www.nufc.co.uk', '_blank', 21, 1, 0);
+menu[15][16] = new Item('Nottingham Forrest', 'https://www.nottinghamforest.co.uk/', '_blank', 21, 1, 0);
+menu[15][17] = new Item('Southampton *', 'https://www.southamptonfc.com/en', '_blank', 21, 1, 0);
+menu[15][18] = new Item('Tottenham Hotspur', 'https://www.tottenhamhotspur.com', '_blank', 21, 1, 0);
+menu[15][19] = new Item('West Ham United', 'https://www.whufc.com', '_blank', 21, 1, 0);
+menu[15][20] = new Item('Wolverhampton Wanderers', 'https://www.wolves.co.uk', '_blank', 21, 1, 0);
+
+menu[16] = new Array();
+menu[16][0] = new Menu(true, '>', -151, 0, 150, '#F3B803', '#FFD143', 'crazyBorder', 'crazyText');
+menu[16][1] = new Item('beIN Sports France', 'https://www.beinsports.com/france', '_blank', 21, 1, 0);
+menu[16][2] = new Item('beIN Sports MENA', 'https://www.beinsports.com/en-mena', '_blank', 21, 1, 0);
+menu[16][3] = new Item('Diema Sport', 'https://diemaxtra.nova.bg/diemasport', '_blank', 21, 1, 0);
+menu[16][4] = new Item('Digi Sport RO', 'https://www.digisport.ro', '_blank', 21, 1, 0);
+menu[16][5] = new Item('ESPN Nederland', 'https://www.espn.nl/', '_blank', 21, 1, 0);
+menu[16][6] = new Item('EuroSport', 'https://www.eurosport.com', '_blank', 21, 1, 0);
+menu[16][7] = new Item('Nova Sports Greece', 'http://www.novasports.gr', '_blank', 21, 1, 0);
+menu[16][8] = new Item('Polsat Sport', 'https://www.polsatsport.pl', '_blank', 21, 1, 0);
+menu[16][9] = new Item('Premier Sports', 'https://premiersport.com', '_blank', 21, 1, 0);
+menu[16][10] = new Item('Sky Sport Germany', 'https://sport.sky.de', '_blank', 21, 1, 0);
+menu[16][11] = new Item('Sky Sport Italia', 'https://sport.sky.it/', '_blank', 21, 1, 0);
+menu[16][12] = new Item('Sky Sports UK', 'https://www.skysports.com', '_blank', 21, 1, 0);
+menu[16][13] = new Item('Sport 1 Germany', 'https://www.sport1.de/', '_blank', 21, 1, 0);
+menu[16][14] = new Item('Sport 1 Hungary', 'http://www.sport1tv.hu', '_blank', 21, 1, 0);
+menu[16][15] = new Item('Sport TV', 'https://www.sporttv.pt', '_blank', 21, 1, 0);
+menu[16][16] = new Item('SportKlub Various', 'http://sportklub.rs', '_blank', 21, 1, 0);
+menu[16][17] = new Item('SuperSport ZA', 'https://www.supersport.com', '_blank', 21, 1, 0);
+menu[16][18] = new Item('TNT Sports', 'https://www.tntsports.co.uk/', '_blank', 21, 1, 0);
+menu[16][19] = new Item('ViaPlay Denmark', 'https://viaplay.dk/sport', '_blank', 21, 1, 0);
+menu[16][20] = new Item('ViaPlay Norway', 'https://viaplay.no/sport', '_blank', 21, 1, 0);
+
+menu[17] = new Array();
+menu[17][0] = new Menu(true, '>', -101, 0, 100, '#F3B803', '#FFD143', 'crazyBorder', 'crazyText');
+menu[17][1] = new Item('BBC', 'https://www.bbc.co.uk/iplayer/guide', '_blank', 21, 1, 0);
+menu[17][2] = new Item('Channel 4', 'https://www.channel4.com/tv-guide', '_blank', 21, 1, 0);
+menu[17][3] = new Item('Channel 5', 'http://www.channel5.com/tv-guide', '_blank', 21, 1, 0);
+menu[17][4] = new Item('ITV', 'https://www.itv.com/hub/tv-guide', '_blank', 21, 1, 0);
+menu[17][5] = new Item('RT&Eacute;', 'https://www.rte.ie/entertainment/listings/television', '_blank', 21, 1, 0);
+menu[17][6] = new Item('TG4 Ireland', 'https://www.tg4.ie/en/irish-tv-schedule', '_blank', 21, 1, 0);
+menu[17][7] = new Item('Virgin Media', 'https://www.virginmediatv.ie/en/tv/tv-guide.html', '_blank', 21, 1, 0);
+
+menu[18] = new Array();
+menu[18][0] = new Menu(true, '>', 157, 0, 130, '#F3B803', '#FFD143', 'crazyBorder', 'crazyText');
+menu[18][1] = new Item('&nbsp;All Nordic', 'europe-nordic.php', '', 21, 0, 0);
+menu[18][2] = new Item('&nbsp;&bull; Denmark only', 'europe-denmark-all-football.php', '', 21, 0, 0);
+menu[18][3] = new Item('&nbsp;&nbsp;&nbsp;- Superliga', 'europe-denmark-superliga.php', '', 21, 0, 0);
+menu[18][4] = new Item('&nbsp;&nbsp;&nbsp;- 1. Division', 'europe-denmark-division-1.php', '', 21, 0, 0);
+menu[18][5] = new Item('&nbsp;&bull; Norway only', 'europe-norway-all-football.php', '', 21, 0, 0);
+menu[18][6] = new Item('&nbsp;&nbsp;&nbsp;- Eliteserien', 'europe-norway-eleteserien.php', '', 21, 0, 0);
+menu[18][7] = new Item('&nbsp;&nbsp;&nbsp;- 1. Division', 'europe-norway-1-division.php', '', 21, 0, 0);
+menu[18][8] = new Item('&nbsp;&bull; Sweden only', 'europe-sweden-all-football.php', '', 21, 0, 0);
+menu[18][9] = new Item('&nbsp;&nbsp;&nbsp;- Allsvenskan', 'europe-sweden-allsvenskan.php', '', 21, 0, 0);
+menu[18][10] = new Item('&nbsp;&nbsp;&nbsp;- Superettan', 'europe-sweden-superettan.php', '', 21, 0, 0);
+menu[18][11] = new Item('&nbsp;&bull; Finland only', 'europe-finland-veikkausliiga.php', '', 21, 0, 0);
+menu[18][12] = new Item('&nbsp;&bull; Iceland only', 'europe-iceland-all-football.php', '', 21, 0, 0);
+
+menu[19] = new Array();
+menu[19][0] = new Menu(true, '>', 157, 0, 140, '#F3B803', '#FFD143', 'crazyBorder', 'crazyText');
+menu[19][1] = new Item('&nbsp;All Mediterranean', 'europe-mediterranean.php', '', 21, 0, 0);
+menu[19][2] = new Item('&nbsp;&bull; Greece / Cyprus', 'europe-greece-cyprus-football.php', '', 21, 0, 0);
+menu[19][3] = new Item('&nbsp;&bull; Israel Only', 'europe-israel-all-football.php', '', 21, 0, 0);
+menu[19][4] = new Item('&nbsp;&bull; Türkiye only', 'europe-turkey-all-football.php', '', 21, 0, 0);
+
+menu[20] = new Array();
+menu[20][0] = new Menu(true, '>', 157, 0, 155, '#F3B803', '#FFD143', 'crazyBorder', 'crazyText');
+menu[20][1] = new Item('&nbsp;All German', 'europe-germany-all-football.php', '', 21, 0, 0);
+menu[20][2] = new Item('&nbsp;&bull; 1. Bundesliga', 'europe-germany-bundesliga1.php', '', 21, 0, 0);
+menu[20][3] = new Item('&nbsp;&bull; 2. Bundesliga', 'europe-germany-bundesliga2.php', '', 21, 0, 0);
+menu[20][4] = new Item('&nbsp;&bull; 3. Liga & Lower', 'europe-germany-bundesliga3.php', '', 21, 0, 0);
+menu[20][5] = new Item('&nbsp;&bull; Female Competitions', 'europe-germany-womens-football.php', '', 21, 0, 0);
+menu[20][6] = new Item('&nbsp;&bull; Cup Competitions', 'europe-germany-dfb-Pokal.php', '', 21, 0, 0);
+
+menu[21] = new Array();
+menu[21][0] = new Menu(true, '>', 157, 0, 145, '#F3B803', '#FFD143', 'crazyBorder', 'crazyText');
+menu[21][1] = new Item('&nbsp;All Italian', 'europe-italy-all-football.php', '', 21, 0, 0);
+menu[21][2] = new Item('&nbsp;&bull; Serie A', 'europe-italy-serie-a.php', '', 21, 0, 0);
+menu[21][3] = new Item('&nbsp;&bull; Serie BKT', 'europe-italy-serie-bkt.php', '', 21, 0, 0);
+menu[21][4] = new Item('&nbsp;&bull; Serie C', 'europe-italy-serie-c.php', '', 21, 0, 0);
+menu[21][5] = new Item('&nbsp;&bull; Cup Competitions', 'europe-italy-coppa-italia.php', '', 21, 0, 0);
+
+menu[22] = new Array();
+menu[22][0] = new Menu(true, '>', 157, 0, 120, '#F3B803', '#FFD143', 'crazyBorder', 'crazyText');
+menu[22][1] = new Item('&nbsp;All Austrian', 'europe-austria-all-football.php', '', 21, 0, 0);
+menu[22][2] = new Item('&nbsp;&bull; Bundesliga', 'europe-austria-bundesliga.php', '', 21, 0, 0);
+menu[22][3] = new Item('&nbsp;&bull; 2. Liga', 'europe-austria-2liga.php', '', 21, 0, 0);
+
+menu[23] = new Array();
+menu[23][0] = new Menu(true, '>', 157, 0, 140, '#F3B803', '#FFD143', 'crazyBorder', 'crazyText');
+menu[23][1] = new Item('&nbsp;All French', 'europe-france-all-football.php', '', 21, 0, 0);
+menu[23][2] = new Item('&nbsp;&bull; Ligue 1', 'europe-france-ligue-1.php', '', 21, 0, 0);
+menu[23][3] = new Item('&nbsp;&bull; Ligue 2', 'europe-france-ligue-2.php', '', 21, 0, 0);
+menu[23][4] = new Item('&nbsp;&bull; Cup Competitions', 'europe-france-cup.php', '', 21, 0, 0);
+
+menu[24] = new Array();
+menu[24][0] = new Menu(true, '>', 157, 0, 150, '#F3B803', '#FFD143', 'crazyBorder', 'crazyText');
+menu[24][1] = new Item('&nbsp;All Portuguese', 'europe-portugal-all-football.php', '', 21, 0, 0);
+menu[24][2] = new Item('&nbsp;&bull; A Liga', 'europe-portugal-primeira-liga.php', '', 21, 0, 0);
+menu[24][3] = new Item('&nbsp;&bull; LigaPro & Cup', 'europe-portugal-ligapro-cup.php', '', 21, 0, 0);
+
+menu[25] = new Array();
+menu[25][0] = new Menu(true, '>', 212, 0, 160, '#F3B803', '#FFD143', 'crazyBorder', 'crazyText');
+menu[25][1] = new Item('&nbsp;All North American', 'americas-north-american-soccer.php', '', 21, 0, 0);
+menu[25][2] = new Item('&nbsp;&bull; Major League Soccer', 'americas-mls.php', '', 21, 0, 0);
+menu[25][3] = new Item('&nbsp;&bull; USL Championship', 'americas-usl-championship.php', '', 21, 0, 0);
+menu[25][4] = new Item('&nbsp;&bull; US OPEN Cup', 'americas-us-open-cup.php', '', 21, 0, 0);
+
+var popOldWidth = window.innerWidth;
+nsResizeHandler = new Function('if (popOldWidth != window.innerWidth) location.reload()');
+
+if (isNS4) document.captureEvents(Event.CLICK);
+document.onclick = clickHandle;
+
+function clickHandle(evt)
+{
+ if (isNS4) document.routeEvent(evt);
+ hideAllBut(0);
+}
+
+function moveRoot()
+{
+ with(menu[0][0].ref) left = ((parseInt(left) < 100) ? 100 : 5);
+}
+//  End -->

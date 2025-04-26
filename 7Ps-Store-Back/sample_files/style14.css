@@ -1,0 +1,450 @@
+html			{ text-decoration: none; color: #FFFFFF; background-color: #1C2B48; font-family: Times New Roman }
+body			{ margin: 4px }
+a				{
+				text-decoration: none
+				}
+				
+				#container {
+margin:0 auto;
+text-align:left;
+width:1080px;
+}
+				
+
+p.olympic		{ text-decoration: none; color: brown; font-size: 11px; font-family: Verdana, Sans-Serif }
+
+span.rsz3		{ text-decoration: none; font-size: 3pt; font-family: Verdana, Sans-Serif }
+span.rsz2 		{ text-decoration: none; font-size: 2pt; font-family: Verdana, Sans-Serif }
+span.pdisc	 	{ text-decoration: none; color: red; font-size: 11px; font-family: Verdana, Sans-Serif }
+span.disc	 	{ font-size: 11px; font-family: Verdana, Sans-Serif }
+
+p.topline, p.verdana, p.menus, p.advert, p.cr, p.league
+				{
+				text-decoration: none
+				}
+
+p.topline     	{ color: white; font-size: 11px; font-family: Georgia, Verdana, Sans-Serif; color: white }
+p.league    	{ color: #000; font-size: 11px; font-family: Arial, Verdana, Sans-Serif }
+p.verdana		{ color: #808080; font-size: 11px; font-family: Verdana, Sans-Serif }
+p.menus			{ color: #B7D5DD; font-size: 10px; font-family: Verdana, Sans-Serif }
+p.sub			{ color: #60C8DE; font-size: 10px; font-family: Verdana, Sans-Serif }
+p.advert     	{ color: #404040; font-size: 11px; font-family: Georgia, Verdana, Sans-Serif }
+p.cr     		{ color: white; font-size: 9px; font-family: Arial, Verdana, Sans-Serif }
+p.verts     	{ color: #000000; font-size: 15px; font-family: Arial, Verdana, Sans-Serif }
+.grecaptcha-badge { visibility: hidden; }
+
+
+.itemBorder		{ border: 1px solid #BCBCBC }
+.itemText		{ text-decoration: none; color: #000000; font: 12px Verdana }
+.crazyBorder	{ border: 1px outset #BCBCC4 }
+.crazyText		{ text-decoration: none; color: #460547; font: 11px Verdana, Geneva, Arial, Helvetica }
+.usaText		{ text-decoration: none; color: #FFFFFF; font: 11px Verdana, Geneva, Arial, Helvetica; font-weight: bold }
+
+
+
+overflow: scroll; overflow-x: hidden; font: 10px verdana, geneva, arial, helvetica .popper {
+	POSITION: absolute; VISIBILITY: hidden; font: 10px Verdana, Geneva, Arial, Helvetica }
+
+	
+.titlefield{ /*CSS for RSS title link in general*/
+color:blue;
+font-size: 95%;
+text-decoration: none;
+}
+
+.labelfield{ /*CSS for label field in general*/
+color: #B17979;
+font-size: 90%;
+}
+
+.datefield{ /*CSS for date field in general*/
+color:gray;
+font-size: 90%;
+}
+
+#LJRSS{ /*Demo 2 main container*/
+width: 290px;
+height: 260px;
+padding: 2px;
+background-color: #B8C4D1;
+}
+
+#LJRSS div ul{ /*Demo 2 UL container*/
+text-align: left;
+list-style: none;
+margin: 1;
+padding-right: 0px;
+padding-left: 2px;
+}
+
+#LJRSS div ul li{ /*Demo 2 LI that surrounds each entry*/
+margin-bottom: 2px;
+}
+
+code{ /*CSS for instructions*/
+color: red;
+}
+	
+	
+p, div, td, th, span, body, ul	{
+FONT-SIZE: 10px;
+color: black;
+font-family: Verdana, Geneva, Arial, Helvetica;
+} 
+
+h2  {  color: #369; font-size: 1.1em; margin: 0em; padding: .1em; line-height:1em;}
+
+
+.note  {font-weight: bold; font-size: .8em; margin: 0em; padding: .1em }
+	 
+
+
+div.border{
+border-top: 1px solid #cdcdcd;
+border-bottom: 1px solid #cdcdcd;
+padding-bottom:4px;
+padding-top:2px;
+padding-left:12px;
+margin-top :4px;
+clear:both;
+}
+
+
+
+
+.selected{color: #ff0000;}
+
+/* Admin Navigation  ///CSS MEnu ITems - http://css.maxdesign.com.au/listamatic/ */
+#navlist li a#current
+{
+background: #3366CC;
+/*border-bottom: 1px solid white;*/
+}
+
+#navcontainer ul
+{
+padding-left: 0;
+margin-left: 0;
+background-color: #036;
+color: White;
+float: left;
+width: 100%;
+font-family: arial, helvetica, sans-serif;
+}
+
+#navcontainer ul li { display: inline; }
+
+#navcontainer ul li a
+{
+padding: 0.2em 1em;
+background-color: #036;
+color: White;
+text-decoration: none;
+float: left;
+border-right: 1px solid #fff;
+}
+
+#navcontainer ul li a:hover
+{
+background-color: #369;
+color: #fff;
+}
+
+.qfSelauto_change{ 
+	color: #000000; 
+	background-color: #FFFFFF; 
+	border: solid 1px #cccccc;
+	FONT-FAMILY: verdana, arial;
+	position:relative;
+	
+}
+
+.qfSubFront{
+	 color: #ffffff; 
+	 font-weight: bold; 
+	 background-color: #003366;
+	 height:1.5em;
+	 position:relative;
+}
+.sport_head{
+	background-color:#C4E4FC;
+	padding-left:.25em;
+
+}
+.time_head{
+background-color:#669999;
+color:#FFFFFF;
+font-size:10px;
+font-weight:bold;
+height:1.2em;
+	padding-left:.25em;
+}
+
+.comp_head{
+float:left;
+clear:left;
+font-family:Verdana, Arial, Helvetica, sans-serif;
+font-style:italic;
+color:#999999;
+padding-top:.5em;
+border-style:solid;
+border-bottom:none;
+border-left:none;
+border-right:none;
+border-width:1px;
+border-color:#EFEFEF;
+width:100%;
+	padding-left:.25em;
+
+}
+
+.names
+{
+	width:80px;
+}
+
+div.floatright{
+	float:right;
+	clear:both;
+	}
+	
+	div.floatleft{
+		 position: absolute;
+    display: inline-block;
+	float:left;
+	clear:both;
+	}
+
+div.fLeft{
+	float:left;
+	vertical-align:middle;
+	padding-right:.25em;
+	padding-left:.25em;
+	}
+	
+div.fLeft_live{
+	float:left;
+	vertical-align:middle;
+	padding-right:.25em;
+	padding-left:1em;
+}
+	
+div.fLeft_rest{
+	float:left;
+	vertical-align:middle;
+	padding-right:.25em;
+	padding-left:1.1em;
+	clear:left;
+}
+
+div.spacer{
+	height:8px;
+	float:left;
+	clear:left;
+	}
+
+div.fLeft_icon_live{
+	float:left;
+	padding-left:1em;
+	padding-top:.25em;
+	width:3em;
+	
+	}
+div.fLeft_icon_live_l{
+	float:left;
+	padding-left:2em;
+	padding-top:.2em;
+	width:3em;
+}
+
+div.fLeft_time_live{
+	float:left;
+	margin-left:1em;
+	padding-left:.2em;
+	padding-right:.2em;
+	width:7em;
+	color:#000000;
+	text-align:right;
+	
+	}
+div.fLeft_icon_rest{
+	float:left;
+	width:10em;
+	clear:left;
+	padding-left:1em;
+	
+	}
+	
+.blockfix{
+	float:left; 
+	clear:left;
+	padding-top:.2em;
+	padding-bottom:.2em;
+	margin-bottom:.5em;
+}
+
+.liveCol
+{
+	background-color:#FFFF99;
+	text-align:center;
+	width:120px;
+}
+.time_col{
+	width:120px;
+	text-align:right;
+	font-size:9px;
+	color: #959595;
+	}
+	
+.chan_col{
+	width:200px;
+}
+
+.notes{
+	float: left;
+	clear: left;
+	padding-left: 2.8em;
+	padding-top: .4em;
+	color: #B079B1;
+	font-style: italic;
+	width: 260px;
+}
+
+.fix{
+	float:left;
+	margin-right:1em;
+}
+
+.fix_text{
+	float:left;
+	height:1.6em;
+	vertical-align:middle;
+	text-align:center;
+}
+
+.floatAndClearL{
+	float:left;
+	clear:left;
+	width:100%;
+	margin-top:.4em;
+}
+.floatAndClearL_list{
+	float:left;
+	clear:left;
+	width:100%;
+	margin-top:.4em;
+	margin-top:1em;
+}
+
+a  {  text-decoration: none; }
+
+a.chan_live_free{
+	color:#A52A2A;
+	text-decoration:none;
+}
+
+a.chan_HD{
+	color:#008000;
+	text-decoration:none;
+}
+
+a.chan_live_not_free{
+	background-color:transparent;
+	text-decoration:none;
+	color:#0000FF;
+}
+
+a.chan_other_not_free{
+	background-color:transparent;
+	text-decoration:none;
+	color:#959595;
+	padding-left:1.3em;
+}
+
+a.chan_other_free{
+	background-color:transparent;
+	text-decoration:none;
+	color:#959595;
+	padding-left:1.3em;
+}
+
+a.chan_live_iptvcable {
+    background-color: transparent;
+    text-decoration: none;
+    color:#404040;
+}
+
+a.chan_live_postponed {
+    background-color: transparent;
+    text-decoration: none;
+    color:#808080;
+}
+
+a.chan_other_postponed{
+	background-color:transparent;
+	text-decoration:none;
+	color:#808080;
+	padding-left:1.3em;
+}
+
+a.chan_other_iptvcable{
+	background-color:transparent;
+	text-decoration:none;
+	color:#959595;
+	padding-left:1.3em;
+}
+
+.freq_col{
+text-align:right;
+padding-right:20px;
+color:#000088;
+}
+.pos_col{
+text-align:right;
+padding-right:25px;
+color:#000088;
+}
+.imgCenter{
+	float:left;
+	padding-right:.25em;
+	padding-left:.25em;
+	padding-top:.2em;
+}
+.fieldRow td
+{
+	color:#0000FF;
+}
+
+.posH_col
+{
+	text-align:right;
+	padding-right:30px;
+}
+
+.freqH_col
+{
+	text-align:right;
+	padding-right:30px;
+}
+.rest_col{
+	padding-left:.7em;
+	color:#000088;
+}
+.enc_live{
+color:#FF4040;
+padding-left:.1em;
+}
+.enc_not_live{
+padding-left:.1em;
+color:#000088;
+}
+
+.tablePad
+{
+	width:530px;
+}
+
+#tzSelect
+{
+font-size:10px;
+}table        { font-family: Verdana; font-size: 2pt }

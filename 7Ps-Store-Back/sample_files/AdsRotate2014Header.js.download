@@ -1,0 +1,32 @@
+<!-- Begin
+var how_many_vrts = 2;
+var now = new Date()
+var sec = now.getSeconds()
+var vrt = sec % how_many_vrts;
+vrt +=1;
+if (vrt==1) {
+url="https://liveonsat.com/pp_bein_sports.html";
+target="_blank";
+alt="beIN Subscription";
+title="beIN Subscription";
+banner="https://liveonsat.com/images/2017_bein.jpg";
+width="430";
+height="88";
+}
+if (vrt==2) {
+url="https://liveonsat.com/pp_bein_sports.html";
+target="_blank";
+alt="beIN Subscription";
+title="beIN Subscription";
+banner="https://liveonsat.com/images/2017_bein.jpg";
+width="430";
+height="88";
+}
+
+document.write('<center>');
+document.write('<a href=\"' + url + '\" target=\"_blank\">');
+document.write('<img src=\"' + banner + '\" width=')
+document.write(width + ' height=' + height + ' ');
+document.write('alt=\"' + alt + '\" border=0>');
+document.write('</center>');
+// End -->
