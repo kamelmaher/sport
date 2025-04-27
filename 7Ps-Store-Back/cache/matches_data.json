@@ -1,5 +1,5 @@
 {
-  "timestamp": 1745722768931,
+  "timestamp": 1745729423526,
   "data": {
     "date": {
       "en": {
@@ -2777,6 +2777,85 @@
                       "frequency": "11.823 V",
                       "symbolRate": "27500 - 3/4",
                       "encryption": "MPEG-4 NDS"
+                    }
+                  }
+                ],
+                "result": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "AFC Champions League Elite",
+        "matches": [
+          {
+            "competition": "AFC Champions League Elite",
+            "matches": [
+              {
+                "competition": "AFC Champions League Elite - Quarter Final",
+                "time": "7:30 PM",
+                "teams": "Kawasaki Frontale vs Al Sadd",
+                "freeChannels": [],
+                "paidChannels": [
+                  {
+                    "name": "beIN Sports MENA AFC HD",
+                    "frequency": {
+                      "position": "25.5°e",
+                      "satellite": "Eshail 2",
+                      "frequency": "10.810 H",
+                      "symbolRate": "27500 - 2/3",
+                      "encryption": "HD Irdeto"
+                    }
+                  },
+                  {
+                    "name": "ESPN 2 Nederland HD",
+                    "frequency": {
+                      "position": "23.5°e",
+                      "satellite": "Astra 3C",
+                      "frequency": "11.856 V",
+                      "symbolRate": "29900 - 3/4",
+                      "encryption": "HD NagraVision"
+                    }
+                  },
+                  {
+                    "name": "MTV MAX Suomi HD",
+                    "frequency": {
+                      "position": "0.8°w",
+                      "satellite": "Thor 6",
+                      "frequency": "10.841 H",
+                      "symbolRate": "25000 - 3/4",
+                      "encryption": "HD Conax"
+                    }
+                  },
+                  {
+                    "name": "Spor Smart 2 Türkiye HD",
+                    "frequency": {
+                      "position": "42.0°e",
+                      "satellite": "Turksat 4A",
+                      "frequency": "12.245 H",
+                      "symbolRate": "27500 - 5/6",
+                      "encryption": "HD VideoGuard"
+                    }
+                  },
+                  {
+                    "name": "TV Start Triumph HD",
+                    "frequency": {
+                      "position": "35.9°e",
+                      "satellite": "Eutelsat 36C",
+                      "frequency": "11.996 L",
+                      "symbolRate": "27500 - 3/4",
+                      "encryption": "HD DRE-Crypt"
+                    }
+                  },
+                  {
+                    "name": "TV4 Sportkanalen HD",
+                    "frequency": {
+                      "position": "0.8°w",
+                      "satellite": "Thor 6",
+                      "frequency": "10.778 H",
+                      "symbolRate": "25000 - 3/4",
+                      "encryption": "HD NagraVision"
                     }
                   }
                 ],

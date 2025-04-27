@@ -12,6 +12,7 @@ export interface Match {
 export interface Competition {
   name: string;
   matches: CompetitionGroup[];
+  showMatches?: boolean; // Add this property
 }
 
 export interface CompetitionGroup {
@@ -41,5 +42,29 @@ export interface MatchDetails {
   status: string;
   result: string | null;
   showChannels?: boolean; // Add this property
+}
+
+
+export interface FinishedMatch {
+  championship: string;
+  team_a: string;
+  team_b: string;
+  match_time: string;
+  score: string;
+  channel: string;
+  status: string;
+  date: string;
+}
+
+export interface FinishedMatchesResponse {
+  date: string;
+  matches: FinishedMatch[];
+  competitions?: FinishedCompetition[];
+}
+
+export interface FinishedCompetition {
+  name: string;
+  matches: FinishedMatch[];
+  showMatches?: boolean;
 }
   

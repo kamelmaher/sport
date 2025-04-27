@@ -1,0 +1,104 @@
+.matches-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #1a1f2e;
+  min-height: 100vh;
+  direction: rtl;
+}
+
+.competition-card {
+  background-color: #242938;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  direction: inherit;
+}
+
+.competition-header {
+  background-color: #2c3449;
+  color: white;
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.competition-header:hover {
+  background-color: #343d57;
+}
+
+.competition-toggle {
+  color: #ffffff;
+  opacity: 0.7;
+}
+
+.matches-list {
+  max-height: 2000px;
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out;
+}
+
+.matches-list.collapsed {
+  max-height: 0;
+}
+
+.date-header {
+  color: white;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.match-card {
+  background-color: #242938;
+  border-radius: 10px;
+  padding: 15px 20px;
+  margin-bottom: 15px;
+}
+
+.championship {
+  color: #ffffff;
+  font-size: 0.9rem;
+  opacity: 0.8;
+  margin-bottom: 10px;
+}
+
+.teams-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  margin: 15px 0;
+}
+
+.team {
+  color: white;
+  font-size: 1rem;
+  flex: 1;
+  text-align: center;
+}
+
+.score {
+  color: #4CAF50;
+  font-weight: 600;
+  padding: 0 15px;
+  min-width: 80px;
+  text-align: center;
+}
+
+.match-info {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  color: #ffffff;
+  opacity: 0.7;
+  font-size: 0.9rem;
+}
+
+.match-time, .match-channel, .match-status {
+  padding: 5px 10px;
+  background-color: #2c3449;
+  border-radius: 4px;
+}

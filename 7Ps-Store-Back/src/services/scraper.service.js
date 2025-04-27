@@ -40,7 +40,8 @@ class ScraperService {
     try {
       const date = moment().tz('Asia/Riyadh').format('MM/DD/YYYY');
       const urlDate = date.replace(/\//g, '-');
-      const url = `https://www.yallakora.com/match-center/?date=${urlDate}`;
+      // const url = `https://www.yallakora.com/match-center/?date=${urlDate}`;
+      const url = `https://www.yallakora.com/match-center/?date=04-26-2025`;
 
       browser = await initPlaywrightBrowser();
       const page = await initPlaywrightPage(browser);
@@ -66,7 +67,57 @@ class ScraperService {
         .catch(() => console.log('No matches found for this date'));
 
       const matches = await page.evaluate((date) => {
-        // ... (keep existing evaluate logic)
+        const finishedMatches = [];
+
+        const championships = document.querySelectorAll('div.matchCard');
+        for (const championship of championships) {
+          let championshipTitle;
+          try {
+            championshipTitle = championship.querySelector('h2')?.textContent.trim() || 'Unknown Championship';
+          } catch (e) {
+            console.error('Error getting championship title:', e);
+            continue;
+          }
+
+          const matchElements = championship.querySelectorAll('div.item.liItem');
+          for (const match of matchElements) {
+            try {
+              const matchStatus = match.querySelector('div.matchStatus > span')?.textContent.trim();
+              if (matchStatus !== 'انتهت') {
+                continue;
+              }
+
+              const teamA = match.querySelector('div.teamA')?.textContent.trim() || 'N/A';
+              const teamB = match.querySelector('div.teamB')?.textContent.trim() || 'N/A';
+
+              const matchResultDiv = match.querySelector('div.MResult');
+              const matchTime = matchResultDiv?.querySelector('span.time')?.textContent.trim() || 'N/A';
+
+              const scoreSpans = match.querySelectorAll('span.score');
+              let score = 'N/A';
+              if (scoreSpans.length === 2) {
+                score = `${scoreSpans[0].textContent.trim()} - ${scoreSpans[1].textContent.trim()}`;
+              }
+
+              const channel = match.querySelector('div.channel')?.textContent.trim() || 'N/A';
+
+              finishedMatches.push({
+                championship: championshipTitle,
+                team_a: teamA,
+                team_b: teamB,
+                match_time: matchTime,
+                score: score,
+                channel: channel,
+                status: 'انتهت',
+                date: date
+              });
+            } catch (e) {
+              console.error('Error processing match:', e);
+            }
+          }
+        }
+
+        return finishedMatches;
       }, date);
 
       return { date, matches };
