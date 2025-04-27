@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const {getMatches} = require('./matches.controller');
+const MatchesController = require('./matches.controller');
 
-router.get('/', getMatches);
+// Define routes directly
+router.get('/', MatchesController.getMatches);
+router.get('/finished', MatchesController.getFinishedMatches);
 
 module.exports = router;
