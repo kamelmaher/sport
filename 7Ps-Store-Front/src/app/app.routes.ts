@@ -8,16 +8,17 @@ import { FinishedMatchesComponent } from './shared/components/finished-matches/f
 import { AuthGuard } from './core/guards/auth.guard';
 import { AdsComponent } from './pages/ads/ads.component';
 import { AdminComponent } from './pages/admin/admin.component';
+import { adminGuard } from './core/guards/admin.guard';
 export const routes: Routes = [
 
-  { path: '', redirectTo: 'home', pathMatch: 'full'},
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: LiveMatchesComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'admin', component: AdminComponent },
+  { path: 'admin', component: AdminComponent, canActivate: [adminGuard] },
   { path: 'channels', component: ChannelsComponent, canActivate: [AuthGuard] },
-  { path: 'ads', component: AdsComponent },
-  { path: 'user', component: UserManagementComponent },
-  { path: 'finished', component: FinishedMatchesComponent },
+  { path: 'ads', component: AdsComponent, canActivate: [adminGuard] },
+  { path: 'user', component: UserManagementComponent, canActivate: [adminGuard] },
+  { path: 'finished', component: FinishedMatchesComponent, canActivate: [AuthGuard] },
 ];
 
 
