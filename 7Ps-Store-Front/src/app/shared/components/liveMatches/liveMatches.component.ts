@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatchService } from '../../../core/services/match.service';
-import { Match, Channel } from '../../../models/match.model';
+import { Match, Channel,Competition } from '../../../models/match.model';
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  templateUrl: './liveMatches.component.html',
+  styleUrl: './liveMatches.component.css'
 })
-export class HomeComponent implements OnInit {
+export class LiveMatchesComponent implements OnInit {
   matches: Match | null = null;
   loading = true;
   error = '';
@@ -21,17 +21,20 @@ export class HomeComponent implements OnInit {
     this.loadMatches();
   }
 
+  toggleCompetition(competition:Competition): void {
+    competition.showMatches = !competition.showMatches;
+  }
+
   loadMatches(): void {
     this.matchService.getMatches().subscribe({
       next: (data) => {
         this.matches = data;
-        // Initialize showChannels property for each match
         if (this.matches && this.matches.competitions) {
           this.matches.competitions.forEach(competition => {
+            competition.showMatches = true; // Initialize competition collapse state
             competition.matches.forEach(matchGroup => {
               matchGroup.matches.forEach(match => {
-                // Add showChannels property using type assertion
-                (match as any).showChannels = false; // Start expanded
+                (match as any).showChannels = false;
               });
             });
           });

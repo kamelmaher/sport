@@ -1,0 +1,47 @@
+<div class="matches-container mt-5">
+  <div *ngIf="loading" class="text-center">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <div *ngIf="error" class="alert alert-danger" role="alert">
+    {{ error }}
+  </div>
+
+  <div *ngIf="finishedMatches && !loading" class="matches-content">
+    <div class="date-header">
+      <h2>{{ finishedMatches.date }}</h2>
+    </div>
+    
+    <div *ngFor="let competition of finishedMatches.competitions" class="competition-card">
+      <div class="competition-header" (click)="toggleCompetition(competition)">
+        <div class="league-info">
+          <i class="fas fa-futbol m-2"></i>
+          <span>{{ competition.name }}</span>
+        </div>
+        <div class="competition-toggle">
+          <i class="fas" [class.fa-chevron-down]="!competition.showMatches" [class.fa-chevron-up]="competition.showMatches"></i>
+        </div>
+      </div>
+      
+      <div class="matches-list" [class.collapsed]="!competition.showMatches">
+        <div *ngFor="let match of competition.matches" class="match-card">
+          <div class="match-details">
+            <div class="teams-container">
+              <div class="team team-home">{{ match.team_a }}</div>
+              <div class="score">{{ match.score }}</div>
+              <div class="team team-away">{{ match.team_b }}</div>
+            </div>
+            <div class="match-info text-white">
+              <!-- <span class="match-time">{{ match.match_time }}</span>
+              <span class="match-channel">{{ match.channel }}</span>
+               -->
+              <span class="match-status">{{ match.status }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

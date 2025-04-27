@@ -11,14 +11,17 @@
 
   <div *ngIf="matches && !loading" class="matches-content">
     <div *ngFor="let competition of matches.competitions" class="competition-card">
-      <div class="competition-header">
+      <div class="competition-header" (click)="toggleCompetition(competition)">
         <div class="league-info">
           <i class="fas fa-futbol m-2"></i>
           <span>{{ competition.name }}</span>
         </div>
+        <div class="competition-toggle">
+          <i class="fas" [class.fa-chevron-down]="!competition.showMatches" [class.fa-chevron-up]="competition.showMatches"></i>
+        </div>
       </div>
       
-      <div class="matches-list">
+      <div class="matches-list" [class.collapsed]="!competition.showMatches">
         <div *ngFor="let matchGroup of competition.matches">
           <div class="match-group">
             

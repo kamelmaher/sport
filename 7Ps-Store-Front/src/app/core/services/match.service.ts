@@ -5,6 +5,7 @@ import { tap, catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { Match } from '../../models/match.model';
+import { FinishedMatchesResponse } from '../../models/match.model';
 
 @Injectable({
   providedIn: 'root'
@@ -40,5 +41,9 @@ export class MatchService {
 
   getCurrentMatches(): Observable<Match | null> {
     return this.matchesSubject.asObservable();
+  }
+
+  getFinishedMatches(): Observable<FinishedMatchesResponse> {
+    return this.http.get<FinishedMatchesResponse>(`${this.apiUrl}/finished`);
   }
 }
