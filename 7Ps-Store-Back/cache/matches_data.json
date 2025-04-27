@@ -1,5 +1,5 @@
 {
-  "timestamp": 1745730463125,
+  "timestamp": 1745784765665,
   "data": {
     "date": {
       "en": {
@@ -149,6 +149,16 @@
                       "frequency": "12.207 V",
                       "symbolRate": "30000 - 2/3",
                       "encryption": "HD Verimatrix"
+                    }
+                  },
+                  {
+                    "name": "Sky Sport Premier League DE HD",
+                    "frequency": {
+                      "position": "19.2°e",
+                      "satellite": "Astra 1N",
+                      "frequency": "12.032 H",
+                      "symbolRate": "27500 - 9/10",
+                      "encryption": "HD VideoGuard"
                     }
                   },
                   {
@@ -468,6 +478,26 @@
                       "frequency": "12.207 V",
                       "symbolRate": "30000 - 2/3",
                       "encryption": "HD Verimatrix"
+                    }
+                  },
+                  {
+                    "name": "Sky Sport Premier League DE HD",
+                    "frequency": {
+                      "position": "19.2°e",
+                      "satellite": "Astra 1N",
+                      "frequency": "12.032 H",
+                      "symbolRate": "27500 - 9/10",
+                      "encryption": "HD VideoGuard"
+                    }
+                  },
+                  {
+                    "name": "Sky Sport Top Event HD",
+                    "frequency": {
+                      "position": "19.2°e",
+                      "satellite": "Astra 1N",
+                      "frequency": "11.914 H",
+                      "symbolRate": "27500 - 9/10",
+                      "encryption": "HD VideoGuard"
                     }
                   },
                   {
@@ -955,6 +985,16 @@
                     }
                   },
                   {
+                    "name": "DAZN 2 Bar Deutsch HD",
+                    "frequency": {
+                      "position": "19.2°e",
+                      "satellite": "Astra 1M",
+                      "frequency": "11.798 H",
+                      "symbolRate": "27500 - 9/0",
+                      "encryption": "HD VideoGuard"
+                    }
+                  },
+                  {
                     "name": "Digi Sport 2 Romania HD",
                     "frequency": {
                       "position": "0.8°w",
@@ -1012,6 +1052,16 @@
                       "frequency": "12.657 V",
                       "symbolRate": "45000 - 3/4",
                       "encryption": "HD Irdeto"
+                    }
+                  },
+                  {
+                    "name": "Sport 2 Czechia HD",
+                    "frequency": {
+                      "position": "23.5°e",
+                      "satellite": "Astra 3B",
+                      "frequency": "12.090 V",
+                      "symbolRate": "29900 - 2/3",
+                      "encryption": "HD Viaccess"
                     }
                   },
                   {
@@ -1269,6 +1319,16 @@
                     }
                   },
                   {
+                    "name": "Sport 2 Czechia HD",
+                    "frequency": {
+                      "position": "23.5°e",
+                      "satellite": "Astra 3B",
+                      "frequency": "12.090 V",
+                      "symbolRate": "29900 - 2/3",
+                      "encryption": "HD Viaccess"
+                    }
+                  },
+                  {
                     "name": "Sport TV3 Portugal HD",
                     "frequency": {
                       "position": "30.0°w",
@@ -1385,16 +1445,6 @@
                       "frequency": "11.247 V",
                       "symbolRate": "24500 - 7/8",
                       "encryption": "HD NagraVision"
-                    }
-                  },
-                  {
-                    "name": "S Sport 2 Türkiye HD",
-                    "frequency": {
-                      "position": "42.0°e",
-                      "satellite": "Turksat 4A",
-                      "frequency": "11.880 H",
-                      "symbolRate": "20000 - 3/4",
-                      "encryption": "HD Irdeto"
                     }
                   },
                   {
@@ -1656,6 +1706,16 @@
                     }
                   },
                   {
+                    "name": "DAZN 1 Bar Deutsch HD",
+                    "frequency": {
+                      "position": "19.2°e",
+                      "satellite": "Astra 1N",
+                      "frequency": "12.070 H",
+                      "symbolRate": "27500 - 9/10",
+                      "encryption": "HD VideoGuard"
+                    }
+                  },
+                  {
                     "name": "DAZN 1 Italia HD",
                     "frequency": {
                       "position": "13.0°e",
@@ -1905,6 +1965,16 @@
                     }
                   },
                   {
+                    "name": "DAZN 1 Bar Deutsch HD",
+                    "frequency": {
+                      "position": "19.2°e",
+                      "satellite": "Astra 1N",
+                      "frequency": "12.070 H",
+                      "symbolRate": "27500 - 9/10",
+                      "encryption": "HD VideoGuard"
+                    }
+                  },
+                  {
                     "name": "DAZN 2 Portugal HD",
                     "frequency": {
                       "position": "30.0°w",
@@ -2031,6 +2101,16 @@
                       "frequency": "11.676 V",
                       "symbolRate": "24444 - 3/4",
                       "encryption": "HD Irdeto"
+                    }
+                  },
+                  {
+                    "name": "DAZN 1 Bar Deutsch HD",
+                    "frequency": {
+                      "position": "19.2°e",
+                      "satellite": "Astra 1N",
+                      "frequency": "12.070 H",
+                      "symbolRate": "27500 - 9/10",
+                      "encryption": "HD VideoGuard"
                     }
                   },
                   {

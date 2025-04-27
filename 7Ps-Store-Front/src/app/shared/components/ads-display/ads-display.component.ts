@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
@@ -22,6 +23,9 @@ export class AdsDisplayComponent implements OnInit {
   }
 
   loadAds() {
+    this.isLoading = true;
+    this.error = null;
+
     this.http.get<Ad[]>('http://localhost:4800/api/ads')
       .subscribe({
         next: (res) => {

@@ -4,7 +4,7 @@
       <a routerLink="/" class="">
         <img src="https://res.cloudinary.com/dojq1nxqw/image/upload/v1745414647/logo_yuuamh.jpg"
           alt="Sports Channels Logo" style="border-radius: 40%;">
-        <!-- <span>7Ps Store </span> -->
+        <span>7Ps Store </span>
       </a>
     </div>
 
@@ -13,13 +13,17 @@
     </button>
 
     <nav class="nav-links" [class.show]="mobileMenuOpen">
+      <a routerLink="/home" routerLinkActive="active" (click)="mobileMenuOpen = false" *ngIf="isLoggedIn">
+        <i class="fas fa-futbol"></i>
+        المباريات
+      </a>
       <a routerLink="/channels" routerLinkActive="active" (click)="mobileMenuOpen = false">
         <i class="fas fa-satellite-dish"></i>
         القنوات
       </a>
-      <a routerLink="/matches" routerLinkActive="active" (click)="mobileMenuOpen = false" *ngIf="isLoggedIn">
-        <i class="fas fa-futbol"></i>
-        المباريات
+      <a routerLink="/admin" routerLinkActive="active" (click)="mobileMenuOpen = false" *ngIf="isAdmin">
+        <i class="fas fa-cog"></i>
+        لوحه التحكم
       </a>
       <a routerLink="/login" routerLinkActive="active" (click)="mobileMenuOpen = false" *ngIf="!isLoggedIn">
         <i class="fas fa-sign-in-alt text-white"></i>
@@ -28,10 +32,6 @@
       <a *ngIf="isLoggedIn" (click)="logout()">
         <i class="fas fa-sign-out-alt" style="color: white;"></i>
         تسجيل الخروج
-      </a>
-      <a routerLink="/admin" routerLinkActive="active" (click)="mobileMenuOpen = false" *ngIf="isAdmin">
-        <i class="fas fa-cog"></i>
-        لوحه التحكم
       </a>
     </nav>
   </div>
