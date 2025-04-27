@@ -29,7 +29,7 @@ export class SearchBarComponent implements OnInit {
     this.channelService.getArabCountries().subscribe({
       next: (countries) => {
         this.arabCountries = countries;
-        console.log('Arab countries loaded:', countries);
+        // console.log('Arab countries loaded:', countries);
       },
       error: (error) => {
         console.error('Error loading Arab countries:', error);
@@ -43,7 +43,7 @@ export class SearchBarComponent implements OnInit {
     this.channelService.getChannels(this.selectedCountry, this.searchTerm)
       .subscribe({
         next: (response: ChannelResponse) => {
-          console.log('Channels response:', response);
+          // console.log('Channels response:', response);
           this.channels = (response.channels || []).map(channel => ({
             channel_name: channel.channel_name || 'غير متوفر',
             logo: channel.logo,
@@ -51,8 +51,8 @@ export class SearchBarComponent implements OnInit {
             technical_info: channel.technical_info || [],
             metadata: channel.metadata || { country: null, scraped_at: null, source: null }
           }));
-          console.log('Channels assigned:', this.channels);
-          console.log('First channel (if exists):', this.channels[0]);
+          // console.log('Channels assigned:', this.channels);
+          // console.log('First channel (if exists):', this.channels[0]);
           this.isLoading = false;
         },
         error: (error) => {

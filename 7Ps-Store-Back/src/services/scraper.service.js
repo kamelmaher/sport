@@ -19,7 +19,7 @@ class ScraperService {
       browser = await initPlaywrightBrowser();
       const page = await initPlaywrightPage(browser);
 
-      await page.goto(liveOnSatPageUrl, { 
+      await page.goto(liveOnSatPageUrl, {
         timeout: timeout,
         waitUntil: 'networkidle'
       });
@@ -40,8 +40,8 @@ class ScraperService {
     try {
       const date = moment().tz('Asia/Riyadh').format('MM/DD/YYYY');
       const urlDate = date.replace(/\//g, '-');
-      // const url = `https://www.yallakora.com/match-center/?date=${urlDate}`;
-      const url = `https://www.yallakora.com/match-center/?date=04-26-2025`;
+      const url = `https://www.yallakora.com/match-center/?date=${urlDate}`;
+      // const url = `https://www.yallakora.com/match-center/?date=04-26-2025`;
 
       browser = await initPlaywrightBrowser();
       const page = await initPlaywrightPage(browser);

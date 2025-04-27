@@ -1,3 +1,4 @@
+<!-- HTML Template -->
 <div class="ads-container">
   <!-- Loading State -->
   @if (isLoading) {
@@ -30,13 +31,11 @@
     @for (ad of ads; track trackByAdId($index, ad)) {
     <div class="ad-card">
       <a [href]="ad.link" target="_blank" rel="noopener noreferrer">
-        <div class="ad-content">
-          <a href="{{ad.link}}" target="_blank">
-            <h3 class="text-center">{{ ad.title }}</h3>
-          </a>
-        </div>
         <div class="image-container">
           <img [src]="ad.image.url" [alt]="ad.title" loading="lazy">
+        </div>
+        <div class="ad-content">
+          <h5 class="text-center px-2">{{ ad.title }}</h5>
         </div>
       </a>
     </div>

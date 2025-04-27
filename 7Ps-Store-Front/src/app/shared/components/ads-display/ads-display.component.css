@@ -1,9 +1,10 @@
-/* General Styles */
 .ads-container {
   max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
-  padding: 20px;
+  padding: 15px;
   font-family: Arial, sans-serif;
+  box-sizing: border-box;
 }
 
 /* Loading State */
@@ -17,8 +18,8 @@
 }
 
 .spinner {
-  width: 40px;
-  height: 40px;
+  width: 60px;
+  height: 60px;
   border: 4px solid #f3f3f3;
   border-top: 4px solid #3498db;
   border-radius: 50%;
@@ -37,7 +38,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 40px;
+  padding: 20px;
   text-align: center;
   color: #d32f2f;
 }
@@ -66,29 +67,93 @@
   margin-top: 16px;
 }
 
+/* Empty State */
+.empty-state {
+  border-radius: 8px;
+  margin: 20px 0;
+}
 
-.ad-card{
+/* Ads Grid */
+.ads-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
   width: 100%;
-  max-height: 400px ;
+}
+
+.ad-card {
+  width: 100%;
   overflow: hidden;
-  margin-bottom: 40px;
-  border-radius: 10px;
+  margin-bottom: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
+  background-color: #ececec;
+  transition: transform 0.3s ease;
 }
 
-.image-container{
+.ad-card:hover {
+  transform: translateY(-5px);
+}
+
+.image-container {
   width: 100%;
+  height: 220px;
 }
 
-.image-container img{
+.image-container img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 10px 10px 0 0;
+  object-position: center;
 }
 
-.ad-content{
+.ad-content {
+  padding: 10px;
   color: #3498db;
-  margin-top: 20px;
+}
+
+.ad-content h5 {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  /* -webkit-line-clamp: 2; */
+  -webkit-box-orient: vertical;
+}
+
+/* Responsive Breakpoints */
+@media screen and (max-width: 1024px) {
+  .ads-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .ads-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .image-container {
+    height: 180px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .ads-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .image-container {
+    height: 200px;
+  }
+
+  .ads-container {
+    padding: 10px;
+  }
+
+  .spinner {
+    width: 40px;
+    height: 40px;
+  }
 }
