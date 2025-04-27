@@ -142,7 +142,6 @@ const deleteUser = async (req, res) => {
  */
 const login = async (req, res) => {
   try {
-    // تحويل النص إلى ترميز موحد
     const userName = req.body.userName?.trim();
     const phone = req.body.phone?.trim();
 
@@ -153,11 +152,9 @@ const login = async (req, res) => {
       return res.status(400).json({ error: 'User name and Phone number are required' });
     }
 
-    // البحث بالمستخدم باستخدام رقم الهاتف فقط
     const user = await User.findOne({ phone });
 
     if (!user) {
-      // إنشاء مستخدم جديد مع الحفاظ على النص العربي
       const newUser = new User({
         userName: userName,
         phone: phone,
@@ -166,19 +163,17 @@ const login = async (req, res) => {
       });
 
       await newUser.save();
-      return res.status(200).json({ message: 'User registered successfully' });
+      return res.status(200).json({ message: 'User registered successfully', status: 'pending', role: 'user' });
     }
 
-    // مقارنة الأسماء بعد تطبيعها (لحساسية الحروف)
     if (userName.localeCompare(user.userName, undefined, { sensitivity: 'base' }) !== 0) {
       return res.status(401).json({ error: 'User names Don`t match' });
     }
 
     if (user.status === 'pending') {
-      return res.status(401).json({ error: 'User is pending', status: user.status });
+      return res.status(200).json({ error: 'User is pending', status: user.status });
     }
 
-    // إنشاء التوكن
     const token = jwt.sign(
       {
         _id: user._id,
@@ -196,6 +191,7 @@ const login = async (req, res) => {
     res.status(200).json({
       token,
       user: user.userName,
+      role: user.role,
       status: user.status,
       message: 'User logged in successfully'
     });

@@ -14,6 +14,9 @@ import { AuthService } from '../../core/services/auth.service';
 })
 export class LoginComponent {
   isLoading = false;
+  isPending = false;
+  isRejected = false;
+  errorMessage = '';
 
   constructor(private router: Router, private authService: AuthService) { }
 
@@ -35,19 +38,37 @@ export class LoginComponent {
       this.loginForm.markAllAsTouched();
       return;
     }
-
+    this.isPending = false;
+    this.isRejected = false;
     this.isLoading = true;
+    this.errorMessage = ''; // إعادة تعيين رسالة الخطأ
     const { name, phone } = this.loginForm.value;
 
-    console.log(name, phone);
     this.authService.login(name!, phone!).subscribe({
       next: (response) => {
-        console.log(name, phone);
-        console.log('Login response:', response);
-        localStorage.setItem('token', JSON.stringify(response?.token));
-        this.router.navigate(['/channels']);
+        this.isLoading = false;
+
+        // التحقق من حالة pending
+        if (response.status === 'pending') {
+          this.isPending = true;
+          return;
+        }
+        if (response.status === 'rejected') {
+          this.isRejected = true;
+          return;
+        }
+
+        if (response.token) {
+          localStorage.setItem('token', JSON.stringify(response.token));
+          localStorage.setItem('role', JSON.stringify(response.role));
+          this.router.navigate(['/channels']);
+        }
       },
       error: (error) => {
+        this.isLoading = false;
+        this.isPending = false;
+        this.isRejected = false;
+        this.errorMessage = error.error?.error || 'حدث خطأ أثناء تسجيل الدخول';
         console.error('Login error:', error);
       },
       complete: () => {

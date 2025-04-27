@@ -1,14 +1,16 @@
-require('dotenv').config();
 const express = require('express');
-const cron = require('node-cron');
-const cors = require('cors');
-const channelRoutes = require('./src/Modules/Channels/channel.routes');
+require('dotenv').config();
+const channelRoutes = require('../7Ps-Store-Back/src/Modules/Channels/channel.routes');
 const matchesRoutes = require('./src/Modules/Matches/matches.routes');
-const MatchesController = require('./src/Modules/Matches/matches.controller');
-const userRoutes = require('./src/Modules/Users/user.routes');
+const userRoutes = require('../7Ps-Store-Back/src/Modules/Users/user.routes');
+const adRoutes = require('../7Ps-Store-Back/src/Modules/Ads/ads.routes');
 const connection = require('./DB/connection');
-
 const app = express();
+const cors = require('cors');
+const cron = require('node-cron');
+const MatchesController = require('./src/Modules/Matches/matches.controller');
+
+
 
 // Middleware
 app.use(express.json());
@@ -27,6 +29,7 @@ connection();
 app.use('/api/channels', channelRoutes);
 app.use('/api/matches', matchesRoutes);  
 app.use('/api/users', userRoutes);
+app.use('/api/ads', adRoutes);
 
 // Schedule the scraping job to run every hour
 cron.schedule('0 * * * *', async () => {
