@@ -31,31 +31,42 @@ app.use('/api/matches', matchesRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/ads', adRoutes);
 
-// Schedule the scraping job to run every hour
-cron.schedule('0 * * * *', async () => {
-  console.log('Running scheduled scraping jobs at', new Date().toISOString());
-  try {
-    // Scrape LiveOnSat data
-    await MatchesController.scrapeAndCacheData();
-    console.log('Scheduled LiveOnSat scraping completed successfully');
 
-    // Scrape Yalla Kora finished matches
+
+
+// Schedule Yalla Kora scraping every 20 minutes (e.g., 00:00, 00:20, 00:40, etc.)
+cron.schedule('*/20 * * * *', async () => {
+  console.log('Running scheduled Yalla Kora scraping at', new Date().toISOString());
+  try {
     await MatchesController.scrapeYallaKoraFinishedMatches();
     console.log('Scheduled Yalla Kora finished matches scraping completed successfully');
   } catch (error) {
-    console.error('Scheduled scraping failed:', error);
+    console.error('Scheduled Yalla Kora scraping failed:', error);
   }
 });
+// Schedule LiveOnSat scraping every 3 hours (e.g., 00:00, 03:00, 06:00, etc.)
+cron.schedule('0 */3 * * *', async () => {
+  console.log('Running scheduled LiveOnSat scraping at', new Date().toISOString());
+  try {
+    await MatchesController.scrapeAndCacheData();
+    console.log('Scheduled LiveOnSat scraping completed successfully');
+  } catch (error) {
+    console.error('Scheduled LiveOnSat scraping failed:', error);
+  }
+});
+
+
 
 // Run the scraping job immediately on server start
 (async () => {
   console.log('Running initial scraping jobs on server start...');
   try {
+    await MatchesController.scrapeYallaKoraFinishedMatches();
+    console.log('Initial Yalla Kora finished matches scraping completed successfully');
+
     await MatchesController.scrapeAndCacheData();
     console.log('Initial LiveOnSat scraping completed successfully');
 
-    await MatchesController.scrapeYallaKoraFinishedMatches();
-    console.log('Initial Yalla Kora finished matches scraping completed successfully');
   } catch (error) {
     console.error('Initial scraping failed:', error);
   }
