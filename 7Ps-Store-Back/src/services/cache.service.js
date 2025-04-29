@@ -2,8 +2,7 @@ const fs = require('fs').promises;
 const path = require('path');
 
 class CacheService {
-  // constructor(cacheFilePath, ttl = 3600000) { // default 1 hour TTL
-  constructor(cacheFilePath, ttl = 600000) { // 10 minutes TTL
+  constructor(cacheFilePath, ttl) {
     this.cacheFilePath = cacheFilePath;
     this.ttl = ttl;
   }
@@ -19,8 +18,15 @@ class CacheService {
       const cacheData = await fs.readFile(this.cacheFilePath, 'utf-8');
       const parsed = JSON.parse(cacheData);
       const now = Date.now();
-      
-      return now - parsed.timestamp < this.ttl ? parsed.data : null;
+      const age = now - parsed.timestamp;
+
+      if (age < this.ttl) {
+        console.log(`Serving data from cache (age: ${Math.round(age / 1000)} seconds)`);
+        return parsed.data;
+      } else {
+        console.log(`Cache expired (age: ${Math.round(age / 1000)} seconds, TTL: ${this.ttl / 1000} seconds). Returning last known data.`);
+        return parsed.data; // Return last known data even if expired
+      }
     } catch (error) {
       console.error('Error reading cache:', error);
       return null;
@@ -35,6 +41,7 @@ class CacheService {
         data
       };
       await fs.writeFile(this.cacheFilePath, JSON.stringify(cacheEntry, null, 2));
+      console.log('Cache updated successfully');
     } catch (error) {
       console.error('Error writing to cache:', error);
     }

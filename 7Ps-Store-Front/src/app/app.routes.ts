@@ -18,7 +18,7 @@ export const routes: Routes = [
   { path: 'channels', component: ChannelsComponent, canActivate: [AuthGuard] },
   { path: 'ads', component: AdsComponent, canActivate: [adminGuard] },
   { path: 'user', component: UserManagementComponent, canActivate: [adminGuard] },
-  { path: 'finished', component: FinishedMatchesComponent, canActivate: [AuthGuard] },
+  { path: 'finished', component: FinishedMatchesComponent/*, canActivate: [AuthGuard]*/ },
 ];
 
 

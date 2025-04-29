@@ -1,67 +1,49 @@
 {
-  "timestamp": 1745879674032,
+  "timestamp": 1745885089856,
   "data": {
     "date": {
       "en": {
-        "day": "28",
+        "day": "29",
         "month": "04",
         "year": "2025"
       }
     },
     "competitions": [
       {
-        "name": "English Premier League",
+        "name": "UEFA Champions League",
         "matches": [
           {
-            "competition": "English Premier League",
+            "competition": "UEFA Champions League",
             "matches": [
               {
-                "competition": "English Premier League 2 - undefined",
-                "time": "9:00 PM",
-                "teams": "Crystal Palace U-21 vs Brighton U-21",
-                "freeChannels": [],
-                "paidChannels": [],
-                "result": null
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "name": "Italian Serie A",
-        "matches": [
-          {
-            "competition": "Italian Serie A",
-            "matches": [
-              {
-                "competition": "Italian Serie A - Week 34",
-                "time": "7:30 PM",
-                "teams": "Udinese vs Bologna",
+                "competition": "UEFA Champions League - Semi Final (1st Leg)",
+                "time": "10:00 PM",
+                "teams": "Arsenal vs Paris St Germain",
                 "freeChannels": [
                   {
-                    "name": "Neto TV HD",
+                    "name": "TRT Spor Türkiye HD",
                     "frequency": {
-                      "position": "52.0°e",
-                      "satellite": "MonacoSat",
-                      "frequency": "10.762 H",
+                      "position": "42.0°e",
+                      "satellite": "Turksat 3A",
+                      "frequency": "11.054 V",
                       "symbolRate": "30000 - 3/4",
+                      "encryption": "Free To Air HD"
+                    }
+                  },
+                  {
+                    "name": "TV8 Italia HD",
+                    "frequency": {
+                      "position": "0.0°-",
+                      "satellite": "*DTT",
+                      "frequency": "0.000 -",
+                      "symbolRate": "-",
                       "encryption": "Free To Air HD"
                     }
                   }
                 ],
                 "paidChannels": [
                   {
-                    "name": "Arena Premium 1 Srbija HD",
-                    "frequency": {
-                      "position": "23.5°e",
-                      "satellite": "Astra 3C",
-                      "frequency": "12.402 V",
-                      "symbolRate": "30000 - 3/4",
-                      "encryption": "HD Conax"
-                    }
-                  },
-                  {
-                    "name": "Arena Premium 2 BiH HD",
+                    "name": "Arena Premium 1 BiH HD",
                     "frequency": {
                       "position": "23.5°e",
                       "satellite": "Astra 3B",
@@ -71,187 +53,17 @@
                     }
                   },
                   {
-                    "name": "Arena Sport 2 Hrvatska HD",
-                    "frequency": {
-                      "position": "16.0°e",
-                      "satellite": "Eutelsat 16A",
-                      "frequency": "11.595 H",
-                      "symbolRate": "30000 - 3/4",
-                      "encryption": "HD NagraVision"
-                    }
-                  },
-                  {
-                    "name": "Cosmote Sport 7 HD",
-                    "frequency": {
-                      "position": "9.0°e",
-                      "satellite": "Eutelsat 9B",
-                      "frequency": "12.149 V",
-                      "symbolRate": "27500 - 2/3",
-                      "encryption": "HD VideoGuard"
-                    }
-                  },
-                  {
-                    "name": "DAZN 1 Italia HD",
-                    "frequency": {
-                      "position": "13.0°e",
-                      "satellite": "Hotbird 13F",
-                      "frequency": "11.842 V",
-                      "symbolRate": "29900 - 5/6",
-                      "encryption": "HD VideoGuard"
-                    }
-                  },
-                  {
-                    "name": "Eleven Sports 2 Polska HD",
-                    "frequency": {
-                      "position": "13.0°e",
-                      "satellite": "Hotbird 13G",
-                      "frequency": "11.488 H",
-                      "symbolRate": "27500 - 3/4",
-                      "encryption": "HD Viaccess"
-                    }
-                  },
-                  {
-                    "name": "MATCH! Futbol 1 HD",
-                    "frequency": {
-                      "position": "84.8°e",
-                      "satellite": "Horizons 2",
-                      "frequency": "11.840 H",
-                      "symbolRate": "28800 - 2/3",
-                      "encryption": "MPEG-4 Irdeto"
-                    }
-                  },
-                  {
-                    "name": "MTV Urheilu 2 Suomi HD",
-                    "frequency": {
-                      "position": "0.8°w",
-                      "satellite": "Thor 5",
-                      "frequency": "11.247 V",
-                      "symbolRate": "24500 - 7/8",
-                      "encryption": "HD NagraVision"
-                    }
-                  },
-                  {
-                    "name": "Prima Sport RO 2 HD",
-                    "frequency": {
-                      "position": "39.0°e",
-                      "satellite": "Hellas Sat 3",
-                      "frequency": "12.565 V",
-                      "symbolRate": "30000 - 7/8",
-                      "encryption": "VideoGuard"
-                    }
-                  },
-                  {
-                    "name": "Setanta Sports 1 Eurasia HD",
-                    "frequency": {
-                      "position": "58.5°e",
-                      "satellite": "KazSat 3",
-                      "frequency": "12.657 V",
-                      "symbolRate": "45000 - 3/4",
-                      "encryption": "HD Irdeto"
-                    }
-                  },
-                  {
-                    "name": "Sport 3 Israel HD",
-                    "frequency": {
-                      "position": "4.0°w",
-                      "satellite": "Amos 7",
-                      "frequency": "10.972 V",
-                      "symbolRate": "30000 - 2/3",
-                      "encryption": "HD VideoGuard"
-                    }
-                  },
-                  {
-                    "name": "Sport TV3 Portugal HD",
-                    "frequency": {
-                      "position": "30.0°w",
-                      "satellite": "Hispasat 30W-5",
-                      "frequency": "12.246 H",
-                      "symbolRate": "27500 - 3/4",
-                      "encryption": "HD NagraVision"
-                    }
-                  },
-                  {
-                    "name": "SuperSport Football HD",
-                    "frequency": {
-                      "position": "68.5°e",
-                      "satellite": "Intelsat 20",
-                      "frequency": "11.674 H",
-                      "symbolRate": "30000 - 5/6",
-                      "encryption": "Irdeto"
-                    }
-                  },
-                  {
-                    "name": "Tring Sport 1 HD",
-                    "frequency": {
-                      "position": "39.0°e",
-                      "satellite": "Hellas Sat 4",
-                      "frequency": "10.890 H",
-                      "symbolRate": "30000 - 5/6",
-                      "encryption": "HD Conax"
-                    }
-                  },
-                  {
-                    "name": "TV4 Fotboll HD",
-                    "frequency": {
-                      "position": "0.8°w",
-                      "satellite": "Thor 6",
-                      "frequency": "10.872 V",
-                      "symbolRate": "25000 - 3/4",
-                      "encryption": "HD VideoGuard"
-                    }
-                  },
-                  {
-                    "name": "Ziggo Sport 2",
-                    "frequency": {
-                      "position": "23.5°e",
-                      "satellite": "Astra 3C",
-                      "frequency": "12.129 V",
-                      "symbolRate": "29900 - 3/4",
-                      "encryption": "MPEG-4 Nagra"
-                    }
-                  }
-                ],
-                "result": null
-              },
-              {
-                "competition": "Italian Serie A - Week 34",
-                "time": "9:45 PM",
-                "teams": "Lazio vs Parma",
-                "freeChannels": [
-                  {
-                    "name": "Neto TV HD",
-                    "frequency": {
-                      "position": "52.0°e",
-                      "satellite": "MonacoSat",
-                      "frequency": "10.762 H",
-                      "symbolRate": "30000 - 3/4",
-                      "encryption": "Free To Air HD"
-                    }
-                  }
-                ],
-                "paidChannels": [
-                  {
                     "name": "Arena Premium 1 Srbija HD",
                     "frequency": {
                       "position": "23.5°e",
                       "satellite": "Astra 3C",
                       "frequency": "12.402 V",
                       "symbolRate": "30000 - 3/4",
-                      "encryption": "HD Conax"
-                    }
-                  },
-                  {
-                    "name": "Arena Sport 4 BiH HD",
-                    "frequency": {
-                      "position": "23.5°e",
-                      "satellite": "Astra 3B",
-                      "frequency": "11.895 V",
-                      "symbolRate": "30000 - 3/4",
                       "encryption": "HD NagraVision"
                     }
                   },
                   {
-                    "name": "Arena Sport 5 Hrvatska HD",
+                    "name": "Arena Sport 1 Hrvatska HD",
                     "frequency": {
                       "position": "16.0°e",
                       "satellite": "Eutelsat 16A",
@@ -261,7 +73,37 @@
                     }
                   },
                   {
-                    "name": "Cosmote Sport 2 HD",
+                    "name": "beIN Sports MENA 2 HD",
+                    "frequency": {
+                      "position": "25.5°e",
+                      "satellite": "Eshail 2",
+                      "frequency": "10.810 H",
+                      "symbolRate": "27500 - 2/3",
+                      "encryption": "HD VideoGuard"
+                    }
+                  },
+                  {
+                    "name": "beIN Sports MENA French 1 HD",
+                    "frequency": {
+                      "position": "25.5°e",
+                      "satellite": "Eshail 2",
+                      "frequency": "11.390 V",
+                      "symbolRate": "27500 - 2/3",
+                      "encryption": "HD VideoGuard"
+                    }
+                  },
+                  {
+                    "name": "Canal+ Live 1 France HD",
+                    "frequency": {
+                      "position": "19.2°e",
+                      "satellite": "Astra 1M",
+                      "frequency": "11.856 V",
+                      "symbolRate": "29700 - 2/3",
+                      "encryption": "HD NagraVision"
+                    }
+                  },
+                  {
+                    "name": "Cosmote Sport 1 HD",
                     "frequency": {
                       "position": "9.0°e",
                       "satellite": "Eutelsat 9B",
@@ -271,33 +113,23 @@
                     }
                   },
                   {
-                    "name": "DAZN 2 Bar Deutsch HD",
+                    "name": "Digi Sport 1 Romania HD",
                     "frequency": {
-                      "position": "19.2°e",
-                      "satellite": "Astra 1M",
-                      "frequency": "11.798 H",
-                      "symbolRate": "27500 - 9/0",
+                      "position": "0.8°w",
+                      "satellite": "Thor 6",
+                      "frequency": "11.823 H",
+                      "symbolRate": "30000 - 5/6",
+                      "encryption": "HD NagraVision"
+                    }
+                  },
+                  {
+                    "name": "Kanal A Slovenija HD",
+                    "frequency": {
+                      "position": "16.0°e",
+                      "satellite": "Eutelsat 16A",
+                      "frequency": "11.387 H",
+                      "symbolRate": "30000 - 3/5",
                       "encryption": "HD VideoGuard"
-                    }
-                  },
-                  {
-                    "name": "Eleven Sports 2 Polska HD",
-                    "frequency": {
-                      "position": "13.0°e",
-                      "satellite": "Hotbird 13G",
-                      "frequency": "11.488 H",
-                      "symbolRate": "27500 - 3/4",
-                      "encryption": "HD Viaccess"
-                    }
-                  },
-                  {
-                    "name": "MATCH! Russia HD",
-                    "frequency": {
-                      "position": "90.0°e",
-                      "satellite": "Yamal 401",
-                      "frequency": "3.786 R",
-                      "symbolRate": "15284 - 3/4",
-                      "encryption": "MPEG-4 GoSTcrypt"
                     }
                   },
                   {
@@ -311,52 +143,72 @@
                     }
                   },
                   {
-                    "name": "MTV Urheilu 2 Suomi HD",
+                    "name": "MTV Urheilu 1 Suomi HD",
                     "frequency": {
-                      "position": "0.8°w",
-                      "satellite": "Thor 5",
-                      "frequency": "11.247 V",
-                      "symbolRate": "24500 - 7/8",
+                      "position": "0.6°w",
+                      "satellite": "Thor 7",
+                      "frequency": "12.476 H",
+                      "symbolRate": "30000 - 3/4",
                       "encryption": "HD NagraVision"
                     }
                   },
                   {
-                    "name": "ONE2 Sport Israel HD",
+                    "name": "Premier Sports 1 Ireland HD",
                     "frequency": {
-                      "position": "4.0°w",
-                      "satellite": "Amos 7",
-                      "frequency": "10.997 V",
-                      "symbolRate": "15000 - 2/3",
+                      "position": "28.2°e",
+                      "satellite": "Astra 2F",
+                      "frequency": "12.188 H",
+                      "symbolRate": "27500 - 2/3",
                       "encryption": "HD VideoGuard"
                     }
                   },
                   {
-                    "name": "Prima Sport RO 2 HD",
+                    "name": "Prima Sport RO 1 HD",
                     "frequency": {
                       "position": "39.0°e",
                       "satellite": "Hellas Sat 3",
-                      "frequency": "12.565 V",
+                      "frequency": "12.524 V",
                       "symbolRate": "30000 - 7/8",
                       "encryption": "VideoGuard"
                     }
                   },
                   {
-                    "name": "Setanta Sports 1 Eurasia HD",
+                    "name": "Prime Video 1 Commercial UK HD",
                     "frequency": {
-                      "position": "58.5°e",
-                      "satellite": "KazSat 3",
-                      "frequency": "12.657 V",
-                      "symbolRate": "45000 - 3/4",
-                      "encryption": "HD Irdeto"
+                      "position": "28.2°e",
+                      "satellite": "Astra 2E",
+                      "frequency": "11.758 H",
+                      "symbolRate": "27500 - 2/3",
+                      "encryption": "HD VideoGuard"
                     }
                   },
                   {
-                    "name": "Sky Sport 252 Italia HD",
+                    "name": "RTL Club Belgique",
+                    "frequency": {
+                      "position": "13.0°e",
+                      "satellite": "Hotbird 13G",
+                      "frequency": "11.411 H",
+                      "symbolRate": "27500 - 3/4",
+                      "encryption": "MPEG-4 Nagra"
+                    }
+                  },
+                  {
+                    "name": "Sky Sport 1 Austria HD",
+                    "frequency": {
+                      "position": "19.2°e",
+                      "satellite": "Astra 1N",
+                      "frequency": "12.032 H",
+                      "symbolRate": "27500 - 9/10",
+                      "encryption": "HD VideoGuard"
+                    }
+                  },
+                  {
+                    "name": "Sky Sport 251 Italia HD",
                     "frequency": {
                       "position": "13.0°e",
                       "satellite": "Hotbird 13F",
-                      "frequency": "11.996 V",
-                      "symbolRate": "29900 - 5/6",
+                      "frequency": "12.418 V",
+                      "symbolRate": "29900 - 3/4",
                       "encryption": "HD VideoGuard"
                     }
                   },
@@ -381,13 +233,33 @@
                     }
                   },
                   {
-                    "name": "Sport TV6 Portugal HD",
+                    "name": "Sport TV5 Portugal HD",
                     "frequency": {
                       "position": "30.0°w",
                       "satellite": "Hispasat 30W-5",
                       "frequency": "12.360 H",
                       "symbolRate": "27500 - 3/4",
                       "encryption": "HD NagraVision"
+                    }
+                  },
+                  {
+                    "name": "SuperSport MáXimo 1 HD",
+                    "frequency": {
+                      "position": "68.5°e",
+                      "satellite": "Intelsat 20",
+                      "frequency": "11.594 V",
+                      "symbolRate": "27500 - 5/6",
+                      "encryption": "Irdeto"
+                    }
+                  },
+                  {
+                    "name": "SuperSport Premier League HD",
+                    "frequency": {
+                      "position": "68.5°e",
+                      "satellite": "Intelsat 20",
+                      "frequency": "11.594 V",
+                      "symbolRate": "27500 - 5/6",
+                      "encryption": "Irdeto"
                     }
                   },
                   {
@@ -401,182 +273,132 @@
                     }
                   },
                   {
-                    "name": "TV4 Fotboll HD",
+                    "name": "TV2 Sport Premium HD",
+                    "frequency": {
+                      "position": "5.0°e",
+                      "satellite": "Thor 6",
+                      "frequency": "11.385 V",
+                      "symbolRate": "30000 - 3/4",
+                      "encryption": "HD VideoGuard"
+                    }
+                  },
+                  {
+                    "name": "TV3+ Dansk HD",
+                    "frequency": {
+                      "position": "5.0°e",
+                      "satellite": "Astra 4A",
+                      "frequency": "11.823 V",
+                      "symbolRate": "27500 - 3/4",
+                      "encryption": "HD VideoGuard"
+                    }
+                  },
+                  {
+                    "name": "TV6 Sverige HD",
                     "frequency": {
                       "position": "0.8°w",
                       "satellite": "Thor 6",
-                      "frequency": "10.872 V",
+                      "frequency": "10.809 V",
                       "symbolRate": "25000 - 3/4",
                       "encryption": "HD VideoGuard"
                     }
                   },
                   {
-                    "name": "Ziggo Sport 2",
+                    "name": "TVP 1 Polska HD",
+                    "frequency": {
+                      "position": "13.0°e",
+                      "satellite": "Hotbird 13G",
+                      "frequency": "11.449 H",
+                      "symbolRate": "27500 - 3/4",
+                      "encryption": "HD Conax"
+                    }
+                  },
+                  {
+                    "name": "TVP Sport Polska HD",
+                    "frequency": {
+                      "position": "13.0°e",
+                      "satellite": "Hotbird 13G",
+                      "frequency": "10.834 V",
+                      "symbolRate": "27500 - 3/4",
+                      "encryption": "HD NagraVision"
+                    }
+                  },
+                  {
+                    "name": "VTM 2 Belgium HD",
+                    "frequency": {
+                      "position": "23.5°e",
+                      "satellite": "Astra 3C",
+                      "frequency": "11.856 V",
+                      "symbolRate": "29900 - 3/4",
+                      "encryption": "HD Mediaguard"
+                    }
+                  },
+                  {
+                    "name": "Ziggo Sport HD",
                     "frequency": {
                       "position": "23.5°e",
                       "satellite": "Astra 3C",
                       "frequency": "12.129 V",
                       "symbolRate": "29900 - 3/4",
-                      "encryption": "MPEG-4 Nagra"
+                      "encryption": "HD Mediaguard"
                     }
                   }
                 ],
                 "result": null
-              },
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "AFC Champions League Elite",
+        "matches": [
+          {
+            "competition": "AFC Champions League Elite",
+            "matches": [
               {
-                "competition": "Italian Serie A - Week 34",
-                "time": "9:45 PM",
-                "teams": "Hellas Verona vs Cagliari",
+                "competition": "AFC Champions League Elite - Semi Final",
+                "time": "7:30 PM",
+                "teams": "Al Hilal vs Al Ahli",
                 "freeChannels": [],
                 "paidChannels": [
                   {
-                    "name": "Arena Premium 2 BiH HD",
+                    "name": "Arena Sport 6 Srbija HD",
                     "frequency": {
                       "position": "23.5°e",
                       "satellite": "Astra 3B",
-                      "frequency": "0.000",
-                      "symbolRate": "0",
-                      "encryption": "HD NagraVision"
-                    }
-                  },
-                  {
-                    "name": "Arena Sport 2 Hrvatska HD",
-                    "frequency": {
-                      "position": "16.0°e",
-                      "satellite": "Eutelsat 16A",
-                      "frequency": "11.595 H",
+                      "frequency": "11.817 V",
                       "symbolRate": "30000 - 3/4",
-                      "encryption": "HD NagraVision"
-                    }
-                  },
-                  {
-                    "name": "Arena Sport 3 Srbija HD",
-                    "frequency": {
-                      "position": "23.5°e",
-                      "satellite": "Astra 3B",
-                      "frequency": "11.798 H",
-                      "symbolRate": "30000 - 3/4",
-                      "encryption": "HD NagraVision"
-                    }
-                  },
-                  {
-                    "name": "Cosmote Sport 8 HD",
-                    "frequency": {
-                      "position": "9.0°e",
-                      "satellite": "Eutelsat 9B",
-                      "frequency": "12.149 V",
-                      "symbolRate": "27500 - 2/3",
-                      "encryption": "HD VideoGuard"
-                    }
-                  },
-                  {
-                    "name": "DAZN 1 Bar Deutsch HD",
-                    "frequency": {
-                      "position": "19.2°e",
-                      "satellite": "Astra 1N",
-                      "frequency": "12.070 H",
-                      "symbolRate": "27500 - 9/10",
-                      "encryption": "HD VideoGuard"
-                    }
-                  },
-                  {
-                    "name": "Digi Sport 3 Romania",
-                    "frequency": {
-                      "position": "0.8°w",
-                      "satellite": "Thor 6",
-                      "frequency": "11.900 H",
-                      "symbolRate": "28000 - 5/6",
-                      "encryption": "NagraVision"
-                    }
-                  },
-                  {
-                    "name": "Eleven Sports 3 Polska HD",
-                    "frequency": {
-                      "position": "13.0°e",
-                      "satellite": "Hotbird 13F",
-                      "frequency": "11.488 H",
-                      "symbolRate": "27500 - 3/4",
-                      "encryption": "HD Viaccess"
-                    }
-                  },
-                  {
-                    "name": "MATCH! Futbol 1 HD",
-                    "frequency": {
-                      "position": "84.8°e",
-                      "satellite": "Horizons 2",
-                      "frequency": "11.840 H",
-                      "symbolRate": "28800 - 2/3",
-                      "encryption": "MPEG-4 Irdeto"
-                    }
-                  },
-                  {
-                    "name": "Prima Sport RO 4 HD",
-                    "frequency": {
-                      "position": "39.0°e",
-                      "satellite": "Hellas Sat 3",
-                      "frequency": "12.405 V",
-                      "symbolRate": "30000 - 7/8",
-                      "encryption": "Viaccess"
-                    }
-                  },
-                  {
-                    "name": "Sky Sport 253 Italia HD",
-                    "frequency": {
-                      "position": "13.0°e",
-                      "satellite": "Hotbird 13F",
-                      "frequency": "12.341 V",
-                      "symbolRate": "29900 - 5/6",
-                      "encryption": "HD VideoGuard"
-                    }
-                  },
-                  {
-                    "name": "Sport 3 Israel HD",
-                    "frequency": {
-                      "position": "4.0°w",
-                      "satellite": "Amos 7",
-                      "frequency": "10.972 V",
-                      "symbolRate": "30000 - 2/3",
-                      "encryption": "HD VideoGuard"
-                    }
-                  },
-                  {
-                    "name": "Sport TV3 Portugal HD",
-                    "frequency": {
-                      "position": "30.0°w",
-                      "satellite": "Hispasat 30W-5",
-                      "frequency": "12.246 H",
-                      "symbolRate": "27500 - 3/4",
-                      "encryption": "HD NagraVision"
-                    }
-                  },
-                  {
-                    "name": "SuperSport Football HD",
-                    "frequency": {
-                      "position": "68.5°e",
-                      "satellite": "Intelsat 20",
-                      "frequency": "11.674 H",
-                      "symbolRate": "30000 - 5/6",
-                      "encryption": "Irdeto"
-                    }
-                  },
-                  {
-                    "name": "Tring Sport 2 HD",
-                    "frequency": {
-                      "position": "39.0°e",
-                      "satellite": "Hellas Sat 4",
-                      "frequency": "10.890 H",
-                      "symbolRate": "30000 - 5/6",
                       "encryption": "HD Conax"
                     }
                   },
                   {
-                    "name": "TV4 Sport Live 1 HD",
+                    "name": "Canal 11 Portugal HD",
                     "frequency": {
-                      "position": "0.8°w",
-                      "satellite": "Thor 6",
-                      "frequency": "10.934 H",
-                      "symbolRate": "25000 - 3/4",
-                      "encryption": "HD VideoGuard"
+                      "position": "30.0°w",
+                      "satellite": "Hispasat 30W-5",
+                      "frequency": "12.437 H",
+                      "symbolRate": "27500 - 3/4",
+                      "encryption": "HD NagraVision"
+                    }
+                  },
+                  {
+                    "name": "Nova Sport Bulgaria HD",
+                    "frequency": {
+                      "position": "45.0°e",
+                      "satellite": "AzerSpace 2",
+                      "frequency": "12.600 V",
+                      "symbolRate": "30000 - 5/6",
+                      "encryption": "HD Irdeto"
+                    }
+                  },
+                  {
+                    "name": "Sportdigital 1+ Deutsch HD",
+                    "frequency": {
+                      "position": "19.2°e",
+                      "satellite": "Astra 1L",
+                      "frequency": "11.186 V",
+                      "symbolRate": "22000 - 2/3",
+                      "encryption": "HD NagraVision"
                     }
                   }
                 ],
