@@ -2,7 +2,8 @@ const fs = require('fs').promises;
 const path = require('path');
 
 class CacheService {
-  constructor(cacheFilePath, ttl = 3600000) { // default 1 hour TTL
+  // constructor(cacheFilePath, ttl = 3600000) { // default 1 hour TTL
+  constructor(cacheFilePath, ttl = 600000) { // 10 minutes TTL
     this.cacheFilePath = cacheFilePath;
     this.ttl = ttl;
   }
