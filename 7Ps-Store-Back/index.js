@@ -10,8 +10,6 @@ const cors = require('cors');
 const cron = require('node-cron');
 const MatchesController = require('./src/Modules/Matches/matches.controller');
 
-
-
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -31,20 +29,18 @@ app.use('/api/matches', matchesRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/ads', adRoutes);
 
-
-
-
-// Schedule Yalla Kora scraping every 20 minutes (e.g., 00:00, 00:20, 00:40, etc.)
+// Schedule Yalla Kora scraping every 20 minutes
 cron.schedule('*/20 * * * *', async () => {
   console.log('Running scheduled Yalla Kora scraping at', new Date().toISOString());
   try {
     await MatchesController.scrapeYallaKoraFinishedMatches();
-    console.log('Scheduled Yalla Kora finished matches scraping completed successfully');
+    console.log('Scheduled Yalla Kora scraping completed successfully');
   } catch (error) {
     console.error('Scheduled Yalla Kora scraping failed:', error);
   }
 });
-// Schedule LiveOnSat scraping every 3 hours (e.g., 00:00, 03:00, 06:00, etc.)
+
+// Schedule LiveOnSat scraping every 3 hours
 cron.schedule('0 */3 * * *', async () => {
   console.log('Running scheduled LiveOnSat scraping at', new Date().toISOString());
   try {
@@ -55,18 +51,15 @@ cron.schedule('0 */3 * * *', async () => {
   }
 });
 
-
-
-// Run the scraping job immediately on server start
+// Run the scraping jobs immediately on server start
 (async () => {
   console.log('Running initial scraping jobs on server start...');
   try {
     await MatchesController.scrapeYallaKoraFinishedMatches();
-    console.log('Initial Yalla Kora finished matches scraping completed successfully');
+    console.log('Initial Yalla Kora scraping completed successfully');
 
     await MatchesController.scrapeAndCacheData();
     console.log('Initial LiveOnSat scraping completed successfully');
-
   } catch (error) {
     console.error('Initial scraping failed:', error);
   }

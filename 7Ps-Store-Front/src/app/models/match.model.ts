@@ -41,7 +41,9 @@ export interface MatchDetails {
   paidChannels: Channel[];
   status: string;
   result: string | null;
-  showChannels?: boolean; // Add this property
+  showChannels: boolean;  // Remove optional
+  showFreeChannels: boolean;  // Remove optional
+  showPaidChannels: boolean;  // Remove optional
 }
 
 
