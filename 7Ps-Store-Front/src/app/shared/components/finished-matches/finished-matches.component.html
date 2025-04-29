@@ -1,4 +1,4 @@
-<div class="matches-container mt-5">
+<div class="matches-container ">
   <div *ngIf="loading" class="text-center">
     <div class="spinner-border text-primary" role="status">
       <span class="visually-hidden">Loading...</span>
@@ -11,7 +11,7 @@
 
   <div *ngIf="finishedMatches && !loading" class="matches-content">
     <div class="date-header">
-      <h2>{{ finishedMatches.date }}</h2>
+      <h3>{{ finishedMatches.date }}</h3>
     </div>
     
     <div *ngFor="let competition of finishedMatches.competitions" class="competition-card">

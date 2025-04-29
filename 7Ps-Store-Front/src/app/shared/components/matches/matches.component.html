@@ -1,0 +1,129 @@
+
+<!-- تنبيه تسجيل الدخول محسن -->
+<div *ngIf="!isLoggedIn" class="login-notice-container py-md-5 py-4">
+  <div class="container">
+    <div class="login-card">
+        <div class="row g-0">
+          <!-- صورة جانبية للشاشات المتوسطة والكبيرة -->
+          <div class="col-lg-5 d-none d-lg-block">
+            <div class="login-image">
+              <div class="overlay"></div>
+              <div class="image-content">
+                <h2 class="display-6 fw-bold mb-3">تابع المباريات مباشرة</h2>
+                <p class="lead">تابع أحدث مباريات كرة القدم والقنوات الرياضية</p>
+                <div class="features mt-4">
+                  <div class="feature-item">
+                    <i class="fas fa-tv"></i>
+                    <span>القنوات العربية</span>
+                  </div>
+                  <div class="feature-item">
+                    <i class="fas fa-bell"></i>
+                    <span>مواعيد المباريات</span>
+                  </div>
+                  <div class="feature-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>تردات القنوات</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+          <!-- قسم معلومات تسجيل الدخول -->
+          <div class="col-lg-7">
+            <div class="login-content">
+              <div class="welcome-badge fs-2 d-flex align-items-center justify-content-center">
+                <i class="fas fa-futbol mx-2"></i> مرحباً بك في موقع 7Ps Store
+              </div>
+  
+              <h2 class="login-title mt-4">سجل دخولك الآن</h2>
+              <p class="login-subtitle">للوصول إلى مواعيد المباريات والقنوات الناقلة والمزيد من المميزات</p>
+  
+              <div class="benefits-section">
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <div class="benefit-card">
+                      <div class="benefit-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                      </div>
+                      <div class="benefit-text">
+                        <h5>مواعيد المباريات</h5>
+                        <p>تابع مواعيد جميع المباريات بتوقيتك المحلي</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="benefit-card">
+                      <div class="benefit-icon">
+                        <i class="fas fa-satellite-dish"></i>
+                      </div>
+                      <div class="benefit-text">
+                        <h5>القنوات الناقلة</h5>
+                        <p>تعرف على جميع القنوات الناقلة المجانية والمشفرة</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="benefit-card">
+                      <div class="benefit-icon">
+                        <i class="fas fa-bolt"></i>
+                      </div>
+                      <div class="benefit-text">
+                        <h5>تحديثات فورية</h5>
+                        <p>احصل على تحديثات فورية للنتائج والأهداف</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="benefit-card">
+                      <div class="benefit-icon">
+                        <i class="fas fa-star"></i>
+                      </div>
+                      <div class="benefit-text">
+                        <h5>ترددات القنوات العربية</h5>
+                        <p>بأمكانك البحث ومعرفة الترددات والافمار الخاصة بالقنوات</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="action-buttons mt-4 d-flex justify-content-center">
+                <a [routerLink]="['/login']" class="btn btn-primary btn-lg login-btn">
+                  <i class="fas fa-sign-in-alt me-2"></i> تسجيل الدخول
+                </a>
+              </div>
+  
+  
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+
+<div *ngIf="isLoggedIn">
+  <div class="matches-nav">
+    <div class="nav-tabs">
+      <button 
+        [class.active]="activeTab === 'live'"
+        (click)="toggleTab('live')"
+        class="nav-tab">
+        <i class="fas fa-satellite-dish me-2"></i>
+        مباريات اليوم 
+      </button>
+      <button 
+        [class.active]="activeTab === 'finished'"
+        (click)="toggleTab('finished')"
+        class="nav-tab">
+        <i class="fas fa-history me-2"></i>
+        المباريات المنتهية
+      </button>
+    </div>
+  </div>
+
+  <div class="matches-content">
+    <app-live-matches *ngIf="activeTab === 'live'"></app-live-matches>
+    <app-finished-matches *ngIf="activeTab === 'finished'"></app-finished-matches>
+  </div>
+</div>

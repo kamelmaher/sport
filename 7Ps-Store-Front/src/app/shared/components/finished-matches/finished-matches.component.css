@@ -1,9 +1,7 @@
 .matches-container {
-  max-width: 800px;
   margin: 0 auto;
-  padding: 20px;
-  background-color: #1a1f2e;
-  min-height: 100vh;
+  padding: 2px 20px;
+  background-color: #fdfdfd;
   direction: rtl;
 }
 
@@ -11,13 +9,15 @@
   background-color: #242938;
   border-radius: 10px;
   overflow: hidden;
-  margin-bottom: 20px;
+  margin-bottom: 2px;
   direction: inherit;
 }
 
 .competition-header {
   background-color: #2c3449;
   color: white;
+  font-size: 24px;
+  font-weight: 100;
   padding: 15px 20px;
   display: flex;
   align-items: center;
@@ -30,41 +30,16 @@
   background-color: #343d57;
 }
 
-.competition-toggle {
-  color: #ffffff;
-  opacity: 0.7;
-}
-
-.matches-list {
-  max-height: 2000px;
-  overflow: hidden;
-  transition: max-height 0.3s ease-in-out;
-}
-
-.matches-list.collapsed {
-  max-height: 0;
-}
-
 .date-header {
-  color: white;
+  color: #242938;
   text-align: center;
-  margin-bottom: 20px;
+  margin: 2px 0;
+  font-family: 'Cairo', sans-serif;
 }
 
 .match-card {
-  background-color: #242938;
-  border-radius: 10px;
   padding: 15px 20px;
-  margin-bottom: 15px;
-  border-bottom: #ffffff solid 2px;
-  
-}
-
-.championship {
-  color: #ffffff;
-  font-size: 0.9rem;
-  opacity: 0.8;
-  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .teams-container {
@@ -77,13 +52,14 @@
 
 .team {
   color: white;
-  font-size: 1rem;
+  font-size: 1.2rem;
   flex: 1;
   text-align: center;
 }
 
 .score {
   color: #4CAF50;
+  font-size: 1rem;
   font-weight: 600;
   padding: 0 15px;
   min-width: 80px;
@@ -94,15 +70,45 @@
   display: flex;
   justify-content: center;
   gap: 20px;
-  color: #ffffff;
-  opacity: 0.7;
-  font-size: 0.9rem;
+  margin-top: 10px;
 }
 
-.match-time, .match-channel, .match-status {
-  padding: 5px 10px;
+.match-status {
+  padding: 5px 15px;
   background-color: #495572;
   border-radius: 4px;
   color: white;
-  
+  font-size: 0.9rem;
+}
+
+/* Loading styles */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+}
+
+.loading-text {
+  color: #242938;
+  font-size: 1.1rem;
+  margin-top: 1rem;
+}
+
+/* Error styles */
+.error-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.matches-list {
+  max-height: 2000px;
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out;
+}
+
+.matches-list.collapsed {
+  max-height: 0;
 }

@@ -308,3 +308,247 @@
 .login-notice .alert-link:hover {
   color: #138496;
 }
+
+/* تنسيقات قسم تسجيل الدخول */
+.login-notice-container {
+  background-color: #f8f9fa;
+  direction: rtl;
+}
+
+.login-card {
+  background-color: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+/* تنسيق القسم الجانبي (الصورة) */
+.login-image {
+  height: 100%;
+  position: relative;
+  background-image: url('https://aldoctor.app/wp-content/uploads/2022/06/%D9%85%D9%88%D8%B6%D9%88%D8%B9-%D8%AA%D8%B9%D8%A8%D9%8A%D8%B1-%D8%B9%D9%86-%D9%83%D8%B1%D8%A9-%D8%A7%D9%84%D9%82%D8%AF%D9%85-e1701948552187.jpg');
+  background-size: cover;
+  background-position: center;
+  color: white;
+}
+
+.login-image .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(210, 225, 247, 0.9) 0%, rgba(25, 118, 210, 0.8) 100%);
+}
+
+.image-content {
+  position: relative;
+  z-index: 1;
+  padding: 2.5rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.features {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.1rem;
+}
+
+.feature-item i {
+  background-color: rgba(255, 255, 255, 0.2);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* تنسيق قسم المحتوى */
+.login-content {
+  padding: 2.5rem;
+}
+
+.welcome-badge {
+  display: inline-block;
+  background-color: #e3f2fd;
+  color: #1565c0;
+  padding: 0.5rem 1rem;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.login-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #1a237e;
+  margin-bottom: 0.5rem;
+}
+
+.login-subtitle {
+  color: #546e7a;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+/* تنسيق المميزات */
+.benefits-section {
+  margin-bottom: 2rem;
+}
+
+.benefit-card {
+  display: flex;
+  align-items: flex-start;
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: #f5f5f5;
+  height: 100%;
+  transition: all 0.3s ease;
+}
+
+.benefit-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  background-color: #e8f5e9;
+}
+
+.benefit-icon {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, #1e88e5, #0d47a1);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.5rem;
+  margin-left: 1rem;
+  flex-shrink: 0;
+}
+
+.benefit-text h5 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+  color: #263238;
+}
+
+.benefit-text p {
+  font-size: 0.9rem;
+  color: #607d8b;
+  margin-bottom: 0;
+}
+
+/* تنسيق الأزرار */
+.action-buttons {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.login-btn {
+  background: linear-gradient(135deg, #1e88e5, #0d47a1);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(30, 136, 229, 0.3);
+  transition: all 0.3s ease;
+}
+
+.login-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(30, 136, 229, 0.4);
+}
+
+.signup-btn {
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  border-width: 2px;
+}
+
+.guest-access {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.guest-link {
+  color: #455a64;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.guest-link:hover {
+  color: #1976d2;
+  text-decoration: underline;
+}
+
+/* تجاوبية الشاشات المختلفة */
+@media (max-width: 991.98px) {
+  .login-content {
+    padding: 2rem;
+  }
+
+  .login-title {
+    font-size: 1.8rem;
+  }
+
+  .login-subtitle {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .benefit-card {
+    padding: 0.75rem;
+  }
+
+  .benefit-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+  }
+
+  .login-btn, .signup-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .login-content {
+    padding: 1.5rem;
+  }
+
+  .login-title {
+    font-size: 1.5rem;
+  }
+
+  .login-subtitle {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .benefit-text h5 {
+    font-size: 1rem;
+  }
+
+  .benefit-text p {
+    font-size: 0.8rem;
+  }
+}

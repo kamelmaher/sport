@@ -10,10 +10,12 @@ import { AdsComponent } from './pages/ads/ads.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { adminGuard } from './core/guards/admin.guard';
 import { ErrorComponent } from './shared/components/error/error.component';
+import { MatchesComponent } from './shared/components/matches/matches.component';
+import { HomeComponent } from './pages/home/home.component';
 export const routes: Routes = [
 
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', component: LiveMatchesComponent },
+  { path: 'home', component:HomeComponent},
   { path: 'login', component: LoginComponent },
   { path: 'admin', component: AdminComponent, canActivate: [adminGuard] },
   { path: 'channels', component: ChannelsComponent, canActivate: [AuthGuard] },
