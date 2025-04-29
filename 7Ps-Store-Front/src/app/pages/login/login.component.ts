@@ -41,14 +41,13 @@ export class LoginComponent {
     this.isPending = false;
     this.isRejected = false;
     this.isLoading = true;
-    this.errorMessage = ''; // إعادة تعيين رسالة الخطأ
+    this.errorMessage = '';
     const { name, phone } = this.loginForm.value;
 
     this.authService.login(name!, phone!).subscribe({
       next: (response) => {
         this.isLoading = false;
 
-        // التحقق من حالة pending
         if (response.status === 'pending') {
           this.isPending = true;
           return;
@@ -61,7 +60,7 @@ export class LoginComponent {
         if (response.token) {
           localStorage.setItem('token', JSON.stringify(response.token));
           localStorage.setItem('role', JSON.stringify(response.role));
-          this.router.navigate(['/channels']);
+          this.router.navigate(['/home']);
         }
       },
       error: (error) => {

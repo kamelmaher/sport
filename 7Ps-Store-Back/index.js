@@ -27,7 +27,7 @@ connection();
 
 // Routes
 app.use('/api/channels', channelRoutes);
-app.use('/api/matches', matchesRoutes);  
+app.use('/api/matches', matchesRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/ads', adRoutes);
 

@@ -7,7 +7,7 @@ import { AdsAdminComponent } from '../../shared/components/ads-admin/ads-admin.c
 
 @Component({
   selector: 'app-admin',
-  imports: [FooterComponent, HeaderComponent, AdsAdminComponent, UserManagementComponent, NotificationComponent],
+  imports: [AdsAdminComponent, UserManagementComponent, NotificationComponent],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css'
 })

@@ -9,6 +9,7 @@ import { AuthGuard } from './core/guards/auth.guard';
 import { AdsComponent } from './pages/ads/ads.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { adminGuard } from './core/guards/admin.guard';
+import { ErrorComponent } from './shared/components/error/error.component';
 export const routes: Routes = [
 
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -19,6 +20,8 @@ export const routes: Routes = [
   { path: 'ads', component: AdsComponent, canActivate: [adminGuard] },
   { path: 'user', component: UserManagementComponent, canActivate: [adminGuard] },
   { path: 'finished', component: FinishedMatchesComponent, canActivate: [AuthGuard] },
+  { path: 'error', component: ErrorComponent },
+  { path: '**', redirectTo: 'error' },
 ];
 
 
