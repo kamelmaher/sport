@@ -1,327 +1,77 @@
 {
-  "timestamp": 1745781636367,
+  "timestamp": 1745896611282,
   "data": {
-    "date": "04/27/2025",
+    "date": "04/28/2025",
     "matches": [
       {
-        "championship": "كأس الأمم الأفريقية - 20 عاما",
-        "team_a": "زامبيا - شباب",
-        "team_b": "سيراليون - شباب",
-        "match_time": "18:00",
-        "score": "0 - 0",
-        "channel": "بى ان سبورت 8 HD",
-        "status": "انتهت",
-        "date": "04/27/2025"
-      },
-      {
-        "championship": "الدوري الإنجليزي",
-        "team_a": "بورنموث",
-        "team_b": "مانشستر يونايتد",
-        "match_time": "16:00",
+        "championship": "الدوري المصري",
+        "team_a": "الجونة",
+        "team_b": "سموحة",
+        "match_time": "5:00 PM",
         "score": "1 - 1",
-        "channel": "بى ان سبورت 1HD",
+        "channel": "Ontime sports 1",
         "status": "انتهت",
-        "date": "04/27/2025"
+        "date": "04/28/2025"
       },
       {
-        "championship": "الدوري الإنجليزي",
-        "team_a": "ليفربول",
-        "team_b": "توتنهام هوتسبر",
-        "match_time": "18:30",
-        "score": "5 - 1",
-        "channel": "بى ان سبورت 1HD",
+        "championship": "الدوري المصري",
+        "team_a": "طلائع الجيش",
+        "team_b": "الاتحاد السكندري",
+        "match_time": "8:00 PM",
+        "score": "1 - 2",
+        "channel": "Ontime sports 2",
         "status": "انتهت",
-        "date": "04/27/2025"
+        "date": "04/28/2025"
       },
       {
-        "championship": "الدوري الإسباني",
-        "team_a": "فياريال",
-        "team_b": "اسبانيول",
-        "match_time": "17:15",
-        "score": "1 - 0",
-        "channel": "بى ان سبورت 3 HD",
-        "status": "انتهت",
-        "date": "04/27/2025"
-      },
-      {
-        "championship": "كأس الاتحاد الإنجليزي",
-        "team_a": "نوتينجهام فورست",
-        "team_b": "مانشستر سيتي",
-        "match_time": "18:30",
+        "championship": "الدوري المصري",
+        "team_a": "الإسماعيلي",
+        "team_b": "زد",
+        "match_time": "8:00 PM",
         "score": "0 - 2",
-        "channel": "بى ان سبورت 2 HD",
+        "channel": "Ontime sports 1",
         "status": "انتهت",
-        "date": "04/27/2025"
-      },
-      {
-        "championship": "الدوري الفرنسي",
-        "team_a": "أنجيه",
-        "team_b": "ليل",
-        "match_time": "16:00",
-        "score": "0 - 2",
-        "channel": "بى ان سبورت 4 HD",
-        "status": "انتهت",
-        "date": "04/27/2025"
-      },
-      {
-        "championship": "الدوري الفرنسي",
-        "team_a": "لانس",
-        "team_b": "اوكسير",
-        "match_time": "18:15",
-        "score": "0 - 4",
-        "channel": "بى ان سبورت اكسترا 2",
-        "status": "انتهت",
-        "date": "04/27/2025"
-      },
-      {
-        "championship": "الدوري الفرنسي",
-        "team_a": "نانت",
-        "team_b": "تولوز",
-        "match_time": "18:15",
-        "score": "0 - 0",
-        "channel": "بى ان سبورت 4 HD",
-        "status": "انتهت",
-        "date": "04/27/2025"
-      },
-      {
-        "championship": "الدوري الفرنسي",
-        "team_a": "مونبيليه",
-        "team_b": "ريمس",
-        "match_time": "18:15",
-        "score": "0 - 0",
-        "channel": "بى ان سبورت اكسترا 1",
-        "status": "انتهت",
-        "date": "04/27/2025"
-      },
-      {
-        "championship": "الكونفيدرالية الأفريقية",
-        "team_a": "ستيلينبوش",
-        "team_b": "سيمبا",
-        "match_time": "16:00",
-        "score": "0 - 0",
-        "channel": "بى ان سبورت 5 HD",
-        "status": "انتهت",
-        "date": "04/27/2025"
-      },
-      {
-        "championship": "الكونفيدرالية الأفريقية",
-        "team_a": "النادي الرياضي القسنطينى",
-        "team_b": "نهضة بركان",
-        "match_time": "19:00",
-        "score": "1 - 0",
-        "channel": "بى ان سبورت 6 HD",
-        "status": "انتهت",
-        "date": "04/27/2025"
-      },
-      {
-        "championship": "بطولة أفريقيا للأندية للكرة الطائرة",
-        "team_a": "الاتحاد - ليبيا",
-        "team_b": "نادي الجيش الرواندي",
-        "match_time": "12:00",
-        "score": "1 - 3",
-        "channel": "N/A",
-        "status": "انتهت",
-        "date": "04/27/2025"
-      },
-      {
-        "championship": "بطولة أفريقيا للأندية للكرة الطائرة",
-        "team_a": "الترجي",
-        "team_b": "وداد تلمسان",
-        "match_time": "14:30",
-        "score": "3 - 0",
-        "channel": "N/A",
-        "status": "انتهت",
-        "date": "04/27/2025"
-      },
-      {
-        "championship": "بطولة أفريقيا للأندية للكرة الطائرة",
-        "team_a": "الأهلي",
-        "team_b": "أسبوار",
-        "match_time": "17:00",
-        "score": "3 - 1",
-        "channel": "N/A",
-        "status": "انتهت",
-        "date": "04/27/2025"
-      },
-      {
-        "championship": "بطولة أفريقيا للأندية للكرة الطائرة",
-        "team_a": "السويحلي",
-        "team_b": "الفتح الرياضي",
-        "match_time": "19:30",
-        "score": "3 - 0",
-        "channel": "N/A",
-        "status": "انتهت",
-        "date": "04/27/2025"
-      },
-      {
-        "championship": "الدوري الألماني",
-        "team_a": "بوخوم",
-        "team_b": "يونيون برلين",
-        "match_time": "16:30",
-        "score": "1 - 1",
-        "channel": "بى ان سبورت 5 HD",
-        "status": "انتهت",
-        "date": "04/27/2025"
-      },
-      {
-        "championship": "الدوري الألماني",
-        "team_a": "فيردر بريمن",
-        "team_b": "سانت باولي",
-        "match_time": "18:30",
-        "score": "0 - 0",
-        "channel": "بى ان سبورت اكسترا 3",
-        "status": "انتهت",
-        "date": "04/27/2025"
-      },
-      {
-        "championship": "دوري أبطال آسيا للنخبة",
-        "team_a": "كاواساكي فورنتال",
-        "team_b": "السد القطري",
-        "match_time": "19:30",
-        "score": "3 - 2",
-        "channel": "Bein Sports AFC",
-        "status": "انتهت",
-        "date": "04/27/2025"
+        "date": "04/28/2025"
       },
       {
         "championship": "الدوري الإيطالي",
-        "team_a": "فينيزيا",
-        "team_b": "ميلان",
-        "match_time": "13:30",
+        "team_a": "أودينيزي",
+        "team_b": "بولونيا",
+        "match_time": "7:30 PM",
+        "score": "0 - 0",
+        "channel": "Starz Play App",
+        "status": "انتهت",
+        "date": "04/28/2025"
+      },
+      {
+        "championship": "الدوري الإيطالي",
+        "team_a": "هيلاس فيرونا",
+        "team_b": "كالياري",
+        "match_time": "9:45 PM",
         "score": "0 - 2",
         "channel": "Starz Play App",
         "status": "انتهت",
-        "date": "04/27/2025"
+        "date": "04/28/2025"
       },
       {
         "championship": "الدوري الإيطالي",
-        "team_a": "كومو",
-        "team_b": "جنوى",
-        "match_time": "13:30",
-        "score": "1 - 0",
-        "channel": "Starz Play App",
-        "status": "انتهت",
-        "date": "04/27/2025"
-      },
-      {
-        "championship": "الدوري الإيطالي",
-        "team_a": "فيورنتينا",
-        "team_b": "إمبولي",
-        "match_time": "16:00",
-        "score": "2 - 1",
-        "channel": "Starz Play App",
-        "status": "انتهت",
-        "date": "04/27/2025"
-      },
-      {
-        "championship": "الدوري الإيطالي",
-        "team_a": "إنتر ميلان",
-        "team_b": "روما",
-        "match_time": "16:00",
-        "score": "0 - 1",
-        "channel": "Starz Play App",
-        "status": "انتهت",
-        "date": "04/27/2025"
-      },
-      {
-        "championship": "الدوري الإيطالي",
-        "team_a": "يوفنتوس",
-        "team_b": "مونزا",
-        "match_time": "19:00",
-        "score": "2 - 0",
-        "channel": "Starz Play App",
-        "status": "انتهت",
-        "date": "04/27/2025"
-      },
-      {
-        "championship": "الدوري التركي",
-        "team_a": "طرابزون سبور",
-        "team_b": "ألانيا سبور",
-        "match_time": "16:00",
-        "score": "4 - 3",
-        "channel": "N/A",
-        "status": "انتهت",
-        "date": "04/27/2025"
-      },
-      {
-        "championship": "الدوري التركي",
-        "team_a": "قونيا سبور",
-        "team_b": "أضنة دمير سبور",
-        "match_time": "16:00",
-        "score": "3 - 1",
-        "channel": "N/A",
-        "status": "انتهت",
-        "date": "04/27/2025"
-      },
-      {
-        "championship": "الدوري التركي",
-        "team_a": "قيصري سبور",
-        "team_b": "ريزه سبور",
-        "match_time": "19:00",
-        "score": "1 - 0",
-        "channel": "N/A",
-        "status": "انتهت",
-        "date": "04/27/2025"
-      },
-      {
-        "championship": "الدوري التركي",
-        "team_a": "ايوبسبور",
-        "team_b": "جالاتا سراي",
-        "match_time": "19:00",
-        "score": "1 - 5",
-        "channel": "N/A",
-        "status": "انتهت",
-        "date": "04/27/2025"
-      },
-      {
-        "championship": "الدوري البرتغالي",
-        "team_a": "موريرنسي",
-        "team_b": "ناسيونال ماديرا",
-        "match_time": "17:30",
-        "score": "1 - 1",
-        "channel": "N/A",
-        "status": "انتهت",
-        "date": "04/27/2025"
-      },
-      {
-        "championship": "الدوري البرتغالي",
-        "team_a": "فيتوريا جيماريش",
-        "team_b": "ريو آفي",
-        "match_time": "20:00",
-        "score": "3 - 0",
-        "channel": "N/A",
-        "status": "انتهت",
-        "date": "04/27/2025"
-      },
-      {
-        "championship": "الدوري البرتغالي",
-        "team_a": "بنفيكا",
-        "team_b": "اي في اس فوتبول",
-        "match_time": "20:00",
-        "score": "6 - 0",
-        "channel": "N/A",
-        "status": "انتهت",
-        "date": "04/27/2025"
-      },
-      {
-        "championship": "الدوري الإماراتي",
-        "team_a": "الجــزيرة",
-        "team_b": "الشــارقة",
-        "match_time": "17:00",
-        "score": "1 - 1",
-        "channel": "N/A",
-        "status": "انتهت",
-        "date": "04/27/2025"
-      },
-      {
-        "championship": "الدوري الإماراتي",
-        "team_a": "الوحـــدة",
-        "team_b": "شباب الأهلي",
-        "match_time": "19:45",
+        "team_a": "لاتسيو",
+        "team_b": "بارما",
+        "match_time": "9:45 PM",
         "score": "2 - 2",
+        "channel": "Starz Play App",
+        "status": "انتهت",
+        "date": "04/28/2025"
+      },
+      {
+        "championship": "الدوري التركي",
+        "team_a": "جوزتيبي",
+        "team_b": "إسطنبول باشاكشهير",
+        "match_time": "8:00 PM",
+        "score": "4 - 1",
         "channel": "N/A",
         "status": "انتهت",
-        "date": "04/27/2025"
+        "date": "04/28/2025"
       }
     ]
   }

@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatchService } from '../../../core/services/match.service';
-import { Match, Channel,Competition } from '../../../models/match.model';
+import { AuthService } from '../../../core/services/auth.service';
+import { Match, Channel,Competition,MatchDetails } from '../../../models/match.model';
+import { RouterModule } from '@angular/router';
+import { AdsDisplayComponent } from '../ads-display/ads-display.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,RouterModule,AdsDisplayComponent],
   templateUrl: './liveMatches.component.html',
   styleUrl: './liveMatches.component.css'
 })
@@ -14,11 +17,19 @@ export class LiveMatchesComponent implements OnInit {
   matches: Match | null = null;
   loading = true;
   error = '';
+  isLoggedIn = false;
 
-  constructor(private matchService: MatchService) {}
+  constructor(private matchService: MatchService,private authService: AuthService) {}
 
   ngOnInit(): void {
-    this.loadMatches();
+    this.isLoggedIn = this.authService.isLoggedIn();
+    // this.loadMatches();
+    if (!this.isLoggedIn) {
+      // If not logged in, still show competitions but hide times
+      this.loadMatches();
+    } else {
+      this.loadMatches();
+    }
   }
 
   toggleCompetition(competition:Competition): void {
@@ -31,10 +42,14 @@ export class LiveMatchesComponent implements OnInit {
         this.matches = data;
         if (this.matches && this.matches.competitions) {
           this.matches.competitions.forEach(competition => {
-            competition.showMatches = true; // Initialize competition collapse state
+            competition.showMatches = true;
             competition.matches.forEach(matchGroup => {
-              matchGroup.matches.forEach(match => {
-                (match as any).showChannels = false;
+              matchGroup.matches.forEach((match: MatchDetails) => {
+                Object.assign(match, {
+                  showChannels: false,
+                  showFreeChannels: false,
+                  showPaidChannels: false
+                });
               });
             });
           });
@@ -62,5 +77,13 @@ export class LiveMatchesComponent implements OnInit {
 
   toggleChannels(match: any): void {
     match.showChannels = !match.showChannels;
+  }
+
+  toggleCategory(match: MatchDetails, type: 'free' | 'paid'): void {
+    if (type === 'free') {
+      match.showFreeChannels = !match.showFreeChannels;
+    } else {
+      match.showPaidChannels = !match.showPaidChannels;
+    }
   }
 }

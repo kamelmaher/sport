@@ -1,9 +1,16 @@
+.co-container{
+  margin-left: 2%;
+  margin-right: 2%;
+  width: 96%;
+  margin: 15px auto;
+  /* max-width: 1200px; */
+}
 .matches-container {
-  max-width: 800px;
+  /* max-width: 800px; */
   margin: 0 auto;
   padding: 20px;
-  background-color: #1a1f2e;
-  min-height: 100vh;
+  background-color: #fdfdfd;
+  /* min-height: 100vh; */
   direction: ltr;
 }
 
@@ -11,7 +18,7 @@
   background-color: #242938;
   border-radius: 10px;
   overflow: hidden;
-  margin-bottom: 20px;
+  margin-bottom: 2px;
   direction: inherit;
 }
 
@@ -94,7 +101,7 @@
 }
 
 .channels-section {
-  max-height: 500px;
+  /* max-height: 500px; */
   overflow: hidden;
   transition: max-height 0.3s ease-in-out;
 }
@@ -147,4 +154,426 @@
 
 .channel-badge.paid:hover {
   background-color: #1565c0;
+}
+
+.channels-categories {
+  padding: 10px;
+}
+
+.channel-category {
+  margin-bottom: 15px;
+}
+
+.category-header {
+  display: flex;
+  align-items: center;
+  padding: 8px 15px;
+  background-color: #2c3449;
+  border-radius: 6px;
+  cursor: pointer;
+  /* margin-bottom: 10px; */
+  direction: rtl;
+}
+
+.category-header:hover {
+  background-color: #343d57;
+}
+
+.category-count {
+  background-color: #1a1f2e;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-left: 10px;
+  font-size: 0.9rem;
+}
+
+.category-title {
+  color: white;
+  flex: 1;
+  font-size: 0.95rem;
+}
+
+.category-header i {
+  color: white;
+  opacity: 0.7;
+  transition: transform 0.3s ease;
+}
+
+.category-header.collapsed i {
+  transform: rotate(-90deg);
+}
+
+.channels-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-start;
+  padding: 10px;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+  opacity: 0;
+}
+
+.channels-row.expanded {
+  max-height: 1000px;
+  opacity: 1;
+}
+
+.channel-item {
+  display: flex;
+  align-items: flex-start;
+  width: calc(33.333% - 10px); /* Default for large screens: 3 items per row */
+}
+
+/* Medium screens (tablets) */
+@media screen and (max-width: 868px) {
+  .channel-item {
+    width: calc(50% - 10px); /* 2 items per row */
+  }
+}
+
+/* Small screens (phones) */
+@media screen and (max-width: 480px) {
+  .channel-item {
+    width: 100%; /* 1 item per row */
+  }
+  .co-container{
+    margin-left: 2%;
+    margin-right: 2%;
+    width: 96%;
+  }
+}
+
+/* Adjust channel badge to fill the width */
+.channel-badge {
+  width: 100%;
+  justify-content: center;
+}
+
+.channel-badge.arabic {
+  background-color: #d32f2f;
+}
+
+.channel-badge.arabic:hover {
+  background-color: #e53935;
+}
+
+
+/* Loading styles */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+}
+
+.loading-text {
+  color: #ffffff;
+  font-size: 1.1rem;
+  margin-top: 1rem;
+  opacity: 0.8;
+}
+
+/* Error styles */
+.error-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.error-box {
+  max-width: 500px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background-color: rgba(220, 53, 69, 0.1);
+  border: 1px solid rgba(220, 53, 69, 0.2);
+}
+
+.error-box i {
+  font-size: 1.2rem;
+}
+
+/* Login notice styles */
+.login-notice {
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 0 20px;
+}
+
+.login-notice .alert {
+  background-color: rgba(23, 162, 184, 0.1);
+  border: 1px solid rgba(23, 162, 184, 0.2);
+  color: #ffffff;
+}
+
+.login-notice .alert-link {
+  color: #17a2b8;
+  text-decoration: underline;
+}
+
+.login-notice .alert-link:hover {
+  color: #138496;
+}
+
+/* تنسيقات قسم تسجيل الدخول */
+.login-notice-container {
+  background-color: #f8f9fa;
+  direction: rtl;
+}
+
+.login-card {
+  background-color: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+/* تنسيق القسم الجانبي (الصورة) */
+.login-image {
+  height: 100%;
+  position: relative;
+  background-image: url('https://aldoctor.app/wp-content/uploads/2022/06/%D9%85%D9%88%D8%B6%D9%88%D8%B9-%D8%AA%D8%B9%D8%A8%D9%8A%D8%B1-%D8%B9%D9%86-%D9%83%D8%B1%D8%A9-%D8%A7%D9%84%D9%82%D8%AF%D9%85-e1701948552187.jpg');
+  background-size: cover;
+  background-position: center;
+  color: white;
+}
+
+.login-image .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(210, 225, 247, 0.9) 0%, rgba(25, 118, 210, 0.8) 100%);
+}
+
+.image-content {
+  position: relative;
+  z-index: 1;
+  padding: 2.5rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.features {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.1rem;
+}
+
+.feature-item i {
+  background-color: rgba(255, 255, 255, 0.2);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* تنسيق قسم المحتوى */
+.login-content {
+  padding: 2.5rem;
+}
+
+.welcome-badge {
+  display: inline-block;
+  background-color: #e3f2fd;
+  color: #1565c0;
+  padding: 0.5rem 1rem;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.login-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #1a237e;
+  margin-bottom: 0.5rem;
+}
+
+.login-subtitle {
+  color: #546e7a;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+/* تنسيق المميزات */
+.benefits-section {
+  margin-bottom: 2rem;
+}
+
+.benefit-card {
+  display: flex;
+  align-items: flex-start;
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: #f5f5f5;
+  height: 100%;
+  transition: all 0.3s ease;
+}
+
+.benefit-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  background-color: #e8f5e9;
+}
+
+.benefit-icon {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, #1e88e5, #0d47a1);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.5rem;
+  margin-left: 1rem;
+  flex-shrink: 0;
+}
+
+.benefit-text h5 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+  color: #263238;
+}
+
+.benefit-text p {
+  font-size: 0.9rem;
+  color: #607d8b;
+  margin-bottom: 0;
+}
+
+/* تنسيق الأزرار */
+.action-buttons {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.login-btn {
+  background: linear-gradient(135deg, #1e88e5, #0d47a1);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(30, 136, 229, 0.3);
+  transition: all 0.3s ease;
+}
+
+.login-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(30, 136, 229, 0.4);
+}
+
+.signup-btn {
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  border-width: 2px;
+}
+
+.guest-access {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.guest-link {
+  color: #455a64;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.guest-link:hover {
+  color: #1976d2;
+  text-decoration: underline;
+}
+
+/* تجاوبية الشاشات المختلفة */
+@media (max-width: 991.98px) {
+  .login-content {
+    padding: 2rem;
+  }
+
+  .login-title {
+    font-size: 1.8rem;
+  }
+
+  .login-subtitle {
+    font-size: 1rem;
+  }
+  .co-container{
+    margin-left: 6%;
+    margin-right: 6%;
+    width: 88%;
+    margin: 15px auto;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .benefit-card {
+    padding: 0.75rem;
+  }
+
+  .benefit-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+  }
+
+  .login-btn, .signup-btn {
+    width: 100%;
+  }
+  .co-container{
+    margin-left: 4%;
+    margin-right: 4%;
+    width: 92%;
+    margin: 15px auto;
+    /* max-width: 1200px; */
+  }
+}
+
+@media (max-width: 575.98px) {
+  .login-content {
+    padding: 1.5rem;
+  }
+
+  .login-title {
+    font-size: 1.5rem;
+  }
+
+  .login-subtitle {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .benefit-text h5 {
+    font-size: 1rem;
+  }
+
+  .benefit-text p {
+    font-size: 0.8rem;
+  }
 }
