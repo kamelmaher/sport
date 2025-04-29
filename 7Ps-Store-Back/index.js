@@ -1,9 +1,9 @@
 const express = require('express');
 require('dotenv').config();
-const channelRoutes = require('../7Ps-Store-Back/src/Modules/Channels/channel.routes');
+const channelRoutes = require('./src/Modules/Channels/channel.routes');
 const matchesRoutes = require('./src/Modules/Matches/matches.routes');
-const userRoutes = require('../7Ps-Store-Back/src/Modules/Users/user.routes');
-const adRoutes = require('../7Ps-Store-Back/src/Modules/Ads/ads.routes');
+const userRoutes = require('./src/Modules/Users/user.routes');
+const adRoutes = require('./src/Modules/Ads/ads.routes');
 const connection = require('./DB/connection');
 const app = express();
 const cors = require('cors');
@@ -25,7 +25,7 @@ connection();
 
 // Routes
 app.use('/api/channels', channelRoutes);
-app.use('/api/matches', matchesRoutes);  
+app.use('/api/matches', matchesRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/ads', adRoutes);
 

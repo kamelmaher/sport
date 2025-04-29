@@ -1,9 +1,9 @@
 .matches-container {
-  max-width: 800px;
+  /* max-width: 800px; */
   margin: 0 auto;
   padding: 20px;
-  background-color: #1a1f2e;
-  min-height: 100vh;
+  background-color: #fdfdfd;
+  /* min-height: 100vh; */
   direction: ltr;
 }
 
@@ -11,7 +11,7 @@
   background-color: #242938;
   border-radius: 10px;
   overflow: hidden;
-  /* margin-bottom: 30px; */
+  margin-bottom: 2px;
   direction: inherit;
 }
 
@@ -94,7 +94,7 @@
 }
 
 .channels-section {
-  max-height: 500px;
+  /* max-height: 500px; */
   overflow: hidden;
   transition: max-height 0.3s ease-in-out;
 }
@@ -147,4 +147,164 @@
 
 .channel-badge.paid:hover {
   background-color: #1565c0;
+}
+
+.channels-categories {
+  padding: 10px;
+}
+
+.channel-category {
+  margin-bottom: 15px;
+}
+
+.category-header {
+  display: flex;
+  align-items: center;
+  padding: 8px 15px;
+  background-color: #2c3449;
+  border-radius: 6px;
+  cursor: pointer;
+  /* margin-bottom: 10px; */
+  direction: rtl;
+}
+
+.category-header:hover {
+  background-color: #343d57;
+}
+
+.category-count {
+  background-color: #1a1f2e;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-left: 10px;
+  font-size: 0.9rem;
+}
+
+.category-title {
+  color: white;
+  flex: 1;
+  font-size: 0.95rem;
+}
+
+.category-header i {
+  color: white;
+  opacity: 0.7;
+  transition: transform 0.3s ease;
+}
+
+.category-header.collapsed i {
+  transform: rotate(-90deg);
+}
+
+.channels-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-start;
+  padding: 10px;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+  opacity: 0;
+}
+
+.channels-row.expanded {
+  max-height: 1000px;
+  opacity: 1;
+}
+
+.channel-item {
+  display: flex;
+  align-items: flex-start;
+  width: calc(33.333% - 10px); /* Default for large screens: 3 items per row */
+}
+
+/* Medium screens (tablets) */
+@media screen and (max-width: 868px) {
+  .channel-item {
+    width: calc(50% - 10px); /* 2 items per row */
+  }
+}
+
+/* Small screens (phones) */
+@media screen and (max-width: 480px) {
+  .channel-item {
+    width: 100%; /* 1 item per row */
+  }
+}
+
+/* Adjust channel badge to fill the width */
+.channel-badge {
+  width: 100%;
+  justify-content: center;
+}
+
+.channel-badge.arabic {
+  background-color: #d32f2f;
+}
+
+.channel-badge.arabic:hover {
+  background-color: #e53935;
+}
+
+
+/* Loading styles */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+}
+
+.loading-text {
+  color: #ffffff;
+  font-size: 1.1rem;
+  margin-top: 1rem;
+  opacity: 0.8;
+}
+
+/* Error styles */
+.error-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.error-box {
+  max-width: 500px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background-color: rgba(220, 53, 69, 0.1);
+  border: 1px solid rgba(220, 53, 69, 0.2);
+}
+
+.error-box i {
+  font-size: 1.2rem;
+}
+
+/* Login notice styles */
+.login-notice {
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 0 20px;
+}
+
+.login-notice .alert {
+  background-color: rgba(23, 162, 184, 0.1);
+  border: 1px solid rgba(23, 162, 184, 0.2);
+  color: #ffffff;
+}
+
+.login-notice .alert-link {
+  color: #17a2b8;
+  text-decoration: underline;
+}
+
+.login-notice .alert-link:hover {
+  color: #138496;
 }

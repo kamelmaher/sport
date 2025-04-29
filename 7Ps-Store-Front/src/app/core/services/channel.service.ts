@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Channel, ChannelResponse } from '../../models/channel.model';
 import { environment } from '../../../environments/environment';
@@ -12,6 +12,18 @@ export class ChannelService {
   private readonly channelsUrl = `${this.apiUrl}/api/channels`;
 
   constructor(private http: HttpClient) { }
+
+
+  getAuthHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token');
+    const cleanToken = token ? token.replace(/^"(.*)"$/, '$1') : '';
+    // console.log('Cleaned Authorization Token:', cleanToken);
+
+    return new HttpHeaders({
+      'Authorization': `Bearer ${cleanToken}`,
+      'Content-Type': 'application/json'
+    });
+  }
 
   /**
    * Fetch channels with optional country and search filters
@@ -28,7 +40,10 @@ export class ChannelService {
       params = params.set('search', search);
     }
 
-    return this.http.get<ChannelResponse>(this.channelsUrl, { params });
+    return this.http.get<ChannelResponse>(this.channelsUrl, {
+      headers: this.getAuthHeaders(),
+      params: params
+    });
   }
 
   /**

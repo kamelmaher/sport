@@ -14,7 +14,7 @@ export class FooterComponent implements OnInit {
   footerLinks = [
     { title: 'الرئيسية', path: '/' },
     { title: 'القنوات', path: '/channels' },
-    { title: 'المباريات', path: '/matches' },
+    { title: 'المباريات', path: '/home' },
   ];
 
   socialLinks = [

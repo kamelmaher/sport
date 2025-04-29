@@ -7,7 +7,7 @@ import { AdsDisplayComponent } from '../../shared/components/ads-display/ads-dis
 
 @Component({
   selector: 'app-channels',
-  imports: [HeaderComponent, FooterComponent, SearchBarComponent, AdsDisplayComponent],
+  imports: [SearchBarComponent, AdsDisplayComponent],
   templateUrl: './channels.component.html',
   styleUrl: './channels.component.css'
 })
