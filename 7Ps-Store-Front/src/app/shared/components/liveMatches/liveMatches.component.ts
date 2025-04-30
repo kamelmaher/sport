@@ -1,15 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatchService } from '../../../core/services/match.service';
-import { AuthService } from '../../../core/services/auth.service';
 import { Match, Channel,Competition,MatchDetails } from '../../../models/match.model';
 import { RouterModule } from '@angular/router';
-import { AdsDisplayComponent } from '../ads-display/ads-display.component';
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-live-matches',
   standalone: true,
-  imports: [CommonModule,RouterModule,AdsDisplayComponent],
+  imports: [CommonModule,RouterModule],
   templateUrl: './liveMatches.component.html',
   styleUrl: './liveMatches.component.css'
 })
@@ -17,19 +15,11 @@ export class LiveMatchesComponent implements OnInit {
   matches: Match | null = null;
   loading = true;
   error = '';
-  isLoggedIn = false;
 
-  constructor(private matchService: MatchService,private authService: AuthService) {}
+  constructor(private matchService: MatchService) {}
 
   ngOnInit(): void {
-    this.isLoggedIn = this.authService.isLoggedIn();
-    // this.loadMatches();
-    if (!this.isLoggedIn) {
-      // If not logged in, still show competitions but hide times
-      this.loadMatches();
-    } else {
-      this.loadMatches();
-    }
+    this.loadMatches();
   }
 
   toggleCompetition(competition:Competition): void {
