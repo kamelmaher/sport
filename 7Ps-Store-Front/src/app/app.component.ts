@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = '7Ps-Store-Front';
+  title = '7Ps Store';
   constructor(private router: Router) { }
 
   isLoginPage(): boolean {

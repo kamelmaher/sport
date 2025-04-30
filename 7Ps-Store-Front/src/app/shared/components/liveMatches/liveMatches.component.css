@@ -1,3 +1,10 @@
+.co-container{
+  margin-left: 2%;
+  margin-right: 2%;
+  width: 96%;
+  margin: 15px auto;
+  /* max-width: 1200px; */
+}
 .matches-container {
   /* max-width: 800px; */
   margin: 0 auto;
@@ -231,6 +238,11 @@
 @media screen and (max-width: 480px) {
   .channel-item {
     width: 100%; /* 1 item per row */
+  }
+  .co-container{
+    margin-left: 2%;
+    margin-right: 2%;
+    width: 96%;
   }
 }
 
@@ -508,6 +520,13 @@
   .login-subtitle {
     font-size: 1rem;
   }
+  .co-container{
+    margin-left: 6%;
+    margin-right: 6%;
+    width: 88%;
+    margin: 15px auto;
+  }
+
 }
 
 @media (max-width: 767.98px) {
@@ -527,6 +546,13 @@
 
   .login-btn, .signup-btn {
     width: 100%;
+  }
+  .co-container{
+    margin-left: 4%;
+    margin-right: 4%;
+    width: 92%;
+    margin: 15px auto;
+    /* max-width: 1200px; */
   }
 }
 
