@@ -1,72 +1,149 @@
-
 <app-ads-display></app-ads-display>
- <!-- حالة التحميل -->
- <div *ngIf="loading" class="loading-container text-center py-5">
+<!-- حالة التحميل -->
+<div *ngIf="loading" class="loading-container text-center py-5">
   <div class="spinner-container">
-      <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-          <span class="visually-hidden">جاري التحميل...</span>
-      </div>
+    <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+      <span class="visually-hidden">جاري التحميل...</span>
+    </div>
   </div>
-  
+
   <h4 class="loading-text mt-4 text-primary">مرحباً بك!</h4>
   <p class="text-muted">جاري تجهيز المباريات لك، انتظر قليلاً...</p>
-  
+
   <div class="mt-3">
-      <div class="progress" style="height: 6px;">
-          <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 75%"></div>
-      </div>
+    <div class="progress" style="height: 6px;">
+      <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 75%"></div>
+    </div>
   </div>
 </div>
 
 <!-- حالة الخطأ -->
 <div *ngIf="error" class="error-container py-4">
   <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
-      <div class="error-icon mb-3">
-          <i class="fas fa-exclamation-triangle fa-3x text-danger"></i>
-      </div>
-      <h4 class="alert-heading">عذراً!</h4>
-      <p>{{ error }}</p>
-      <hr>
-      <p class="mb-0">حدث خطأ أثناء تحميل البيانات. نعتذر للإزعاج!</p>
-      
-      <div class="mt-3">
-          <button class="btn btn-primary me-2" (click)="loadMatches()">
-              <i class="fas fa-redo me-1"></i> المحاولة مرة أخرى
-          </button>
-          <button class="btn btn-outline-secondary" routerLink="/">
-              <i class="fas fa-home me-1"></i> العودة للرئيسية
-          </button>
-      </div>
+    <div class="error-icon mb-3">
+      <i class="fas fa-exclamation-triangle fa-3x text-danger"></i>
+    </div>
+    <h4 class="alert-heading">عذراً!</h4>
+    <p>{{ error }}</p>
+    <hr>
+    <p class="mb-0">حدث خطأ أثناء تحميل البيانات. نعتذر للإزعاج!</p>
+
+    <div class="mt-3">
+      <button class="btn btn-primary me-2" (click)="loadMatches()">
+        <i class="fas fa-redo me-1"></i> المحاولة مرة أخرى
+      </button>
+      <button class="btn btn-outline-secondary" routerLink="/">
+        <i class="fas fa-home me-1"></i> العودة للرئيسية
+      </button>
+    </div>
   </div>
 </div>
 
-<!-- تنبيه تسجيل الدخول -->
-<div *ngIf="!isLoggedIn && !loading && !error" class="login-notice py-5">
-  <div class="container">
-      <div class="card border-primary shadow">
-          <div class="card-header bg-primary text-white">
-              <h4 class="mb-0">
-                  <i class="fas fa-door-open me-2"></i> مرحباً بك عزيزي الزائر
-              </h4>
-          </div>
-          <div class="card-body text-center py-4">
-              <i class="fas fa-user-lock fa-4x text-primary mb-4"></i>
-              <h3 class="card-title">للوصول إلى كامل الميزات</h3>
-              <p class="card-text text-muted">يجب عليك تسجيل الدخول لمشاهدة مواعيد المباريات والتفاصيل الكاملة</p>
-              
-              <div class="mt-4">
-                  <a [routerLink]="['/login']" class="btn btn-primary btn-lg me-3">
-                      <i class="fas fa-sign-in-alt me-2"></i> تسجيل الدخول
-                  </a>
-                  
+<!-- تنبيه تسجيل الدخول محسن -->
+<div *ngIf="!isLoggedIn && !loading && !error" class="login-notice-container py-md-5 py-4">
+  <div class="co-container">
+    <div class="login-card">
+      <div class="row g-0">
+        <!-- صورة جانبية للشاشات المتوسطة والكبيرة -->
+        <div class="col-lg-5 d-none d-lg-block">
+          <div class="login-image">
+            <div class="overlay"></div>
+            <div class="image-content">
+              <h2 class="display-6 fw-bold mb-3">تابع المباريات مباشرة</h2>
+              <p class="lead">تابع أحدث مباريات كرة القدم والقنوات الرياضية</p>
+              <div class="features mt-4">
+                <div class="feature-item">
+                  <i class="fas fa-tv"></i>
+                  <span>القنوات العربية</span>
+                </div>
+                <div class="feature-item">
+                  <i class="fas fa-bell"></i>
+                  <span>مواعيد المباريات</span>
+                </div>
+                <div class="feature-item">
+                  <i class="fas fa-chart-line"></i>
+                  <span>تردات القنوات</span>
+                </div>
               </div>
+            </div>
           </div>
-         
+        </div>
+
+        <!-- قسم معلومات تسجيل الدخول -->
+        <div class="col-lg-7">
+          <div class="login-content">
+            <div class="welcome-badge fs-2 d-flex align-items-center justify-content-center">
+              <i class="fas fa-futbol mx-2"></i> مرحباً بك في موقع 7Ps Store
+            </div>
+
+            <h2 class="login-title mt-4">سجل دخولك الآن</h2>
+            <p class="login-subtitle">للوصول إلى مواعيد المباريات والقنوات الناقلة والمزيد من المميزات</p>
+
+            <div class="benefits-section">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <div class="benefit-card">
+                    <div class="benefit-icon">
+                      <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <h5>مواعيد المباريات</h5>
+                      <p>تابع مواعيد جميع المباريات بتوقيتك المحلي</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="benefit-card">
+                    <div class="benefit-icon">
+                      <i class="fas fa-satellite-dish"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <h5>القنوات الناقلة</h5>
+                      <p>تعرف على جميع القنوات الناقلة المجانية والمشفرة</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="benefit-card">
+                    <div class="benefit-icon">
+                      <i class="fas fa-bolt"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <h5>تحديثات فورية</h5>
+                      <p>احصل على تحديثات فورية للنتائج والأهداف</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="benefit-card">
+                    <div class="benefit-icon">
+                      <i class="fas fa-star"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <h5>ترددات القنوات العربية</h5>
+                      <p>بأمكانك البحث ومعرفة الترددات والافمار الخاصة بالقنوات</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="action-buttons mt-4 d-flex justify-content-center">
+              <a [routerLink]="['/login']" class="btn btn-primary btn-lg login-btn">
+                <i class="fas fa-sign-in-alt me-2"></i> تسجيل الدخول
+              </a>
+            </div>
+
+
+          </div>
+        </div>
       </div>
+    </div>
   </div>
 </div>
-<div *ngIf="matches && !loading && !error && isLoggedIn"  class="matches-container mt-5">
- 
+
+<div *ngIf="matches && !loading && !error && isLoggedIn" class="matches-container mt-5">
+
 
   <!-- Matches Content -->
   <div class="matches-content">
@@ -77,14 +154,15 @@
           <span>{{ competition.name }}</span>
         </div>
         <div class="competition-toggle">
-          <i class="fas" [class.fa-chevron-down]="!competition.showMatches" [class.fa-chevron-up]="competition.showMatches"></i>
+          <i class="fas" [class.fa-chevron-down]="!competition.showMatches"
+            [class.fa-chevron-up]="competition.showMatches"></i>
         </div>
       </div>
-      
+
       <div class="matches-list" [class.collapsed]="!competition.showMatches">
         <div *ngFor="let matchGroup of competition.matches">
           <div class="match-group">
-            
+
             <div *ngFor="let match of matchGroup.matches" class="match-card">
               <div class="match-title text-white text-center mb-2">{{ match.competition }}</div>
               <div class="match-details">
@@ -94,47 +172,49 @@
                   <div class="team team-away">{{ match.teams.split(' vs ')[1] }}</div>
                 </div>
               </div>
-              
+
               <div class="channels-toggle" (click)="toggleChannels(match)">
-                <i class="fas" [class.fa-chevron-down]="!match.showChannels" [class.fa-chevron-up]="match.showChannels"> القنوات </i>
+                <i class="fas" [class.fa-chevron-down]="!match.showChannels" [class.fa-chevron-up]="match.showChannels">
+                  القنوات </i>
               </div>
-              
+
               <div class="channels-section" [class.collapsed]="!match.showChannels">
                 <div class="channels-categories">
 
-                    <!-- Free Channels -->
-                    <div class="channel-category" *ngIf="match.freeChannels?.length">
-                      <div class="category-header" (click)="toggleCategory(match, 'free')">
-                        <span class="category-count">{{ match.freeChannels.length }}</span>
-                        <span class="category-title">القنوات المجانية</span>
-                        <i class="fas" [class.fa-chevron-down]="!match.showFreeChannels" [class.fa-chevron-up]="match.showFreeChannels"></i>
-                      </div>
-                      <div class="channels-row" [class.expanded]="match.showFreeChannels">
-                        <div *ngFor="let channel of match.freeChannels" class="channel-item">
-                          <span class="channel-badge free" [title]="getFrequencyTooltip(channel)">
-                            <i class="fas fa-tv me-1"></i>
-                            {{ channel.name }}
-                            <i *ngIf="channel.frequency" class="fas fa-satellite-dish ms-1"></i>
-                          </span>
-                        </div>
+                  <!-- Free Channels -->
+                  <div class="channel-category" *ngIf="match.freeChannels?.length">
+                    <div class="category-header" (click)="toggleCategory(match, 'free')">
+                      <span class="category-count">{{ match.freeChannels.length }}</span>
+                      <span class="category-title">القنوات المجانية</span>
+                      <i class="fas" [class.fa-chevron-down]="!match.showFreeChannels"
+                        [class.fa-chevron-up]="match.showFreeChannels"></i>
+                    </div>
+                    <div class="channels-row" [class.expanded]="match.showFreeChannels">
+                      <div *ngFor="let channel of match.freeChannels" class="channel-item">
+                        <span class="channel-badge free" [title]="getFrequencyTooltip(channel)">
+                          <i class="fas fa-tv me-1"></i>
+                          {{ channel.name }}
+                          <i *ngIf="channel.frequency" class="fas fa-satellite-dish ms-1"></i>
+                        </span>
                       </div>
                     </div>
-                  
-                    <!-- Paid Channels -->
-                    <div class="channel-category" *ngIf="match.paidChannels?.length">
-                      <div class="category-header" (click)="toggleCategory(match, 'paid')">
-                        <span class="category-count">{{ match.paidChannels.length }}</span>
-                        <span class="category-title">القنوات المشفرة</span>
-                        <i class="fas" [class.fa-chevron-down]="!match.showPaidChannels" [class.fa-chevron-up]="match.showPaidChannels"></i>
-                      </div>
-                      <div class="channels-row" [class.expanded]="match.showPaidChannels">
-                        <div *ngFor="let channel of match.paidChannels" class="channel-item">
-                          <span class="channel-badge paid" [title]="getFrequencyTooltip(channel)">
-                            <i class="fas fa-tv me-1"></i>
-                            {{ channel.name }}
-                            <i *ngIf="channel.frequency" class="fas fa-satellite-dish ms-1"></i>
-                          </span>
-                        </div>
+                  </div>
+
+                  <!-- Paid Channels -->
+                  <div class="channel-category" *ngIf="match.paidChannels?.length">
+                    <div class="category-header" (click)="toggleCategory(match, 'paid')">
+                      <span class="category-count">{{ match.paidChannels.length }}</span>
+                      <span class="category-title">القنوات المشفرة</span>
+                      <i class="fas" [class.fa-chevron-down]="!match.showPaidChannels"
+                        [class.fa-chevron-up]="match.showPaidChannels"></i>
+                    </div>
+                    <div class="channels-row" [class.expanded]="match.showPaidChannels">
+                      <div *ngFor="let channel of match.paidChannels" class="channel-item">
+                        <span class="channel-badge paid" [title]="getFrequencyTooltip(channel)">
+                          <i class="fas fa-tv me-1"></i>
+                          {{ channel.name }}
+                          <i *ngIf="channel.frequency" class="fas fa-satellite-dish ms-1"></i>
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -146,3 +226,4 @@
       </div>
     </div>
   </div>
+</div>
