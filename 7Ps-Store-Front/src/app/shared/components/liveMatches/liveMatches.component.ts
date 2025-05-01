@@ -1,13 +1,14 @@
+import { AuthService } from './../../../core/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatchService } from '../../../core/services/match.service';
-import { Match, Channel,Competition,MatchDetails } from '../../../models/match.model';
+import { Match, Channel, Competition, MatchDetails } from '../../../models/match.model';
 import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-live-matches',
   standalone: true,
-  imports: [CommonModule,RouterModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './liveMatches.component.html',
   styleUrl: './liveMatches.component.css'
 })
@@ -15,14 +16,15 @@ export class LiveMatchesComponent implements OnInit {
   matches: Match | null = null;
   loading = true;
   error = '';
-
-  constructor(private matchService: MatchService) {}
+  isLogined = false;
+  constructor(private matchService: MatchService, private AuthService: AuthService) { }
 
   ngOnInit(): void {
     this.loadMatches();
+    this.isLogined = this.AuthService.isLoggedIn();
   }
 
-  toggleCompetition(competition:Competition): void {
+  toggleCompetition(competition: Competition): void {
     competition.showMatches = !competition.showMatches;
   }
 
@@ -55,7 +57,7 @@ export class LiveMatchesComponent implements OnInit {
 
   getFrequencyTooltip(channel: Channel): string {
     if (!channel.frequency) return '';
-    
+
     return `
       Position: ${channel.frequency.position}
       Satellite: ${channel.frequency.satellite}

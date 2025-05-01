@@ -18,7 +18,7 @@ export const adminGuard: CanActivateFn = (route, state) => {
     const decodedToken: any = jwtDecode(token);
     if (decodedToken.role !== 'admin') {
       notificationService.error('ليس لديك صلاحيات للوصول لهذه الصفحة');
-      router.navigate(['/']);
+      router.navigate(['/home']);
       return false;
     }
     return true;

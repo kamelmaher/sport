@@ -100,6 +100,7 @@ footer {
   gap: 5px;
 }
 
+
 .contact-info a {
   color: #ddd;
   text-decoration: none;
@@ -119,7 +120,12 @@ footer {
   margin-left: 10px;
   color: #e74c3c;
 }
-
+.location-info p{
+  display: flex;
+  /* align-items: end !important; */
+  justify-content: end;
+  color: #ddd;
+}
 .footer-bottom {
   text-align: center;
   padding-top: 20px;
