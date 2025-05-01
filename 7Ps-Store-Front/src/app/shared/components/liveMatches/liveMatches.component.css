@@ -8,7 +8,7 @@
 .matches-container {
   /* max-width: 800px; */
   margin: 0 auto;
-  padding: 20px;
+  padding: 2px 5px 10px;
   background-color: #fdfdfd;
   /* min-height: 100vh; */
   direction: ltr;
@@ -145,6 +145,7 @@
 
 .channel-badge.free:hover {
   background-color: #388e3c;
+  cursor: pointer;
 }
 
 .channel-badge.paid {
@@ -154,6 +155,7 @@
 
 .channel-badge.paid:hover {
   background-color: #1565c0;
+  cursor: pointer;
 }
 
 .channels-categories {
