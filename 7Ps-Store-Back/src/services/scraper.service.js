@@ -28,9 +28,9 @@ class ScraperService {
       });
 
       console.log('Waiting for timezone selector...');
-      await page.waitForSelector('#selecttz', { 
+      await page.waitForSelector('#selecttz', {
         timeout: 30000,
-        state: 'visible' 
+        state: 'visible'
       }).catch(() => console.log('Timezone selector not found, continuing...'));
 
       if (await page.$('#selecttz')) {
@@ -52,9 +52,11 @@ class ScraperService {
 
   static async scrapeYallaKora() {
     let browser;
+    // const date = getDate().today(); // Get today's date
     try {
       console.log('Starting Yalla Kora scraping...');
-      const date = '04/28/2025'; // April 28, 2025 (past date)
+      // const date = '05/2/2025';
+      const date = moment().tz('Asia/Riyadh').format('MM/DD/YYYY');
       const urlDate = date.replace(/\//g, '-');
       const url = `https://www.yallakora.com/match-center/?date=${urlDate}`;
       console.log(`Navigating to URL: ${url}`);
@@ -73,7 +75,7 @@ class ScraperService {
 
       console.log('Navigating to page...');
       await page.goto(url, {
-        waitUntil: 'domcontentloaded', 
+        waitUntil: 'domcontentloaded',
         timeout: 60000 // Increased timeout to 60 seconds
       });
 

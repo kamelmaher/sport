@@ -43,10 +43,12 @@
       </div>
 
       <div class="channel-body">
-        <div class="satellite-info" *ngIf="channel.satellite_info && channel.satellite_info.length > 0">
+        <div class="satellite-info"
+          *ngIf="channel.satellite_info && channel.technical_info && channel.satellite_info.length > 0">
           <div class="satellite-name info-group">
             <div class="info-label">القمر الصناعي</div>
-            <div class="info-value">{{ channel.satellite_info[0].satellite_name || 'غير متوفر' }}</div>
+            <div class="info-value">{{ channel.satellite_info[0].satellite_name || channel.technical_info[0].beam ||
+              'غير متوفر' }}</div>
           </div>
           <div class="satellite-position info-group">
             <div class="info-label">الموقع</div>
