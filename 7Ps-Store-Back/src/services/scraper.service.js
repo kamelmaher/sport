@@ -55,7 +55,8 @@ class ScraperService {
     // const date = getDate().today(); // Get today's date
     try {
       console.log('Starting Yalla Kora scraping...');
-      const date = '05/2/2025';
+      // const date = '05/2/2025';
+      const date = moment().tz('Asia/Riyadh').format('MM/DD/YYYY');
       const urlDate = date.replace(/\//g, '-');
       const url = `https://www.yallakora.com/match-center/?date=${urlDate}`;
       console.log(`Navigating to URL: ${url}`);

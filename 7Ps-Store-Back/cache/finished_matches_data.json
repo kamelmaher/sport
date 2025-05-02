@@ -1,7 +1,28 @@
 {
-  "timestamp": 1746162012047,
+  "timestamp": 1746206413638,
   "data": {
-    "date": "05/2/2025",
-    "matches": []
+    "date": "05/02/2025",
+    "matches": [
+      {
+        "championship": "الدوري المصري",
+        "team_a": "سموحة",
+        "team_b": "الإسماعيلي",
+        "match_time": "5:00 PM",
+        "score": "1 - 1",
+        "channel": "Ontime sports 2",
+        "status": "انتهت",
+        "date": "05/02/2025"
+      },
+      {
+        "championship": "كأس الأمم الأفريقية - 20 عاما",
+        "team_a": "السنغال - الشباب",
+        "team_b": "إفريقيا الوسطى - شباب",
+        "match_time": "6:00 PM",
+        "score": "1 - 1",
+        "channel": "بى ان سبورت 6 HD",
+        "status": "انتهت",
+        "date": "05/02/2025"
+      }
+    ]
   }
 }

@@ -1,5 +1,5 @@
 {
-  "timestamp": 1746154836311,
+  "timestamp": 1746203402556,
   "data": {
     "date": {
       "en": {
@@ -19,7 +19,48 @@
                 "competition": "English Premier League - Week 35",
                 "time": "10:00 PM",
                 "teams": "Manchester City vs Wolves",
-                "freeChannels": [],
+                "freeChannels": [
+                  {
+                    "name": "Neto TV HD",
+                    "frequency": {
+                      "position": "52.0°e",
+                      "satellite": "MonacoSat",
+                      "frequency": "10.762 H",
+                      "symbolRate": "30000 - 3/4",
+                      "encryption": "Free To Air HD"
+                    }
+                  },
+                  {
+                    "name": "Persiana Sport HD",
+                    "frequency": {
+                      "position": "52.0°e",
+                      "satellite": "MonacoSat",
+                      "frequency": "10.762 V",
+                      "symbolRate": "27500 - 2/3",
+                      "encryption": "Free To Air HD"
+                    }
+                  },
+                  {
+                    "name": "Solh TV",
+                    "frequency": {
+                      "position": "52.0°e",
+                      "satellite": "MonacoSat",
+                      "frequency": "10.845 V",
+                      "symbolRate": "27500 - 2/3",
+                      "encryption": "FTA (MPEG-4)"
+                    }
+                  },
+                  {
+                    "name": "Turkmenistan Sport HD",
+                    "frequency": {
+                      "position": "52.0°e",
+                      "satellite": "MonacoSat",
+                      "frequency": "12.303 V",
+                      "symbolRate": "27500 - 2/3",
+                      "encryption": "FTA (MPEG-4)"
+                    }
+                  }
+                ],
                 "paidChannels": [
                   {
                     "name": "Arena Premium 1 Srbija HD",
@@ -322,6 +363,16 @@
                     }
                   },
                   {
+                    "name": "SuperSport 2 Albania HD",
+                    "frequency": {
+                      "position": "16.0°e",
+                      "satellite": "Eutelsat 16A",
+                      "frequency": "10.845 H",
+                      "symbolRate": "30000 - 3/5",
+                      "encryption": "HD Conax"
+                    }
+                  },
+                  {
                     "name": "SuperSport Premier League HD",
                     "frequency": {
                       "position": "68.5°e",
@@ -329,6 +380,16 @@
                       "frequency": "11.594 V",
                       "symbolRate": "27500 - 5/6",
                       "encryption": "Irdeto"
+                    }
+                  },
+                  {
+                    "name": "V Sport 2 Suomi HD",
+                    "frequency": {
+                      "position": "0.8°w",
+                      "satellite": "Thor 5",
+                      "frequency": "11.278 V",
+                      "symbolRate": "25000 - 3/4",
+                      "encryption": "HD Conax"
                     }
                   },
                   {
@@ -481,6 +542,16 @@
                     }
                   },
                   {
+                    "name": "MTV MAX Suomi HD",
+                    "frequency": {
+                      "position": "0.8°w",
+                      "satellite": "Thor 6",
+                      "frequency": "10.841 H",
+                      "symbolRate": "25000 - 3/4",
+                      "encryption": "HD Conax"
+                    }
+                  },
+                  {
                     "name": "Nova Sport 6 Czech HD",
                     "frequency": {
                       "position": "1.0°w",
@@ -538,6 +609,16 @@
                       "frequency": "11.727 V",
                       "symbolRate": "28000 - 7/8",
                       "encryption": "Conax"
+                    }
+                  },
+                  {
+                    "name": "SuperSport 4 Albania HD",
+                    "frequency": {
+                      "position": "16.0°e",
+                      "satellite": "Eutelsat 16A",
+                      "frequency": "10.845 H",
+                      "symbolRate": "30000 - 3/5",
+                      "encryption": "HD Conax"
                     }
                   },
                   {
@@ -688,6 +769,16 @@
                       "frequency": "12.600 V",
                       "symbolRate": "30000 - 5/6",
                       "encryption": "HD VideoGuard"
+                    }
+                  },
+                  {
+                    "name": "MTV Urheilu 2 Suomi HD",
+                    "frequency": {
+                      "position": "0.8°w",
+                      "satellite": "Thor 5",
+                      "frequency": "11.247 V",
+                      "symbolRate": "24500 - 7/8",
+                      "encryption": "HD NagraVision"
                     }
                   },
                   {
@@ -950,6 +1041,16 @@
                     }
                   },
                   {
+                    "name": "SuperSport 3 Albania HD",
+                    "frequency": {
+                      "position": "16.0°e",
+                      "satellite": "Eutelsat 16A",
+                      "frequency": "10.845 H",
+                      "symbolRate": "30000 - 3/5",
+                      "encryption": "HD Conax"
+                    }
+                  },
+                  {
                     "name": "Tivibu Spor 1 HD",
                     "frequency": {
                       "position": "42.0°e",
@@ -977,6 +1078,16 @@
                       "frequency": "10.809 V",
                       "symbolRate": "25000 - 3/4",
                       "encryption": "HD Conax"
+                    }
+                  },
+                  {
+                    "name": "V Sport+ Suomi HD",
+                    "frequency": {
+                      "position": "5.0°e",
+                      "satellite": "Astra 4A",
+                      "frequency": "11.823 V",
+                      "symbolRate": "27500 - 3/4",
+                      "encryption": "MPEG-4 NDS"
                     }
                   }
                 ],
@@ -1126,6 +1237,16 @@
                       "frequency": "12.360 H",
                       "symbolRate": "27500 - 3/4",
                       "encryption": "HD NagraVision"
+                    }
+                  },
+                  {
+                    "name": "SuperSport 5 Albania HD",
+                    "frequency": {
+                      "position": "16.0°e",
+                      "satellite": "Eutelsat 16A",
+                      "frequency": "10.804 H",
+                      "symbolRate": "29950 - 2/3",
+                      "encryption": "HD Conax"
                     }
                   },
                   {
