@@ -6,7 +6,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "postinstall": "npx playwright install && npx playwright install-deps"
+    "postinstall": "npx playwright@1.52.0 install-deps"
   },
   "keywords": [],
   "author": "",
