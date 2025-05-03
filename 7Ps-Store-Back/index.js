@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors({
   origin: ['http://localhost:4200', 'https://7ps-store.netlify.app', process.env.FRONTEND_URL],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  allowedHeaders: ['Access-Control-Allow-Headers','Content-Type', 'Authorization']
 }));
 
 // Database connection
