@@ -24,7 +24,9 @@ class ScraperService {
       console.log('Navigating to LiveOnSat page...');
       await page.goto(liveOnSatPageUrl, {
         timeout: timeout,
-        waitUntil: 'networkidle'
+        // waitUntil: 'networkidle'
+        waitUntil: 'domcontentloaded',
+
       });
 
       console.log('Waiting for timezone selector...');
@@ -55,8 +57,8 @@ class ScraperService {
     // const date = getDate().today(); // Get today's date
     try {
       console.log('Starting Yalla Kora scraping...');
-      // const date = '05/2/2025';
-      const date = moment().tz('Asia/Riyadh').format('MM/DD/YYYY');
+      const date = '05/3/2025';
+      // const date = moment().tz('Asia/Riyadh').format('MM/DD/YYYY');
       const urlDate = date.replace(/\//g, '-');
       const url = `https://www.yallakora.com/match-center/?date=${urlDate}`;
       console.log(`Navigating to URL: ${url}`);
