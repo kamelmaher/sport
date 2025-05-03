@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { environment } from '../../../environments/environment';
+import { environment } from '../../../environments/environment.prod';
 import { Match } from '../../models/match.model';
 import { FinishedMatchesResponse } from '../../models/match.model';
 
@@ -25,15 +25,15 @@ export class MatchService {
       }),
       catchError(error => {
         console.error('Error fetching matches:', error);
-        return of({ 
-          date: { 
-            en: { 
-              day: '', 
-              month: '', 
-              year: '' 
-            } 
-          }, 
-          competitions: [] 
+        return of({
+          date: {
+            en: {
+              day: '',
+              month: '',
+              year: ''
+            }
+          },
+          competitions: []
         });
       })
     );
