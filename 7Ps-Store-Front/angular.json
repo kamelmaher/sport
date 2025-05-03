@@ -21,6 +21,7 @@
             ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
+              "src/_redirects",
               {
                 "glob": "**/*",
                 "input": "public"
@@ -30,12 +31,8 @@
               "@angular/material/prebuilt-themes/azure-blue.css",
               "src/styles.css"
             ],
-            "scripts": [],
-            "server": "src/main.server.ts",
-            "outputMode": "server",
-            "ssr": {
-              "entry": "src/server.ts"
-            }
+            "scripts": []
+
           },
           "configurations": {
             "production": {
@@ -85,6 +82,7 @@
             ],
             "tsConfig": "tsconfig.spec.json",
             "assets": [
+              "src/_redirects",
               {
                 "glob": "**/*",
                 "input": "public"
