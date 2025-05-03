@@ -28,6 +28,7 @@ export class AdsService {
   }
 
   createAd(adData: FormData): Observable<Ad> {
+    console.log('adData:', adData);
     return this.http.post<Ad>(this.apiUrl, adData, { headers: this.getAuthHeaders() });
   }
 
