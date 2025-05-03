@@ -27,6 +27,7 @@
 
   <!-- Ads Grid -->
   @if (!isLoading && !error && ads.length > 0) {
+  <!-- <div class="d-flex justify-content-center align-items-center"> -->
   <div class="ads-grid">
     @for (ad of ads; track trackByAdId($index, ad)) {
     <div class="ad-card">
@@ -41,5 +42,6 @@
     </div>
     }
   </div>
+  <!-- </div> -->
   }
 </div>

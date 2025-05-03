@@ -89,7 +89,11 @@ export class AuthService {
   }
 
   createUser(user: AuthResponse): Observable<any> {
-    return this.http.post<any>(this.usersUrl, user, { headers: this.getAuthHeaders() });
+    const UserData = {
+      userName: user.userName,
+      phone: user.phone
+    }
+    return this.http.post<any>(this.usersUrl, UserData, { headers: this.getAuthHeaders() });
   }
 
   updateUser(id: string, user: Partial<AuthResponse>): Observable<any> {
