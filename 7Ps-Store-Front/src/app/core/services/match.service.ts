@@ -14,7 +14,7 @@ export class MatchService {
   private readonly apiUrl = `${environment.apiUrl}/api/matches`;
   private matchesSubject = new BehaviorSubject<Match | null>(null);
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) { }
 
   getMatches(): Observable<Match> {
     console.log('Fetching matches from:', this.apiUrl);
@@ -47,3 +47,5 @@ export class MatchService {
     return this.http.get<FinishedMatchesResponse>(`${this.apiUrl}/finished`);
   }
 }
+
+

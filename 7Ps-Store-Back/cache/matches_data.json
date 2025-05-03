@@ -1,5 +1,5 @@
 {
-  "timestamp": 1746235194679,
+  "timestamp": 1746277207923,
   "data": {
     "date": {
       "en": {
@@ -28,6 +28,26 @@
                       "frequency": "12.012 V",
                       "symbolRate": "29700 - 5/6",
                       "encryption": "HD NagraVision"
+                    }
+                  },
+                  {
+                    "name": "Neto TV HD",
+                    "frequency": {
+                      "position": "52.0°e",
+                      "satellite": "MonacoSat",
+                      "frequency": "10.762 H",
+                      "symbolRate": "30000 - 3/4",
+                      "encryption": "Free To Air HD"
+                    }
+                  },
+                  {
+                    "name": "Persiana Sport HD",
+                    "frequency": {
+                      "position": "52.0°e",
+                      "satellite": "MonacoSat",
+                      "frequency": "10.762 V",
+                      "symbolRate": "27500 - 2/3",
+                      "encryption": "Free To Air HD"
                     }
                   }
                 ],
@@ -787,7 +807,18 @@
                 "competition": "English Premier League - Week 35",
                 "time": "7:30 PM",
                 "teams": "Arsenal vs Bournemouth",
-                "freeChannels": [],
+                "freeChannels": [
+                  {
+                    "name": "Neto TV HD",
+                    "frequency": {
+                      "position": "52.0°e",
+                      "satellite": "MonacoSat",
+                      "frequency": "10.762 H",
+                      "symbolRate": "30000 - 3/4",
+                      "encryption": "Free To Air HD"
+                    }
+                  }
+                ],
                 "paidChannels": [
                   {
                     "name": "Arena Premium 1 BiH HD",
@@ -1359,6 +1390,16 @@
                     }
                   },
                   {
+                    "name": "Setanta Sports Qazaqstan HD",
+                    "frequency": {
+                      "position": "58.5°e",
+                      "satellite": "KazSat 3",
+                      "frequency": "12.657 V",
+                      "symbolRate": "45000 - 3/4",
+                      "encryption": "HD Irdeto"
+                    }
+                  },
+                  {
                     "name": "Spíler 2 TV Hungary HD",
                     "frequency": {
                       "position": "0.8°w",
@@ -1585,6 +1626,16 @@
                       "frequency": "12.188 V",
                       "symbolRate": "27500 - 5/6",
                       "encryption": "HD VideoGuard"
+                    }
+                  },
+                  {
+                    "name": "Setanta Sports Qazaqstan HD",
+                    "frequency": {
+                      "position": "58.5°e",
+                      "satellite": "KazSat 3",
+                      "frequency": "12.657 V",
+                      "symbolRate": "45000 - 3/4",
+                      "encryption": "HD Irdeto"
                     }
                   },
                   {
@@ -1874,7 +1925,48 @@
                 "competition": "Spanish La Liga (Primera) - Week 34",
                 "time": "10:00 PM",
                 "teams": "Real Valladolid vs Barcelona",
-                "freeChannels": [],
+                "freeChannels": [
+                  {
+                    "name": "Arezo TV HD",
+                    "frequency": {
+                      "position": "52.5°e",
+                      "satellite": "Al Yah 1",
+                      "frequency": "12.054 H",
+                      "symbolRate": "27500 - 3/5",
+                      "encryption": "Free To Air HD"
+                    }
+                  },
+                  {
+                    "name": "Neto TV HD",
+                    "frequency": {
+                      "position": "52.0°e",
+                      "satellite": "MonacoSat",
+                      "frequency": "10.762 H",
+                      "symbolRate": "30000 - 3/4",
+                      "encryption": "Free To Air HD"
+                    }
+                  },
+                  {
+                    "name": "Persiana Sport HD",
+                    "frequency": {
+                      "position": "52.0°e",
+                      "satellite": "MonacoSat",
+                      "frequency": "10.762 V",
+                      "symbolRate": "27500 - 2/3",
+                      "encryption": "Free To Air HD"
+                    }
+                  },
+                  {
+                    "name": "Solh TV",
+                    "frequency": {
+                      "position": "52.0°e",
+                      "satellite": "MonacoSat",
+                      "frequency": "10.845 V",
+                      "symbolRate": "27500 - 2/3",
+                      "encryption": "FTA (MPEG-4)"
+                    }
+                  }
+                ],
                 "paidChannels": [
                   {
                     "name": "Arena Premium 1 Srbija HD",
@@ -1942,6 +2034,16 @@
                       "position": "25.5°e",
                       "satellite": "Eshail 2",
                       "frequency": "10.850 V",
+                      "symbolRate": "27500 - 2/3",
+                      "encryption": "HD VideoGuard"
+                    }
+                  },
+                  {
+                    "name": "beIN Sports MENA French 1 HD",
+                    "frequency": {
+                      "position": "25.5°e",
+                      "satellite": "Eshail 2",
+                      "frequency": "11.390 V",
                       "symbolRate": "27500 - 2/3",
                       "encryption": "HD VideoGuard"
                     }
@@ -2989,7 +3091,28 @@
                 "competition": "German 1. Bundesliga - Week 32",
                 "time": "4:30 PM",
                 "teams": "RB Leipzig vs Bayern Munich",
-                "freeChannels": [],
+                "freeChannels": [
+                  {
+                    "name": "Neto TV HD",
+                    "frequency": {
+                      "position": "52.0°e",
+                      "satellite": "MonacoSat",
+                      "frequency": "10.762 H",
+                      "symbolRate": "30000 - 3/4",
+                      "encryption": "Free To Air HD"
+                    }
+                  },
+                  {
+                    "name": "Persiana Sport HD",
+                    "frequency": {
+                      "position": "52.0°e",
+                      "satellite": "MonacoSat",
+                      "frequency": "10.762 V",
+                      "symbolRate": "27500 - 2/3",
+                      "encryption": "Free To Air HD"
+                    }
+                  }
+                ],
                 "paidChannels": [
                   {
                     "name": "Arena 4 Hungary HD",
@@ -3668,6 +3791,16 @@
                     }
                   },
                   {
+                    "name": "Setanta Sports Qazaqstan HD",
+                    "frequency": {
+                      "position": "58.5°e",
+                      "satellite": "KazSat 3",
+                      "frequency": "12.657 V",
+                      "symbolRate": "45000 - 3/4",
+                      "encryption": "HD Irdeto"
+                    }
+                  },
+                  {
                     "name": "Setanta Sports Ukraine HD",
                     "frequency": {
                       "position": "5.0°e",
@@ -3812,6 +3945,16 @@
                       "position": "25.5°e",
                       "satellite": "Eshail 2",
                       "frequency": "10.810 V",
+                      "symbolRate": "27500 - 2/3",
+                      "encryption": "HD VideoGuard"
+                    }
+                  },
+                  {
+                    "name": "beIN Sports MENA French 2 HD",
+                    "frequency": {
+                      "position": "25.5°e",
+                      "satellite": "Eshail 2",
+                      "frequency": "10.850 H",
                       "symbolRate": "27500 - 2/3",
                       "encryption": "HD VideoGuard"
                     }
@@ -4186,6 +4329,16 @@
                     }
                   },
                   {
+                    "name": "Setanta Sports Qazaqstan HD",
+                    "frequency": {
+                      "position": "58.5°e",
+                      "satellite": "KazSat 3",
+                      "frequency": "12.657 V",
+                      "symbolRate": "45000 - 3/4",
+                      "encryption": "HD Irdeto"
+                    }
+                  },
+                  {
                     "name": "Sport TV4 Portugal HD",
                     "frequency": {
                       "position": "30.0°w",
@@ -4242,7 +4395,18 @@
                 "competition": "AFC Champions League Elite - FINAL",
                 "time": "7:30 PM",
                 "teams": "Al Ahli vs Kawasaki Frontale",
-                "freeChannels": [],
+                "freeChannels": [
+                  {
+                    "name": "Persiana Sport HD",
+                    "frequency": {
+                      "position": "52.0°e",
+                      "satellite": "MonacoSat",
+                      "frequency": "10.762 V",
+                      "symbolRate": "27500 - 2/3",
+                      "encryption": "Free To Air HD"
+                    }
+                  }
+                ],
                 "paidChannels": [
                   {
                     "name": "Arena Sport 7 Srbija HD",
