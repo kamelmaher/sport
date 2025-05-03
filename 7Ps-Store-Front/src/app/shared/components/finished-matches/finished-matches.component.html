@@ -1,7 +1,21 @@
 <div class="matches-container ">
-  <div *ngIf="loading" class="text-center">
-    <div class="spinner-border text-primary" role="status">
-      <span class="visually-hidden">Loading...</span>
+
+
+  <!-- حالة التحميل -->
+  <div *ngIf="loading" class="loading-container text-center py-5">
+    <div class="spinner-container">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">جاري التحميل...</span>
+      </div>
+
+      <h4 class="loading-text mt-4">جاري تحميل البيانات</h4>
+      <p class="text-muted">يرجى الانتظار</p>
+
+      <div class="mt-4">
+        <div class="progress">
+          <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 75%"></div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -13,7 +27,23 @@
     <div class="date-header">
       <h3>{{ finishedMatches.date }}</h3>
     </div>
-    
+
+
+    <!-- No Results Message -->
+    <div class="no-results text-center py-5"
+      *ngIf="!loading && (!finishedMatches.competitions || finishedMatches.competitions?.length === 0)">
+      <div class="no-results-icon m-auto">
+        <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+      </div>
+      <h5 class="fs-2">لا يوجد مباريات منتهية حتى الان </h5>
+      <div class="no-results-hint">انتظر حتى انتهاء المباريات</div>
+    </div>
+
     <div *ngFor="let competition of finishedMatches.competitions" class="competition-card">
       <div class="competition-header" (click)="toggleCompetition(competition)">
         <div class="league-info">
@@ -21,10 +51,11 @@
           <span>{{ competition.name }}</span>
         </div>
         <div class="competition-toggle">
-          <i class="fas" [class.fa-chevron-down]="!competition.showMatches" [class.fa-chevron-up]="competition.showMatches"></i>
+          <i class="fas" [class.fa-chevron-down]="!competition.showMatches"
+            [class.fa-chevron-up]="competition.showMatches"></i>
         </div>
       </div>
-      
+
       <div class="matches-list" [class.collapsed]="!competition.showMatches">
         <div *ngFor="let match of competition.matches" class="match-card">
           <div class="match-details">

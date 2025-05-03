@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../../core/services/auth.service';
 import { AuthResponse } from '../../../models/user.model';
 import { NotificationService } from '../../../core/services/notification.service';
@@ -25,7 +25,8 @@ export class UserManagementComponent implements OnInit {
   constructor(
     private usersService: AuthService,
     private fb: FormBuilder,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private cdr: ChangeDetectorRef
   ) {
     this.userForm = this.fb.group({
       userName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
@@ -36,39 +37,97 @@ export class UserManagementComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchPendingUsers();
-    console.log('search Term:', this.searchTerm);
-    console.log('searchResults:', this.searchResults);
+    this.fetchAllUsers();
   }
 
-  fetchPendingUsers(): void {
+  async fetchPendingUsers(): Promise<void> {
     this.loading = true;
-    this.usersService.getPendingUsers().subscribe({
-      next: (data) => {
-        this.pendingUsers = data.users;
-        this.loading = false;
-      },
-      error: (error) => {
-        this.notificationService.error('فشل في جلب المستخدمين المعلقين');
-        console.error('Error fetching pending users:', error);
-        this.loading = false;
-      }
+    return new Promise((resolve, reject) => {
+      this.usersService.getPendingUsers().subscribe({
+        next: (data) => {
+          this.pendingUsers = data.users;
+          this.loading = false;
+          this.cdr.detectChanges();
+          resolve();
+        },
+        error: (error) => {
+          this.notificationService.error('فشل في جلب المستخدمين المعلقين');
+          console.error('Error fetching pending users:', error);
+          this.loading = false;
+          this.cdr.detectChanges();
+          reject(error);
+        }
+      });
     });
   }
 
-  fetchAllUsers(): void {
+  async fetchAllUsers(): Promise<void> {
     this.loading = true;
-    this.usersService.getAllUsers().subscribe({
-      next: (data) => {
-        this.allUsers = data.users;
-        console.log('All users:', this.allUsers);
-        this.loading = false;
-      },
-      error: (error) => {
-        this.notificationService.error('فشل في جلب المستخدمين');
-        console.error('Error fetching all users:', error);
-        this.loading = false;
-      }
+    return new Promise((resolve, reject) => {
+      this.usersService.getAllUsers().subscribe({
+        next: (data) => {
+          this.allUsers = data.users;
+          this.loading = false;
+          this.cdr.detectChanges();
+          resolve();
+        },
+        error: (error) => {
+          this.notificationService.error('فشل في جلب المستخدمين');
+          console.error('Error fetching all users:', error);
+          this.loading = false;
+          this.cdr.detectChanges();
+          reject(error);
+        }
+      });
     });
+  }
+
+  async refreshData(): Promise<void> {
+    this.loading = true;
+    try {
+      await this.fetchPendingUsers();
+      if (this.showSearch) {
+        await this.fetchAllUsers();
+        if (this.searchTerm) {
+          this.handleSearch();
+        }
+      }
+    } catch (error) {
+      this.notificationService.error('فشل في تحديث البيانات');
+      console.error('Error refreshing data:', error);
+    } finally {
+      this.loading = false;
+      this.cdr.detectChanges();
+    }
+  }
+
+  private updateUserInLists(updatedUser: AuthResponse): void {
+    // تحديث pendingUsers
+    const pendingIndex = this.pendingUsers.findIndex(u => u._id === updatedUser._id);
+    if (pendingIndex !== -1) {
+      if (updatedUser.status !== 'pending') {
+        this.pendingUsers.splice(pendingIndex, 1);
+      } else {
+        this.pendingUsers[pendingIndex] = updatedUser;
+      }
+    } else if (updatedUser.status === 'pending') {
+      this.pendingUsers.push(updatedUser);
+    }
+
+    // تحديث allUsers
+    const allUsersIndex = this.allUsers.findIndex(u => u._id === updatedUser._id);
+    if (allUsersIndex !== -1) {
+      this.allUsers[allUsersIndex] = updatedUser;
+    } else {
+      this.allUsers.push(updatedUser);
+    }
+
+    // تحديث searchResults إذا كان البحث مفعلاً
+    if (this.showSearch && this.searchTerm) {
+      this.handleSearch();
+    }
+
+    this.cdr.detectChanges();
   }
 
   toggleSearch(): void {
@@ -79,19 +138,22 @@ export class UserManagementComponent implements OnInit {
     if (this.showSearch && this.allUsers.length === 0) {
       this.fetchAllUsers();
     }
+    this.cdr.detectChanges();
   }
 
   handleSearch(): void {
     if (!this.searchTerm.trim()) {
       this.searchResults = [];
+      this.cdr.detectChanges();
       return;
     }
 
     this.searchResults = this.allUsers.filter(user =>
-      user.userName.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-      user.phone.includes(this.searchTerm)
+      user.userName?.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      user.phone?.includes(this.searchTerm)
     );
-    console.log('Search results:', this.searchResults);
+    this.cdr.detectChanges();
+    this.fetchAllUsers();
   }
 
   editUser(user: AuthResponse): void {
@@ -101,7 +163,7 @@ export class UserManagementComponent implements OnInit {
       phone: user.phone,
       status: user.status
     });
-    this.refreshData();
+    this.cdr.detectChanges();
   }
 
   cancelEdit(): void {
@@ -109,6 +171,7 @@ export class UserManagementComponent implements OnInit {
     this.userForm.reset({
       status: 'pending'
     });
+    this.cdr.detectChanges();
   }
 
   saveUser(): void {
@@ -120,46 +183,52 @@ export class UserManagementComponent implements OnInit {
     const userData = this.userForm.value;
 
     if (this.editingUser && this.editingUser._id) {
-      // Update existing user
+      // تحديث مستخدم موجود
       this.loading = true;
       this.usersService.updateUser(this.editingUser._id, userData).subscribe({
-        next: () => {
+        next: (updatedUser) => {
           this.notificationService.success('تم تحديث المستخدم بنجاح');
-          this.refreshData();
+          this.updateUserInLists(updatedUser);
           this.cancelEdit();
           this.loading = false;
+          this.cdr.detectChanges();
         },
         error: (error) => {
           this.notificationService.error('فشل في تحديث المستخدم');
           console.error('Error updating user:', error);
           this.loading = false;
+          this.cdr.detectChanges();
         }
       });
     } else {
-      // Create new user
+      // إنشاء مستخدم جديد
       this.loading = true;
       this.usersService.createUser(userData).subscribe({
-        next: () => {
+        next: (newUser) => {
           this.notificationService.success('تم إنشاء المستخدم بنجاح');
-          this.refreshData();
+          if (newUser.status === 'pending') {
+            this.pendingUsers.push(newUser);
+          }
+          this.allUsers.push(newUser);
+          if (this.showSearch && this.searchTerm) {
+            this.handleSearch();
+          }
           this.cancelEdit();
           this.loading = false;
+          this.cdr.detectChanges();
         },
         error: (error) => {
           this.notificationService.error('فشل في إنشاء المستخدم');
           console.error('Error creating user:', error);
           this.loading = false;
+          this.cdr.detectChanges();
         }
       });
     }
   }
 
   deleteUser(user: AuthResponse): void {
-    if (!confirm('هل أنت متأكد من حذف هذا المستخدم؟')) {
-      return;
-    }
-
-    if (!user._id) {
+    if (!confirm('هل أنت متأكد من حذف هذا المستخدم؟') || !user._id) {
       return;
     }
 
@@ -167,16 +236,20 @@ export class UserManagementComponent implements OnInit {
     this.usersService.deleteUser(user._id).subscribe({
       next: () => {
         this.notificationService.success('تم حذف المستخدم بنجاح');
-        this.refreshData();
+        this.pendingUsers = this.pendingUsers.filter(u => u._id !== user._id);
+        this.allUsers = this.allUsers.filter(u => u._id !== user._id);
+        this.searchResults = this.searchResults.filter(u => u._id !== user._id);
         if (this.editingUser && this.editingUser._id === user._id) {
           this.cancelEdit();
         }
         this.loading = false;
+        this.cdr.detectChanges();
       },
       error: (error) => {
         this.notificationService.error('فشل في حذف المستخدم');
         console.error('Error deleting user:', error);
         this.loading = false;
+        this.cdr.detectChanges();
       }
     });
   }
@@ -184,18 +257,19 @@ export class UserManagementComponent implements OnInit {
   approveUser(user: AuthResponse): void {
     if (!user._id) return;
 
-    console.log(' user ID:', user._id);
     this.loading = true;
     this.usersService.updateUser(user._id, { status: 'approved' }).subscribe({
-      next: () => {
+      next: (updatedUser) => {
         this.notificationService.success('تم قبول المستخدم بنجاح');
-        this.refreshData();
+        this.updateUserInLists(updatedUser);
         this.loading = false;
+        this.cdr.detectChanges();
       },
       error: (error) => {
         this.notificationService.error('فشل في قبول المستخدم');
         console.error('Error approving user:', error);
         this.loading = false;
+        this.cdr.detectChanges();
       }
     });
   }
@@ -205,27 +279,19 @@ export class UserManagementComponent implements OnInit {
 
     this.loading = true;
     this.usersService.updateUser(user._id, { status: 'rejected' }).subscribe({
-      next: () => {
+      next: (updatedUser) => {
         this.notificationService.success('تم رفض المستخدم بنجاح');
-        this.refreshData();
+        this.updateUserInLists(updatedUser);
         this.loading = false;
+        this.cdr.detectChanges();
       },
       error: (error) => {
         this.notificationService.error('فشل في رفض المستخدم');
         console.error('Error rejecting user:', error);
         this.loading = false;
+        this.cdr.detectChanges();
       }
     });
-  }
-
-  refreshData(): void {
-    if (this.showSearch) {
-      this.fetchAllUsers();
-      if (this.searchTerm) {
-        this.handleSearch();
-      }
-    }
-    this.fetchPendingUsers();
   }
 
   addNewUser(): void {
@@ -233,5 +299,6 @@ export class UserManagementComponent implements OnInit {
     this.userForm.reset({
       status: 'pending'
     });
+    this.cdr.detectChanges();
   }
 }

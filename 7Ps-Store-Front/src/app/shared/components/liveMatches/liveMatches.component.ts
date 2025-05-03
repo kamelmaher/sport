@@ -46,7 +46,9 @@ export class LiveMatchesComponent implements OnInit {
             });
           });
         }
-        this.loading = false;
+        if (this.matches && this.matches.competitions.length) {
+          this.loading = false;
+        }
       },
       error: (error) => {
         this.error = 'Failed to load matches';
