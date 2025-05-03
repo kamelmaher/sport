@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { Ad } from '../../../models/ads.model';
-
+import { environment } from '../../../../environments/environment.prod';
 @Component({
   selector: 'app-ads-display',
   standalone: true,
@@ -16,6 +16,8 @@ export class AdsDisplayComponent implements OnInit {
   isLoading: boolean = true;
   error: string | null = null;
 
+  apiUrl = `${environment.apiUrl}/api/ads`;
+
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
@@ -26,7 +28,8 @@ export class AdsDisplayComponent implements OnInit {
     this.isLoading = true;
     this.error = null;
 
-    this.http.get<Ad[]>('http://localhost:4800/api/ads')
+
+    this.http.get<Ad[]>(this.apiUrl)
       .subscribe({
         next: (res) => {
           this.ads = res;

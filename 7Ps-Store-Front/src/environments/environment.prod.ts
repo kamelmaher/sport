@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  // apiUrl: 'http://localhost:4800',
+  apiUrl: 'https://7ps-store.up.railway.app',
 };
