@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  backend:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: 7ps-store-backend
+    ports:
+      - "4800:4800"
+    environment:
+      - PORT=4800
+      - MONGO_URL=mongodb+srv://mohamedabdelwahab:mohamed123@cluster0.nsbu7.mongodb.net/7Ps-Store?retryWrites=true&w=majority&appName=Cluster0
+      - JWT_SECRET=Appo
+      - JWT_EXPIRES_IN=2d
+      - NODE_ENV=production
+      - SCRAPER_ENABLED=true
+      - LOG_LEVEL=info
+      - IS_PRODUCTION=true
+      - PLAYWRIGHT_TIMEOUT=120000
+      - PLAYWRIGHT_TIMEZONE=Asia/Riyadh
+      - PLAYWRIGHT_SAMPLE_PAGE_PATH=./sample.html
+      - PLAYWRIGHT_SUPPORTED_COMPETITIONS_PATH=./supported-competitions.yaml
+    volumes:
+      - ./:/7ps-store-back
+      - /7ps-store-back/node_modules
+      # Add specific file mounts to ensure they're accessible
+      - ./sample.html:/7ps-store-back/sample.html
+      - ./supported-competitions.yaml:/7ps-store-back/supported-competitions.yaml
+    restart: unless-stopped
+
+  mongodb:
+    image: mongo:latest
+    container_name: 7ps-store-mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    environment:
+      - MONGO_INITDB_DATABASE=7Ps-Store
+    restart: unless-stopped
+
+volumes:
+  mongodb_data:

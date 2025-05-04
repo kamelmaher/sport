@@ -1,6 +1,7 @@
 const path = require('path');
 const { getDate } = require('./getDate');
 const { isProduction } = require('./isProduction');
+const fs = require('fs');
 
 // Add default fallback path
 const samplePage = process.env.PLAYWRIGHT_SAMPLE_PAGE_PATH 

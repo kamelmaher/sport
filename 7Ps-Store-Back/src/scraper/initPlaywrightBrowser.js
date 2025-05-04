@@ -1,5 +1,4 @@
 const { chromium } = require('playwright-chromium');
-const { isProduction } = require('../helpers/isProduction.js');
 
 const args = [
   '--no-sandbox',
@@ -28,5 +27,15 @@ const args = [
 ];
 
 module.exports.initPlaywrightBrowser = async () => {
-  return await chromium.launch({ headless: isProduction(), args });
+  try {
+    console.log('Initializing browser in headless mode');
+    return await chromium.launch({ 
+      headless: true, // Always use headless mode in container environments
+      args,
+      timeout: Number(process.env.PLAYWRIGHT_TIMEOUT) || 120000 // 2 minute timeout for launch
+    });
+  } catch (error) {
+    console.error('Failed to initialize browser:', error.message);
+    throw error;
+  }
 };
