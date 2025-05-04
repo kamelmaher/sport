@@ -1,0 +1,9 @@
+[build]
+  command = "npm run build:ssr"
+  publish = "dist/7-ps-store-front/browser"
+  functions = "dist/7-ps-store-front/server"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
