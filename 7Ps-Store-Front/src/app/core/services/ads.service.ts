@@ -19,7 +19,7 @@ export class AdsService {
 
     return new HttpHeaders({
       'Authorization': `Bearer ${cleanToken}`,
-      'Content-Type': 'application/json'
+      // 'Content-Type': 'application/json'
     });
   }
 

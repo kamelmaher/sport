@@ -1,5 +1,5 @@
 # Use the official Node.js 18 image as the base
-FROM node:22-slim
+FROM node:18-slim
 
 # Install system dependencies required for Playwright
 RUN apt-get update && apt-get install -y \
@@ -33,11 +33,10 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Set the working directory inside the container
-WORKDIR /app
+WORKDIR /7ps-store-back
 
 # Copy package.json and package-lock.json
 COPY package*.json ./
-
 # Install Node.js dependencies
 RUN npm install
 
@@ -47,6 +46,11 @@ RUN npx playwright install chromium
 
 # Copy the rest of the application code
 COPY . .
+
+# Copy sample files
+# Update the COPY commands to be more explicit
+COPY sample.html /7ps-store-back/sample.html
+COPY supported-competitions.yaml /7ps-store-back/supported-competitions.yaml
 
 # Expose the port your app runs on
 EXPOSE 4800

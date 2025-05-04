@@ -7,6 +7,7 @@ const adminFilter = require('../../middlewares/adminMiddleware');
 const authMiddleware = require('../../middlewares/authMiddleware');
 const { createAd, getAds, updateAd, deleteAd } = require('./ads.controller');
 
+
 router.post('/', authMiddleware, adminFilter, validate(createAdSchema), upload.single('image'), createAd);
 
 router.get('/', getAds);

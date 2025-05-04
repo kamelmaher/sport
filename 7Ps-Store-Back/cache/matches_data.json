@@ -1,5 +1,5 @@
 {
-  "timestamp": 1746384250655,
+  "timestamp": 1746402220812,
   "data": {
     "date": {
       "en": {
@@ -17,7 +17,7 @@
             "matches": [
               {
                 "competition": "English Premier League - Week 35",
-                "time": "4:00 PM",
+                "time": "7:00 PM",
                 "teams": "Brighton H.A. vs Newcastle United",
                 "freeChannels": [],
                 "paidChannels": [
@@ -376,7 +376,7 @@
               },
               {
                 "competition": "English Premier League - Week 35",
-                "time": "4:00 PM",
+                "time": "7:00 PM",
                 "teams": "West Ham United vs Tottenham Hotspur",
                 "freeChannels": [],
                 "paidChannels": [
@@ -575,7 +575,7 @@
               },
               {
                 "competition": "English Premier League - Week 35",
-                "time": "4:00 PM",
+                "time": "7:00 PM",
                 "teams": "Brentford vs Manchester United",
                 "freeChannels": [],
                 "paidChannels": [
@@ -844,7 +844,7 @@
               },
               {
                 "competition": "English Premier League - Week 35",
-                "time": "6:30 PM",
+                "time": "9:30 PM",
                 "teams": "Chelsea vs Liverpool",
                 "freeChannels": [
                   {
@@ -1324,7 +1324,7 @@
             "matches": [
               {
                 "competition": "Spanish La Liga (Primera) - Week 34",
-                "time": "3:00 PM",
+                "time": "6:00 PM",
                 "teams": "Real Madrid vs Celta Vigo",
                 "freeChannels": [],
                 "paidChannels": [
@@ -1653,7 +1653,7 @@
               },
               {
                 "competition": "Spanish La Liga (Primera) - Week 34",
-                "time": "5:15 PM",
+                "time": "8:15 PM",
                 "teams": "Sevilla vs Leganés",
                 "freeChannels": [
                   {
@@ -1953,7 +1953,7 @@
               },
               {
                 "competition": "Spanish La Liga (Primera) - Week 34",
-                "time": "7:30 PM",
+                "time": "10:30 PM",
                 "teams": "Espanyol vs Real Betis",
                 "freeChannels": [],
                 "paidChannels": [
@@ -2162,7 +2162,7 @@
               },
               {
                 "competition": "Spanish La Liga (Primera) - Week 34",
-                "time": "10:00 PM",
+                "time": "1:00 AM",
                 "teams": "Real Sociedad vs Athletic Bilbao",
                 "freeChannels": [],
                 "paidChannels": [
@@ -2471,7 +2471,7 @@
             "matches": [
               {
                 "competition": "Italian Serie A - Week 35",
-                "time": "1:30 PM",
+                "time": "4:30 PM",
                 "teams": "Empoli vs Lazio",
                 "freeChannels": [],
                 "paidChannels": [
@@ -2700,7 +2700,7 @@
               },
               {
                 "competition": "Italian Serie A - Week 35",
-                "time": "4:00 PM",
+                "time": "7:00 PM",
                 "teams": "Monza vs Atalanta",
                 "freeChannels": [],
                 "paidChannels": [
@@ -2919,7 +2919,7 @@
               },
               {
                 "competition": "Italian Serie A - Week 35",
-                "time": "7:00 PM",
+                "time": "10:00 PM",
                 "teams": "Roma vs Fiorentina",
                 "freeChannels": [],
                 "paidChannels": [
@@ -3178,7 +3178,7 @@
               },
               {
                 "competition": "Italian Serie A - Week 35",
-                "time": "9:45 PM",
+                "time": "12:45 AM",
                 "teams": "Bologna vs Juventus",
                 "freeChannels": [],
                 "paidChannels": [
@@ -3447,7 +3447,7 @@
             "matches": [
               {
                 "competition": "German 1. Bundesliga - Week 32",
-                "time": "4:30 PM",
+                "time": "7:30 PM",
                 "teams": "Augsburg vs Holstein Kiel",
                 "freeChannels": [],
                 "paidChannels": [
@@ -3616,7 +3616,7 @@
               },
               {
                 "competition": "German 1. Bundesliga - Week 32",
-                "time": "6:30 PM",
+                "time": "9:30 PM",
                 "teams": "Freiburg vs Bayer Leverkusen",
                 "freeChannels": [],
                 "paidChannels": [
@@ -3855,7 +3855,7 @@
               },
               {
                 "competition": "German 1. Bundesliga - Week 32",
-                "time": "8:30 PM",
+                "time": "11:30 PM",
                 "teams": "Mainz 05 vs Eintracht Frankfurt",
                 "freeChannels": [],
                 "paidChannels": [
@@ -4114,7 +4114,7 @@
             "matches": [
               {
                 "competition": "French Ligue 1 - Week 32",
-                "time": "4:00 PM",
+                "time": "7:00 PM",
                 "teams": "Nantes vs Angers",
                 "freeChannels": [],
                 "paidChannels": [
@@ -4223,7 +4223,7 @@
               },
               {
                 "competition": "French Ligue 1 - Week 32",
-                "time": "6:15 PM",
+                "time": "9:15 PM",
                 "teams": "Auxerre vs Le Havre",
                 "freeChannels": [],
                 "paidChannels": [
@@ -4272,7 +4272,7 @@
               },
               {
                 "competition": "French Ligue 1 - Week 32",
-                "time": "6:15 PM",
+                "time": "9:15 PM",
                 "teams": "Brest vs Montpellier",
                 "freeChannels": [],
                 "paidChannels": [
@@ -4321,7 +4321,7 @@
               },
               {
                 "competition": "French Ligue 1 - Week 32",
-                "time": "6:15 PM",
+                "time": "9:15 PM",
                 "teams": "Lyon vs Lens",
                 "freeChannels": [],
                 "paidChannels": [
@@ -4440,7 +4440,7 @@
               },
               {
                 "competition": "French Ligue 1 - Week 32",
-                "time": "9:45 PM",
+                "time": "12:45 AM",
                 "teams": "Lille vs Marseille",
                 "freeChannels": [],
                 "paidChannels": [

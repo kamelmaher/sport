@@ -1,3 +1,4 @@
+// index.js startup sequence improvements
 const express = require('express');
 require('dotenv').config();
 const channelRoutes = require('./src/Modules/Channels/channel.routes');
@@ -15,9 +16,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(cors({
-  origin: ['http://localhost:4200', 'https://7ps-store.netlify.app', process.env.FRONTEND_URL],
-  methods: ['GET', 'POST', 'PUT', 'DELETE']
+  origin: ['https://7ps-store.netlify.app', 'http://localhost:4200', process.env.FRONTEND_URL],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+  credentials: true
 }));
+
+app.options('*', cors());
 
 // Database connection
 connection();
@@ -50,22 +55,55 @@ cron.schedule('0 */3 * * *', async () => {
   }
 });
 
-// Run the scraping jobs immediately on server start
-(async () => {
-  console.log('Running initial scraping jobs on server start...');
+// Run the scraping jobs in sequence with delayed startup
+async function runInitialScrapingJobs() {
+  console.log('Beginning initial data scraping after server startup...');
+  
+  // Wait a moment for server to fully initialize
+  await new Promise(resolve => setTimeout(resolve, 5000));
+  
+  // Run Yalla Kora scraping first
   try {
+    console.log('Starting initial Yalla Kora scraping...');
     await MatchesController.scrapeYallaKoraFinishedMatches();
     console.log('Initial Yalla Kora scraping completed successfully');
-
+  } catch (error) {
+    console.error('Initial Yalla Kora scraping failed:', error.message);
+  }
+  
+  // Short delay between jobs
+  await new Promise(resolve => setTimeout(resolve, 5000));
+  
+  // Then run LiveOnSat scraping
+  try {
+    console.log('Starting initial LiveOnSat scraping...');
     await MatchesController.scrapeAndCacheData();
     console.log('Initial LiveOnSat scraping completed successfully');
   } catch (error) {
-    console.error('Initial scraping failed:', error);
+    console.error('Initial LiveOnSat scraping failed:', error.message);
   }
-})();
+  
+  console.log('Initial data scraping sequence completed.');
+}
 
 // Start server
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
+  
+  // Start initial scraping after server is ready
+  runInitialScrapingJobs().catch(error => {
+    console.error('Error in initial scraping sequence:', error.message);
+  });
+});
+
+
+
+// Handle server shutdown gracefully
+process.on('SIGTERM', () => {
+  console.log('SIGTERM received, shutting down gracefully');
+  server.close(() => {
+    console.log('Server closed');
+    process.exit(0);
+  });
 });

@@ -16,3 +16,4 @@ router.put('/:id', authMiddleware, adminFilter, validate(registerSchema), userCo
 router.delete('/:id', authMiddleware, adminFilter, userController.deleteUser);
 
 module.exports = router;
+
