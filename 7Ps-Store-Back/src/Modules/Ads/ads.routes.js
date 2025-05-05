@@ -17,4 +17,3 @@ router.put('/:id', authMiddleware, adminFilter, validate(updateAdSchema), update
 router.delete('/:id', authMiddleware, adminFilter, deleteAd);
 
 module.exports = router;
-
