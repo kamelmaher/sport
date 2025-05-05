@@ -1,5 +1,7 @@
+// helpers/isProduction.js
 function isProduction() {
-    return process.env.IS_PRODUCTION === 'true';
-  }
-  
-  module.exports = { isProduction };
+  // More robust check for production environment
+  return process.env.IS_PRODUCTION === 'true' || process.env.NODE_ENV === 'production';
+}
+
+module.exports = { isProduction };

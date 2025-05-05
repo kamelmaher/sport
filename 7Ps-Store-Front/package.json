@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "postbuild": "mv dist/7-ps-store-front/browser/_redirects dist/7-ps-store-front/_redirects",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:7Ps-Store-Front": "node dist/7-ps-store-front/server/server.mjs"
