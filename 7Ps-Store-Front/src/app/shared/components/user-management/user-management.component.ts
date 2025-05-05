@@ -101,15 +101,19 @@ export class UserManagementComponent implements OnInit {
     }
   }
 
-  private updateUserInLists(updatedUser: AuthResponse): void {
+  private updateUserInLists(updatedUser: any): void {
     // تحديث pendingUsers
-    const pendingIndex = this.pendingUsers.findIndex(u => u._id === updatedUser._id);
+    console.log(updatedUser);
+    // const id = updatedUser.user._id;
+    const pendingIndex = this.pendingUsers.findIndex(u => u._id === updatedUser.user._id);
+    console.log('pendingIndex', pendingIndex);
     if (pendingIndex !== -1) {
       if (updatedUser.status !== 'pending') {
         this.pendingUsers.splice(pendingIndex, 1);
       } else {
         this.pendingUsers[pendingIndex] = updatedUser;
       }
+      console.log(this.pendingUsers);
     } else if (updatedUser.status === 'pending') {
       this.pendingUsers.push(updatedUser);
     }

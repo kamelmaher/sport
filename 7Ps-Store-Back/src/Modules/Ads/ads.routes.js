@@ -8,7 +8,7 @@ const authMiddleware = require('../../middlewares/authMiddleware');
 const { createAd, getAds, updateAd, deleteAd } = require('./ads.controller');
 
 
-router.post('/', authMiddleware, adminFilter, validate(createAdSchema), upload.single('image'), createAd);
+router.post('/', authMiddleware, adminFilter, upload.single('image'), createAd);
 
 router.get('/', getAds);
 
@@ -17,3 +17,4 @@ router.put('/:id', authMiddleware, adminFilter, validate(updateAdSchema), update
 router.delete('/:id', authMiddleware, adminFilter, deleteAd);
 
 module.exports = router;
+
