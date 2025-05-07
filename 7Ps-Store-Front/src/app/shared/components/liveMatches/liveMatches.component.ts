@@ -17,6 +17,11 @@ export class LiveMatchesComponent implements OnInit {
   loading = true;
   error = '';
   isLogined = false;
+  // Track which channel's tooltip is visible on mobile
+  activeTooltip: { matchKey: string, channelName: string } | null = null;
+  // Map to store unique keys for matches
+  matchKeys: Map<MatchDetails, string> = new Map();
+
   constructor(private matchService: MatchService, private AuthService: AuthService) { }
 
   ngOnInit(): void {
@@ -37,6 +42,9 @@ export class LiveMatchesComponent implements OnInit {
             competition.showMatches = true;
             competition.matches.forEach(matchGroup => {
               matchGroup.matches.forEach((match: MatchDetails) => {
+                // Generate a unique key for the match
+                const matchKey = this.generateMatchKey(match);
+                this.matchKeys.set(match, matchKey);
                 Object.assign(match, {
                   showChannels: false,
                   showFreeChannels: false,
@@ -69,7 +77,7 @@ export class LiveMatchesComponent implements OnInit {
     `;
   }
 
-  toggleChannels(match: any): void {
+  toggleChannels(match: MatchDetails): void {
     match.showChannels = !match.showChannels;
   }
 
@@ -79,5 +87,26 @@ export class LiveMatchesComponent implements OnInit {
     } else {
       match.showPaidChannels = !match.showPaidChannels;
     }
+  }
+
+  // Toggle tooltip visibility on mobile
+  toggleTooltip(match: MatchDetails, channel: Channel): void {
+    if (!channel.frequency) return; // Do nothing if no frequency data
+
+    const channelName = channel.name;
+    const matchKey = this.matchKeys.get(match) || this.generateMatchKey(match);
+    if (this.activeTooltip?.matchKey === matchKey && this.activeTooltip?.channelName === channelName) {
+      this.activeTooltip = null; // Close tooltip if clicking the same channel
+    } else {
+      this.activeTooltip = { matchKey, channelName }; // Show tooltip for clicked channel
+    }
+  }
+
+  // Generate a unique key for a match
+  private generateMatchKey(match: MatchDetails): string {
+    // Use a combination of match properties to create a unique key
+    const keyBase = `${match.competition}-${match.teams}-${match.time}`;
+    // Add a random suffix to handle potential duplicates
+    return `${keyBase}-${Math.random().toString(36).substr(2, 9)}`;
   }
 }
