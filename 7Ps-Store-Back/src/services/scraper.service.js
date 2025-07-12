@@ -8,8 +8,19 @@ const { scrapeCompetitions } = require('../scraper/scrapeCompetitions');
 const { getDate } = require('../helpers/getDate');
 const moment = require('moment-timezone');
 const { convertToMeccaTime } = require('../helpers/timeConverter');
+const CacheService = require('./cache.service');
+const path = require('path');  
 
 class ScraperService {
+  static liveOnSatCache = new CacheService(
+    path.join(__dirname, '../cache/liveonsat.json'),
+    1800000 // 30 minutes TTL
+  );
+
+  static yallaKoraCache = new CacheService(
+    path.join(__dirname, '../cache/yallakora.json'),
+    1800000 // 30 minutes TTL
+  );
   static async scrapeLiveOnSat() {
     let browser;
     let retries = 4; // Allow 3 attempts total (initial + 2 retries)
@@ -49,12 +60,17 @@ class ScraperService {
         await browser.close().catch(console.error);
         return { date, competitions };
       } catch (error) {
-        console.error(`LiveOnSat scraping attempt failed (${2-retries+1}/3):`, error.message);
+        console.error(`LiveOnSat scraping attempt failed (${2-retries+1}/5):`, error.message);
         if (browser) await browser.close().catch(console.error);
         
         retries--;
         if (retries < 0) {
           console.error('All LiveOnSat scraping attempts failed');
+          const fallbackData = await this.liveOnSatCache.getFallbackData();
+          if (fallbackData) {
+            console.log('Using cached LiveOnSat data as fallback');
+            return fallbackData;
+          }
           return { date: getDate().today(), competitions: [] };
         }
         
@@ -188,7 +204,12 @@ class ScraperService {
         retries--;
         if (retries < 0) {
           console.error('All Yalla Kora scraping attempts failed');
-          return { date: moment().tz('Asia/Riyadh').format('MM/DD/YYYY'), matches: [] };
+          const fallbackData = await this.yallaKoraCache.getFallbackData();
+          if (fallbackData) {
+            console.log('Using cached YallaKora data as fallback');
+            return fallbackData;
+          }
+        return { date: moment().tz('Asia/Riyadh').format('MM/DD/YYYY'), matches: [] };
         }
         
         // Wait before retrying

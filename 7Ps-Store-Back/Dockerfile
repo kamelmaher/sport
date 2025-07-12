@@ -32,28 +32,33 @@ RUN apt-get update && apt-get install -y \
     libasound2 \
     && rm -rf /var/lib/apt/lists/*
 
-# Set the working directory inside the container
+# Set the working directory
 WORKDIR /7ps-store-back
 
-# Copy package.json and package-lock.json
+# Copy package files
 COPY package*.json ./
-# Install Node.js dependencies
+
+# Install dependencies
 RUN npm install
 
-# Install Playwright Chromium browser
+# Install Playwright
 RUN npx playwright install-deps
 RUN npx playwright install chromium
 
-# Copy the rest of the application code
+ENV TZ=Asia/Riyadh
+
+# Create directory for sample files
+RUN mkdir -p /7ps-store-back
+
+# Copy application files
 COPY . .
 
-# Copy sample files
-# Update the COPY commands to be more explicit
-COPY sample.html /7ps-store-back/sample.html
-COPY supported-competitions.yaml /7ps-store-back/supported-competitions.yaml
+# Ensure correct permissions
+RUN chmod +x /7ps-store-back/sample.html
+RUN chmod +x /7ps-store-back/supported-competitions.yaml
 
-# Expose the port your app runs on
+# Expose port
 EXPOSE 4800
 
-# Command to run the application
+# Start application
 CMD ["npm", "start"]

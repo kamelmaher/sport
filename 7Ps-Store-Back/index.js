@@ -10,17 +10,18 @@ const app = express();
 const cors = require('cors');
 const cron = require('node-cron');
 const MatchesController = require('./src/Modules/Matches/matches.controller');
+// ['https://7ps-store.netlify.app', 'http://localhost:4200', process.env.FRONTEND_URL]
+app.use(cors({
+  origin: "*",
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  // allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+  credentials: true
+}));
 
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(cors({
-  origin: ['https://7ps-store.netlify.app', 'http://localhost:4200', process.env.FRONTEND_URL],
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
-  credentials: true
-}));
 
 app.options('*', cors());
 
@@ -45,7 +46,7 @@ cron.schedule('*/20 * * * *', async () => {
 });
 
 // Schedule LiveOnSat scraping every 3 hours
-cron.schedule('0 */3 * * *', async () => {
+cron.schedule('*/10 * * * *', async () => {
   console.log('Running scheduled LiveOnSat scraping at', new Date().toISOString());
   try {
     await MatchesController.scrapeAndCacheData();
@@ -55,14 +56,14 @@ cron.schedule('0 */3 * * *', async () => {
   }
 });
 
-// Run the scraping jobs in sequence with delayed startup
+// // Run the scraping jobs in sequence with delayed startup
 async function runInitialScrapingJobs() {
   console.log('Beginning initial data scraping after server startup...');
-  
-  // Wait a moment for server to fully initialize
+
+  //   // Wait a moment for server to fully initialize
   await new Promise(resolve => setTimeout(resolve, 5000));
-  
-  // Run Yalla Kora scraping first
+
+  //   // Run Yalla Kora scraping first
   try {
     console.log('Starting initial Yalla Kora scraping...');
     await MatchesController.scrapeYallaKoraFinishedMatches();
@@ -70,11 +71,11 @@ async function runInitialScrapingJobs() {
   } catch (error) {
     console.error('Initial Yalla Kora scraping failed:', error.message);
   }
-  
+
   // Short delay between jobs
   await new Promise(resolve => setTimeout(resolve, 5000));
-  
-  // Then run LiveOnSat scraping
+
+  //   // Then run LiveOnSat scraping
   try {
     console.log('Starting initial LiveOnSat scraping...');
     await MatchesController.scrapeAndCacheData();
@@ -82,7 +83,7 @@ async function runInitialScrapingJobs() {
   } catch (error) {
     console.error('Initial LiveOnSat scraping failed:', error.message);
   }
-  
+
   console.log('Initial data scraping sequence completed.');
 }
 
@@ -90,7 +91,7 @@ async function runInitialScrapingJobs() {
 const PORT = process.env.PORT || 3000;
 const server = app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
-  
+
   // Start initial scraping after server is ready
   runInitialScrapingJobs().catch(error => {
     console.error('Error in initial scraping sequence:', error.message);

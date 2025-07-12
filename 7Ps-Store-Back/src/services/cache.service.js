@@ -32,6 +32,17 @@ class CacheService {
       return null;
     }
   }
+  async getFallbackData() {
+    try {
+      const cacheData = await fs.readFile(this.cacheFilePath, 'utf-8');
+      const parsed = JSON.parse(cacheData);
+      console.log('Retrieving fallback data from cache');
+      return parsed.data;
+    } catch (error) {
+      console.error('Error reading fallback cache:', error);
+      return null;
+    }
+  }
 
   async set(data) {
     try {
