@@ -2,6 +2,7 @@
 node_modules/
 .env
 cache/*.json
+sample_files/
 # Node.js
 node_modules/
 .env
